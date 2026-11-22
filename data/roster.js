@@ -1,6 +1,6 @@
 // Automatisch erzeugt von scripts/update-roster.mjs – nicht von Hand bearbeiten.
 window.ROSTER = {
- "updated": "2026-11-22T10:10:37.261Z",
+ "updated": "2026-11-22T10:23:06.820Z",
  "maxLevel": 60,
  "members": [
   {
@@ -2816,7 +2816,7 @@ window.ROSTER = {
    "surname": "Blitzbob",
    "slug": "sadaukar-blitzbob",
    "level": 30,
-   "ilvl": 26,
+   "ilvl": 27,
    "race": "UNDEAD",
    "raceName": "Untoter",
    "cls": "WARLOCK",
