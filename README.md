@@ -27,15 +27,15 @@ ersten Bankdaten importiert wurden.
 1. Repository als ZIP herunterladen:
    https://github.com/gerrybluemug/donnerbalkenklan/archive/refs/heads/main.zip
 2. Den Ordner `addon/DonnerbalkenBank` in den AddOns-Ordner von WoW Forever
-   kopieren (`…\World of Warcraft\<Spielversion>\Interface\AddOns\`).
+   kopieren (`…\World of Warcraft\_forever_\Interface\AddOns\`).
 3. Im Spiel auf jedem Bank-Charakter einmal `/gbank an` eingeben.
 4. Danach einfach wie gewohnt die Bank öffnen – das Addon liest Taschen,
    Bankfach und Gold dann selbst aus. Ist später eine echte Gildenbank da,
    wird sie beim Öffnen ebenfalls erfasst.
 
-Wird das Addon im Spiel als „veraltet“ angezeigt, im AddOn-Menü „Veraltete
-AddOns laden“ anhaken. (Die passende Versionsnummer zeigt `/dump select(4, GetBuildInfo())`;
-sie gehört in die erste Zeile von `DonnerbalkenBank.toc`.)
+Wird das Addon im Spiel als „Inkompatibel“ angezeigt, passt die Versionsnummer
+in der ersten Zeile von `DonnerbalkenBank.toc` nicht mehr (WoW Forever: `16001`,
+Stand November 2026). Die aktuelle Nummer zeigt `/dump select(4, GetBuildInfo())`.
 
 Weitere Befehle: `/gbank status` (was wurde erfasst), `/gbank aus` (Charakter nicht mehr erfassen).
 

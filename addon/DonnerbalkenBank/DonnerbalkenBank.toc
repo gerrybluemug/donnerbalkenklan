@@ -1,8 +1,8 @@
-## Interface: 11507, 20505, 50501, 110207, 120001
+## Interface: 16001, 11509, 20506, 38002, 40402, 50504, 120105
 ## Title: Donnerbalken Bank
 ## Notes: Liest Bank-Charaktere und Gildenbank aus und exportiert sie für die Gilden-Homepage. /gbank
 ## Author: Donnerbalkenklan
-## Version: 1.1
+## Version: 1.2
 ## SavedVariables: DonnerbalkenBankDB
 
 DonnerbalkenBank.lua

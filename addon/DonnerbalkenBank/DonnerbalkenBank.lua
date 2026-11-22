@@ -49,7 +49,7 @@ local function BankIDs()
   local E = Enum and Enum.BagIndex
   if E and E.CharacterBankTab_1 then
     -- neueres Bank-System: Bankfächer statt Bankfach + Banktaschen
-    for i = 1, 6 do
+    for i = 1, 9 do
       local id = E["CharacterBankTab_" .. i]
       if id then ids[#ids + 1] = id end
     end
