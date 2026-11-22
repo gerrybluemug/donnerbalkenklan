@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chronik – Donnerbalkenklan</title>
+  <meta name="description" content="Chronik des Donnerbalkenklans – Aufsteiger der Woche, Neuzugänge, Ruhmeshalle und Gildenwachstum.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="chronik" data-title="Chronik">
+  <header class="nav">
+    <a class="brand" href="index.html"><span class="crest" aria-hidden="true">⚡</span><span data-bind="name"></span></a>
+    <nav>
+      <a href="index.html" data-page="start">Start</a>
+      <a href="mitglieder.html" data-page="mitglieder">Mitglieder</a>
+      <a href="chronik.html" data-page="chronik">Chronik</a>
+      <a href="gildenbank.html" data-page="gildenbank" id="nav-bank" hidden>Gildenbank</a>
+      <a href="index.html#beitreten">Beitreten</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="page-head wrap">
+      <h1>Chronik</h1>
+      <p class="tagline">Wer aufsteigt, wer dazukommt und wer es als Erstes geschafft hat.</p>
+      <p class="chronik-since" id="chronik-since"></p>
+    </section>
+
+    <section id="chronik" class="wrap">
+      <div class="grid-2">
+        <div class="card">
+          <h2>Aufsteiger der Woche</h2>
+          <p class="card-sub" id="risers-period"></p>
+          <ol class="rank-list" id="risers"></ol>
+        </div>
+        <div class="card">
+          <h2>Kommen &amp; Gehen</h2>
+          <p class="card-sub">Die letzten 30 Tage</p>
+          <div class="joins">
+            <div>
+              <h3>Neu im Klan</h3>
+              <ul class="plain-list" id="joined"></ul>
+            </div>
+            <div>
+              <h3>Ehemalige</h3>
+              <ul class="plain-list" id="left"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card hall">
+        <h2>Ruhmeshalle</h2>
+        <p class="card-sub" id="hall-sub"></p>
+        <div class="grid-2 hall-grid">
+          <div>
+            <h3>Die Ersten auf Höchststufe</h3>
+            <ol class="rank-list" id="hall-first"></ol>
+          </div>
+          <div>
+            <h3>Erste ihrer Klasse</h3>
+            <ul class="hall-classes" id="hall-classes"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card growth">
+        <h2>Gildenwachstum</h2>
+        <p class="card-sub" id="growth-sub"></p>
+        <div class="grid-2">
+          <figure class="chart" id="chart-members"></figure>
+          <figure class="chart" id="chart-level"></figure>
+        </div>
+        <details class="chart-table">
+          <summary>Als Tabelle anzeigen</summary>
+          <div class="table-wrap"><table id="growth-table"><thead><tr><th>Tag</th><th class="num">Mitglieder</th><th class="num">Ø Stufe</th><th class="num">Auf Höchststufe</th></tr></thead><tbody></tbody></table></div>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <p id="stand"></p>
+    <p class="small">World of Warcraft ist eine Marke von Blizzard Entertainment. Dies ist eine private Fan-Seite ohne Verbindung zu Blizzard.</p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="data/roster.js"></script>
+  <script src="data/bank.js"></script>
+  <script src="data/history.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

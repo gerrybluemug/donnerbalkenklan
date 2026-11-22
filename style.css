@@ -177,6 +177,115 @@ td a:hover { text-decoration: underline; }
 .log-note { color: var(--muted); font-size: .78rem; opacity: .75; margin: 10px 0 0; }
 #log-more { margin-top: 12px; }
 
+/* Heute im Klan */
+.spot { display: flex; flex-direction: column; }
+.spot h3 { margin-bottom: 12px; }
+.spot .more { margin-top: auto; padding-top: 12px; font-weight: 600; text-decoration: none; font-size: .92rem; }
+.spot .more:hover { text-decoration: underline; }
+.motd-name { margin: 0; font-family: var(--head); font-size: 1.35rem; line-height: 1.25; }
+.motd-name a { text-decoration: none; }
+.motd-meta { margin: 4px 0 10px; color: var(--muted); font-size: .92rem; }
+.motd-facts { list-style: none; margin: 0 0 10px; padding: 0; font-size: .92rem; }
+.motd-facts li::before { content: "⚡ "; color: var(--gold); }
+.quip { margin: 6px 0 0; color: var(--gold-2); font-style: italic; }
+.shelf-item { margin: 0; font-size: 1.15rem; }
+.shelf-meta { margin: 4px 0 0; color: var(--muted); font-size: .9rem; }
+.discord-online { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; padding: 6px 14px; border-radius: 999px; background: #5865f21f; border: 1px solid #5865f266; color: var(--text); text-decoration: none; font-size: .92rem; }
+.discord-online:hover { background: #5865f233; }
+.discord-online b { color: #fff; }
+.pulse { width: 9px; height: 9px; border-radius: 50%; background: #3ba55d; box-shadow: 0 0 0 0 #3ba55d99; animation: pulse 2s infinite; }
+@keyframes pulse { 70% { box-shadow: 0 0 0 8px #3ba55d00; } 100% { box-shadow: 0 0 0 0 #3ba55d00; } }
+@media (prefers-reduced-motion: reduce) { .pulse { animation: none; } }
+
+/* Ranglisten (Aufsteiger, Ruhmeshalle) */
+.rank-list { list-style: none; margin: 0; padding: 0; counter-reset: r; }
+.rank-list li { counter-increment: r; display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); }
+.rank-list li:first-child { border-top: 0; }
+.rank-list li::before { content: counter(r); font-family: var(--head); color: var(--gold); width: 22px; text-align: center; flex-shrink: 0; }
+.rank-list li.empty { color: var(--muted); }
+.rank-list li.empty::before { content: none; }
+.rank-list .who { display: flex; flex-direction: column; line-height: 1.3; min-width: 0; flex: 1; }
+.rank-list .who a, .rank-list .who b { font-weight: 700; text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rank-list .who small { color: var(--muted); }
+.rank-list .gain { font-family: var(--head); color: #7fd36a; }
+.rank-list.compact li { padding: 6px 0; }
+.card-sub { color: var(--muted); margin: -6px 0 14px; font-size: .92rem; }
+.chronik-since { color: var(--muted); font-size: .85rem; margin: 6px 0 0; }
+.joins { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.plain-list { list-style: none; margin: 0; padding: 0; }
+.plain-list li { display: flex; flex-direction: column; padding: 7px 0; border-top: 1px solid var(--line); line-height: 1.3; }
+.plain-list li:first-child { border-top: 0; }
+.plain-list li a, .plain-list li b { font-weight: 700; text-decoration: none; }
+.plain-list li small { color: var(--muted); }
+.plain-list li.empty { color: var(--muted); }
+#chronik .card.hall, #chronik .card.growth { margin-top: 20px; }
+.hall-grid { margin-top: 4px; }
+.hall-classes { list-style: none; margin: 0; padding: 0; }
+.hall-classes li { display: grid; grid-template-columns: 16px 110px 1fr; align-items: center; gap: 6px; padding: 7px 0; border-top: 1px solid var(--line); }
+.hall-classes li:first-child { border-top: 0; }
+.hall-classes .dot { margin: 0; }
+.hall-classes .cl { color: var(--muted); font-size: .92rem; }
+.hall-classes .who { display: flex; flex-direction: column; line-height: 1.3; min-width: 0; }
+.hall-classes .who a, .hall-classes .who b { font-weight: 700; text-decoration: none; }
+.hall-classes .who small { color: var(--muted); }
+.hall-classes .free { color: var(--muted); font-style: italic; }
+
+/* Diagramme */
+.chart { position: relative; margin: 0; outline: none; }
+.chart:focus-visible { box-shadow: 0 0 0 2px var(--gold); border-radius: 8px; }
+.chart figcaption { font-family: var(--head); color: var(--gold); font-size: .95rem; margin-bottom: 4px; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; touch-action: pan-y; }
+.chart .grid { stroke: #ffffff14; stroke-width: 1; }
+.chart .ax { fill: var(--muted); font-size: 12px; font-family: var(--body); }
+.chart .ln { fill: none; stroke: var(--gold); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.chart .pt { fill: var(--gold-2); stroke: var(--card); stroke-width: 2; }
+.chart .xh { stroke: var(--muted); stroke-width: 1; }
+.chart .tip { position: absolute; top: 22px; transform: translateX(-50%); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 5px 10px; pointer-events: none; display: flex; flex-direction: column; line-height: 1.25; white-space: nowrap; }
+.chart .tip b { color: var(--text); font-size: 1rem; }
+.chart .tip span { color: var(--muted); font-size: .8rem; }
+.growth .grid-2 { grid-template-columns: 1fr 1fr; }
+.chart-table { margin-top: 14px; }
+.chart-table summary { cursor: pointer; color: var(--gold); font-weight: 600; }
+.chart-table .table-wrap { margin-top: 10px; max-height: 320px; min-height: 0; }
+
+/* Termine aus dem Ingame-Kalender */
+#events-box { margin-bottom: 18px; }
+.events { list-style: none; margin: 0; padding: 0; }
+.events li { display: flex; gap: 12px; padding: 8px 0; border-top: 1px solid var(--line); }
+.events li b { min-width: 92px; color: var(--gold); }
+.events li .t { color: var(--muted); min-width: 52px; }
+.tag { display: inline-block; font-size: .72rem; padding: 1px 7px; border-radius: 99px; border: 1px solid var(--line); color: var(--muted); font-style: normal; vertical-align: 1px; }
+
+/* Abzeichen in der Mitgliederliste */
+.badge { margin-left: 6px; font-size: .78rem; cursor: help; }
+.badge.new { padding: 1px 7px; border-radius: 99px; background: #4a8f3a33; color: #8fd47c; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; font-size: .68rem; vertical-align: 1px; }
+
+/* Gildenbank: Ladenhüter & Mitgliederecke */
+.bank-top { display: grid; grid-template-columns: 1fr 1.4fr; gap: 20px; margin-bottom: 20px; }
+.bank-top:not(:has(> :not([hidden]))) { display: none; }
+.bank-top:has(> [hidden]) { grid-template-columns: 1fr; }
+.corner p { margin: 0 0 12px; }
+.corner h4 { margin: 16px 0 6px; font-family: var(--head); color: var(--gold); font-size: .92rem; }
+.corner-user { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.corner-user img { border-radius: 50%; }
+.corner-char { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: .92rem; flex-wrap: wrap; }
+.corner-char input { flex: 1 1 200px; background: var(--bg-2); color: var(--text); border: 1px solid var(--line); border-radius: 10px; padding: 7px 10px; font: inherit; }
+.corner-msg { min-height: 1.2em; color: #8fd47c; font-size: .85rem; margin: 6px 0 0 !important; }
+.btn.discord-btn { background: #5865f2; border-color: #5865f2; color: #fff; }
+.linkish { background: none; border: 0; padding: 0; color: var(--gold); font: inherit; font-size: .85rem; cursor: pointer; text-decoration: underline; }
+.need-list { list-style: none; margin: 0; padding: 0; }
+.need-list li { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; padding: 6px 0; border-top: 1px solid var(--line); }
+.need-list li:first-child { border-top: 0; }
+.need-list li small { color: var(--muted); }
+.need-list li > .linkish { margin-left: auto; }
+.need-list li.group { flex-direction: column; gap: 2px; }
+.need-list li.group > span { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: .9rem; }
+.need-list li.empty { color: var(--muted); }
+.need-btn { margin-top: 4px; background: transparent; color: var(--gold-2); border: 1px solid #e2b65c66; border-radius: 99px; padding: 1px 10px; font: inherit; font-size: .78rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.need-btn:hover { background: #e2b65c1a; }
+.need-btn.on { background: #4a8f3a33; border-color: #4a8f3a; color: #8fd47c; }
+.need-count { color: var(--gold); font-size: .78rem; white-space: nowrap; }
+
 .join { text-align: center; padding: 40px 24px; background: linear-gradient(180deg, #3a151033, transparent), var(--card); }
 .join p { max-width: 620px; margin: 0 auto 20px; color: var(--muted); }
 
@@ -184,7 +293,7 @@ td a:hover { text-decoration: underline; }
 .footer .small { font-size: .78rem; opacity: .7; }
 
 @media (max-width: 900px) {
-  .grid-2, .grid-3, .bank-log-wrap { grid-template-columns: 1fr; }
+  .grid-2, .grid-3, .bank-log-wrap, .bank-top { grid-template-columns: 1fr; }
   .kpis { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 560px) {
@@ -196,4 +305,6 @@ td a:hover { text-decoration: underline; }
   .brand span:last-child { display: none; }
   .hero { padding: 60px 16px 50px; }
   .bar { grid-template-columns: 96px 1fr 28px; }
+  .joins, .growth .grid-2 { grid-template-columns: 1fr; }
+  .hall-classes li { grid-template-columns: 16px 92px 1fr; }
 }

@@ -43,5 +43,19 @@ window.GUILD_CONFIG = {
     { day: "Sonntag", time: "19:00", what: "Gemeinsames Leveln & Twink-Runde" },
   ],
 
+  // Sprüche für das "Mitglied des Tages" (jeden Tag ein anderer)
+  motdLines: [
+    "Heute geht die erste Runde Grog auf dich!",
+    "Möge dein Donnerbalken niemals brechen.",
+    "Der Klan grüßt dich – Lok'tar!",
+    "Heute hast du Vortritt beim Loot. Fast.",
+    "Ehre, Ruhm und ein Freibier in Orgrimmar.",
+    "Dein Name wird heute in jeder Taverne gerufen.",
+  ],
+
+  // Adresse der Mitgliederecke (Bedarf an Gildenbank-Gegenständen anmelden),
+  // also des Ordners api/ auf dem eigenen Webspace. Leer lassen = ausgeblendet.
+  needsApi: "",
+
   joinText: "Wir freuen uns über neue Gesichter – egal welche Klasse, egal welches Level. Schreib einfach einen Offizier im Spiel an oder komm auf unseren Discord.",
 };

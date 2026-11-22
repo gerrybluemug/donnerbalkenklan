@@ -16,6 +16,7 @@
     <nav>
       <a href="index.html" data-page="start">Start</a>
       <a href="mitglieder.html" data-page="mitglieder">Mitglieder</a>
+      <a href="chronik.html" data-page="chronik">Chronik</a>
       <a href="gildenbank.html" data-page="gildenbank" id="nav-bank" hidden>Gildenbank</a>
       <a href="index.html#beitreten">Beitreten</a>
     </nav>
@@ -32,6 +33,27 @@
           <a class="btn primary" href="mitglieder.html">Mitglieder ansehen</a>
           <a class="btn" id="armory-link" target="_blank" rel="noopener">Zur Armory ↗</a>
         </div>
+        <a class="discord-online" id="discord-online" target="_blank" rel="noopener" hidden></a>
+      </div>
+    </section>
+
+    <section id="heute" class="wrap">
+      <h2 class="section-title">Heute im Klan</h2>
+      <div class="grid-3">
+        <div class="card spot" id="motd-card">
+          <h3>Mitglied des Tages</h3>
+          <div id="motd"></div>
+        </div>
+        <div class="card spot" id="risers-card">
+          <h3>Aufsteiger der Woche</h3>
+          <ol class="rank-list compact" id="risers-mini"></ol>
+          <a class="more" href="chronik.html">Zur Chronik →</a>
+        </div>
+        <div class="card spot" id="shelf-card" hidden>
+          <h3>Ladenhüter des Monats</h3>
+          <div id="shelf"></div>
+          <a class="more" href="gildenbank.html">Zur Gildenbank →</a>
+        </div>
       </div>
     </section>
 
@@ -39,6 +61,11 @@
       <div class="card">
         <h2>Über uns</h2>
         <div id="about"></div>
+        <div id="events-box" hidden>
+          <h3>Nächste Gildentermine</h3>
+          <ul class="events" id="events"></ul>
+          <p class="log-note" id="events-note"></p>
+        </div>
         <div id="schedule-box">
           <h3>Feste Termine</h3>
           <ul class="schedule" id="schedule"></ul>
@@ -89,6 +116,7 @@
   <script src="config.js"></script>
   <script src="data/roster.js"></script>
   <script src="data/bank.js"></script>
+  <script src="data/history.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

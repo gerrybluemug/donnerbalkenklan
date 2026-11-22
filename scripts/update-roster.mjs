@@ -73,3 +73,9 @@ const data = {
 const out = join(dirname(fileURLToPath(import.meta.url)), "..", "data", "roster.js");
 await writeFile(out, "// Automatisch erzeugt von scripts/update-roster.mjs – nicht von Hand bearbeiten.\nwindow.ROSTER = " + JSON.stringify(data, null, 1) + ";\n", "utf8");
 console.log(`${members.length} Mitglieder gespeichert → ${out}`);
+
+// Verlauf für die Chronik fortschreiben
+const { loadHistory, saveHistory, addSnapshot } = await import("./history.mjs");
+const history = addSnapshot(await loadHistory(), data);
+await saveHistory(history);
+console.log(`Verlauf: ${Object.keys(history.chars).length} Charaktere, ${history.days.length} Tage`);

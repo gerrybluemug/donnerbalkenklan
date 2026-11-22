@@ -99,13 +99,26 @@ const log = data.guildLog && typeof data.guildLog === "object"
     }
   : null;
 
+// Gildentermine aus dem Ingame-Kalender (ab Addon 1.4), Zeiten in Serverzeit
+const calTime = (t) => (typeof t === "string" && /^\d{4}-\d\d-\d\dT\d\d:\d\d$/.test(t) ? t : null);
+const calendar = data.calendar && typeof data.calendar === "object" && Array.isArray(data.calendar.events)
+  ? {
+      updated: time(data.calendar.updated),
+      events: data.calendar.events
+        .filter((e) => Array.isArray(e) && calTime(e[0]))
+        .map((e) => ({ start: calTime(e[0]), end: calTime(e[1]), title: str(e[2], 120), kind: e[3] === "GUILD_ANNOUNCEMENT" ? "announcement" : "event", type: Number.isInteger(e[4]) ? e[4] : null }))
+        .slice(0, 100),
+    }
+  : null;
+
 // ---------- mit vorhandenen Daten zusammenführen ----------
 let bank = { updated: null, chars: {}, guild: null };
 try {
   const old = await readFile(bankFile, "utf8");
   bank = JSON.parse(old.slice(old.indexOf("{"), old.lastIndexOf("}") + 1));
 } catch { /* noch keine Bankdaten */ }
-const before = JSON.stringify([bank.chars, bank.guild, bank.log]);
+const snapshot = () => JSON.stringify([bank.chars, bank.guild, bank.log, bank.calendar]);
+const before = snapshot();
 
 const newer = (a, b) => !b || (a && a >= b);
 const changes = [];
@@ -143,8 +156,12 @@ if (log) {
   bank.log = { items: merge(bank.log?.items, log.items), money: merge(bank.log?.money, log.money) };
   changes.push(`Protokoll: ${bank.log.items.length} Einträge zu Gegenständen, ${bank.log.money.length} zu Gold`);
 }
-if (!changes.length) fail("Der Export enthält keine Bankdaten.");
-if (JSON.stringify([bank.chars, bank.guild, bank.log]) === before) {
+if (calendar && newer(calendar.updated, bank.calendar?.updated)) {
+  bank.calendar = calendar;
+  changes.push(`Gildentermine: ${calendar.events.length}`);
+}
+if (!changes.length) fail("Der Export enthält weder Bankdaten noch Gildentermine.");
+if (snapshot() === before) {
   console.log("Nichts Neues – diese Bankdaten sind schon auf der Homepage.");
   process.exit(0);
 }

@@ -16,6 +16,7 @@
     <nav>
       <a href="index.html" data-page="start">Start</a>
       <a href="mitglieder.html" data-page="mitglieder">Mitglieder</a>
+      <a href="chronik.html" data-page="chronik">Chronik</a>
       <a href="gildenbank.html" data-page="gildenbank" id="nav-bank" hidden>Gildenbank</a>
       <a href="index.html#beitreten">Beitreten</a>
     </nav>
@@ -31,6 +32,18 @@
 
     <section id="gildenbank" class="wrap" hidden>
       <div class="bank-summary" id="bank-summary"></div>
+
+      <div class="bank-top">
+        <div class="card shelf-strip" id="shelf-card" hidden>
+          <h3>Ladenhüter des Monats</h3>
+          <div id="shelf"></div>
+        </div>
+        <div class="card corner" id="corner" hidden>
+          <h3>Mitgliederecke</h3>
+          <div id="corner-body"></div>
+        </div>
+      </div>
+
       <div class="bank-sources" id="bank-sources" role="tablist" aria-label="Lagerort"></div>
       <div class="filters">
         <input type="search" id="b-search" placeholder="Gegenstand suchen …" aria-label="Gegenstand suchen">
@@ -71,6 +84,7 @@
   <script src="config.js"></script>
   <script src="data/roster.js"></script>
   <script src="data/bank.js"></script>
+  <script src="data/history.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

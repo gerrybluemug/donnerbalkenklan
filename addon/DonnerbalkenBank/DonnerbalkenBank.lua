@@ -7,6 +7,9 @@
 --   /gbank aus     – diesen Charakter nicht mehr erfassen
 --   /gbank export  – Export-Fenster öffnen (Strg+C zum Kopieren)
 --   /gbank status  – zeigt, was zuletzt erfasst wurde
+--
+-- Außerdem liest es (mit jedem Charakter, der in der Gilde ist) die
+-- Gildentermine aus dem Ingame-Kalender.
 
 local ADDON = ...
 local DB
@@ -129,7 +132,12 @@ local function BuildExport()
   local log = false
   local L = DB.guild and DB.guildLog[DB.guild.name]
   if L then log = { items = Deposits(L.items, LOG_EXPORT), money = Deposits(L.money, LOG_EXPORT) } end
-  DB.lastExport = toJSON({ v = 1, exported = time(), chars = DB.chars, guild = DB.guild or false, guildLog = log })
+  -- Gildentermine: die der Gilde mit der Gildenbank, sonst die zuletzt gelesenen
+  local cal = DB.guild and DB.calendar[DB.guild.name]
+  if not cal then
+    for _, c in pairs(DB.calendar) do if not cal or c.updated > cal.updated then cal = c end end
+  end
+  DB.lastExport = toJSON({ v = 1, exported = time(), chars = DB.chars, guild = DB.guild or false, guildLog = log, calendar = cal or false })
   return DB.lastExport
 end
 
@@ -393,6 +401,60 @@ end
 ---------------------------------------------------------------------------
 -- Befehle
 ---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+-- Gildentermine aus dem Ingame-Kalender
+-- DB.calendar[Gilde] = { guild, updated, events = { {start, ende, titel, art, typ} } }
+-- Zeiten als "JJJJ-MM-TTTHH:MM" in Serverzeit, so wie der Kalender sie zeigt.
+---------------------------------------------------------------------------
+local CAL_TYPES = { GUILD_EVENT = true, GUILD_ANNOUNCEMENT = true }
+local CAL_MONTHS = 3 -- aktueller Monat + 2 weitere
+local calAsked = false
+
+local function CalTime(t)
+  if not t then return false end
+  return string.format("%04d-%02d-%02dT%02d:%02d", t.year, t.month, t.monthDay, t.hour or 0, t.minute or 0)
+end
+
+local function ReadCalendar()
+  if not (C_Calendar and C_Calendar.GetNumDayEvents and C_Calendar.GetDayEvent and C_Calendar.GetMonthInfo
+    and C_DateAndTime and C_DateAndTime.GetCurrentCalendarTime) then return end
+  local gname = GetGuildInfo("player")
+  if not gname then return end
+  local now = C_DateAndTime.GetCurrentCalendarTime()
+  local shown = C_Calendar.GetMonthInfo(0)
+  if not (now and shown) then return end
+  -- Der Kalender zählt Monate ab dem gerade angezeigten (der Spieler kann geblättert haben)
+  local base = (now.year - shown.year) * 12 + (now.month - shown.month)
+  local events, seen = {}, {}
+  for m = 0, CAL_MONTHS - 1 do
+    local info = C_Calendar.GetMonthInfo(base + m)
+    local from = m == 0 and now.monthDay or 1
+    for day = from, (info and info.numDays or 31) do
+      for i = 1, (C_Calendar.GetNumDayEvents(base + m, day) or 0) do
+        local e = C_Calendar.GetDayEvent(base + m, day, i)
+        -- mehrtägige Termine nur einmal (am ersten Tag)
+        if e and CAL_TYPES[e.calendarType] and (not e.sequenceType or e.sequenceType == "" or e.sequenceType == "START") then
+          local start = CalTime(e.startTime)
+          local key = start .. "|" .. (e.title or "")
+          if not seen[key] then
+            seen[key] = true
+            table.insert(events, { start, CalTime(e.endTime), e.title or "", e.calendarType, e.eventType or false })
+          end
+        end
+      end
+    end
+  end
+  table.sort(events, function(a, b) return a[1] < b[1] end)
+  DB.calendar[gname] = { guild = gname, updated = time(), events = events }
+  BuildExport()
+end
+
+local function AskCalendar()
+  if calAsked or not (C_Calendar and C_Calendar.OpenCalendar) or not IsInGuild() then return end
+  calAsked = true
+  C_Calendar.OpenCalendar() -- lädt nur die Termine (CALENDAR_UPDATE_EVENT_LIST), öffnet nichts
+end
+
 local function fmtTime(t) return t and date("%d.%m. %H:%M", t) or "nie" end
 
 SLASH_DONNERBALKENBANK1 = "/gbank"
@@ -424,7 +486,10 @@ SlashCmdList.DONNERBALKENBANK = function(msg)
       local L = DB.guildLog[DB.guild.name]
       if L then say(string.format("Gildenbank-Protokoll: %d Einträge zu Gegenständen, %d zu Gold", #L.items, #L.money)) end
     end
-    if not any and not DB.guild then say("Noch nichts erfasst. Auf dem Bank-Charakter: /gbank an") end
+    local gname = GetGuildInfo("player")
+    local cal = gname and DB.calendar[gname]
+    if cal then say(string.format("Gildentermine: %d (gelesen: %s)", #cal.events, fmtTime(cal.updated))) end
+    if not any and not DB.guild then say("Noch keine Bank erfasst. Auf dem Bank-Charakter: /gbank an") end
   else
     say("/gbank an | aus | export | status")
   end
@@ -440,6 +505,7 @@ for _, ev in ipairs({
   "BANKFRAME_OPENED", "BANKFRAME_CLOSED", "PLAYERBANKSLOTS_CHANGED",
   "GUILDBANKFRAME_OPENED", "GUILDBANKFRAME_CLOSED", "GUILDBANKBAGSLOTS_CHANGED", "GUILDBANK_UPDATE_MONEY", "GUILDBANKLOG_UPDATE",
   "PLAYER_INTERACTION_MANAGER_FRAME_SHOW", "PLAYER_INTERACTION_MANAGER_FRAME_HIDE",
+  "CALENDAR_UPDATE_EVENT_LIST", "CALENDAR_UPDATE_GUILD_EVENTS",
 }) do Reg(ev) end
 
 local PIT = Enum and Enum.PlayerInteractionType
@@ -456,12 +522,16 @@ f:SetScript("OnEvent", function(_, event, arg1)
     DB.seen = DB.seen or {}
     DB.guildTabsSeen = DB.guildTabsSeen or {}
     DB.guildLog = DB.guildLog or {}
+    DB.calendar = DB.calendar or {}
     return
   end
   if not DB then return end
 
   if event == "PLAYER_LOGIN" or event == "PLAYER_MONEY" then
     ScanBags()
+    if event == "PLAYER_LOGIN" then C_Timer.After(8, AskCalendar) end
+  elseif event == "CALENDAR_UPDATE_EVENT_LIST" or event == "CALENDAR_UPDATE_GUILD_EVENTS" then
+    ReadCalendar()
   elseif event == "BAG_UPDATE_DELAYED" then
     if bankOpen then ScanBank() else ScanBags() end
   elseif event == "PLAYER_LOGOUT" then

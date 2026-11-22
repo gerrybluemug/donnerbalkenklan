@@ -11,7 +11,11 @@ Online: **https://donnerbalkenklan.free-kick.de**
 |---|---|
 | `index.html` | Startseite (Über uns, News, Statistik, Mitmachen) |
 | `mitglieder.html` | Mitgliederliste |
-| `gildenbank.html` | Gildenbank: Bestand, größte Spender, Einzahlungen |
+| `chronik.html` | Chronik: Aufsteiger der Woche, Kommen & Gehen, Ruhmeshalle, Gildenwachstum |
+| `gildenbank.html` | Gildenbank: Bestand, Ladenhüter, größte Spender, Einzahlungen, Mitgliederecke |
+| `data/history.js` | Verlauf der Mitgliederliste (täglich fortgeschrieben, Grundlage der Chronik) |
+| `scripts/history.mjs` | Schreibt den Verlauf fort (wird von `update-roster.mjs` aufgerufen) |
+| `api/` | Mitgliederecke (PHP) für den eigenen Webspace – siehe unten |
 | `app.js`, `style.css` | Gemeinsamer Code und Gestaltung aller Seiten |
 | `config.js` | **Hier anpassen:** Texte, News, Termine, Rangnamen, Discord-Link |
 | `data/roster.js` | Mitgliederdaten aus der Armory (automatisch erzeugt) |
@@ -63,6 +67,12 @@ Einträge; das Addon sammelt sie bei jedem Öffnen und baut so eine längere
 Historie auf – also die Gildenbank ruhig regelmäßig öffnen. Zeiten sind nur
 auf die Stunde genau.
 
+**Gildentermine:** Das Addon liest (mit jedem Charakter in der Gilde, auch ohne
+`/gbank an`) kurz nach dem Einloggen die Gildentermine und Gildenankündigungen
+der nächsten drei Monate aus dem Ingame-Kalender. Sie landen beim nächsten
+Hochladen auf der Startseite unter „Nächste Gildentermine“ (Zeiten in Serverzeit).
+Die festen Termine aus `config.js` bleiben zusätzlich stehen.
+
 ### 2. Daten auf die Homepage bringen – am einfachsten: Doppelklick
 
 `scripts/Gildenbank-hochladen.bat` auf den Desktop kopieren. Nach dem
@@ -95,6 +105,52 @@ node scripts/import-bank.mjs "<WoW-Ordner>\WTF\Account\<KONTO>\SavedVariables\Do
 
 Mehrere Bank-Charaktere – auch von verschiedenen WoW-Accounts – werden
 zusammengeführt; pro Charakter zählt jeweils der neueste Stand.
+
+## Chronik & Spielereien
+
+- **Chronik** (`chronik.html`): Der tägliche Bot schreibt bei jedem Abruf der
+  Mitgliederliste einen Verlauf nach `data/history.js` (Stufen, Beitritte,
+  Austritte, erreichte Höchststufe). Daraus entstehen Aufsteiger der Woche,
+  Neuzugänge/Ehemalige der letzten 30 Tage, die Ruhmeshalle und das
+  Gildenwachstum. Aufgezeichnet wird ab dem 22.11.2026 – wer vorher schon auf
+  Höchststufe war, steht als „vor dem 22. November 2026“ in der Ruhmeshalle.
+- **Startseite:** Mitglied des Tages (Sprüche in `config.js` unter `motdLines`),
+  Aufsteiger der Woche, Ladenhüter des Monats (was am längsten in der Bank liegt)
+  und wie viele gerade im Discord online sind.
+- **Mitgliederliste:** 💰 für die 10 größten Spender der Gildenbank, „neu“ für
+  alle, die in den letzten 7 Tagen beigetreten sind.
+
+## Mitgliederecke (Bedarf an Gildenbank-Gegenständen anmelden)
+
+Mitglieder melden sich auf der Gildenbank-Seite mit Discord an und klicken bei
+einem Gegenstand auf „Bedarf“. Alle Angemeldeten sehen, wer was braucht;
+Offiziere können Anmeldungen als „erledigt“ abhaken. GitHub Pages kann nichts
+speichern, deshalb läuft dieser Teil als kleines PHP-Skript (Ordner `api/`) auf
+dem Hetzner-Webspace von free-kick.de. Die Daten liegen dort in einer
+SQLite-Datei im Unterordner `data/` (wird automatisch angelegt und ist von außen
+gesperrt).
+
+Einrichtung (einmalig):
+
+1. **Discord-App anlegen:** https://discord.com/developers/applications →
+   *New Application* (z. B. „Donnerbalkenklan Homepage“) → *OAuth2*.
+   *Client ID* notieren, *Client Secret* erzeugen und notieren. Unter
+   *Redirects* eintragen: `https://free-kick.de/donnerbalken-api/?action=callback`
+2. **Dateien vorbereiten:** `api/config.sample.php` als `config.php` speichern
+   und Client ID und Client Secret eintragen. Optional Offiziers-Rollen
+   (`officer_roles`) und eine Pflicht-Rolle (`required_role`) eintragen – die
+   Rollen-ID bekommt man in Discord mit eingeschaltetem Entwicklermodus per
+   Rechtsklick auf die Rolle → „ID kopieren“.
+   `config.php` enthält das Geheimnis und gehört **nicht** ins Repository
+   (steht in `.gitignore`).
+3. **Hochladen:** In konsoleH (Dateimanager oder FTP) im Webordner von
+   free-kick.de einen Ordner `donnerbalken-api` anlegen und `index.php`,
+   `.htaccess` und `config.php` hineinladen. Der Webspace braucht PHP 8 mit
+   SQLite (bei Hetzner Standard; PHP-Version in konsoleH prüfen).
+4. **Einschalten:** In `config.js` `needsApi: "https://free-kick.de/donnerbalken-api/"`
+   eintragen und hochladen.
+
+Ohne Anmeldung zeigt die Seite nur, wie oft ein Gegenstand angemeldet ist.
 
 ## Ansehen
 
