@@ -1,6 +1,6 @@
 // Automatisch erzeugt von scripts/update-roster.mjs – nicht von Hand bearbeiten.
 window.ROSTER = {
- "updated": "2026-11-22T13:03:19.543Z",
+ "updated": "2026-11-22T13:16:42.968Z",
  "maxLevel": 60,
  "members": [
   {
@@ -1388,7 +1388,7 @@ window.ROSTER = {
    "surname": "Mishima",
    "slug": "hyranthier-mishima",
    "level": 41,
-   "ilvl": 34,
+   "ilvl": 35,
    "race": "UNDEAD",
    "raceName": "Untoter",
    "cls": "PALADIN",
@@ -2348,7 +2348,7 @@ window.ROSTER = {
    "surname": "Blitz",
    "slug": "zefix-blitz",
    "level": 29,
-   "ilvl": 20,
+   "ilvl": 22,
    "race": "TROLL",
    "raceName": "Troll",
    "cls": "MAGE",
