@@ -16,6 +16,10 @@ window.GUILD_CONFIG = {
   // Link zu eurem Discord (leer lassen, um den Button auszublenden)
   discordUrl: "https://discord.gg/8vRUnk3XdG",
 
+  // Gildenbank-Protokoll: auch Entnahmen (Gegenstände, Gold, Reparaturen)
+  // öffentlich zeigen? false = nur Einzahlungen/Einlagerungen anzeigen.
+  showBankWithdrawals: true,
+
   // Die Armory liefert nur Rang-Nummern, keine Namen.
   // Tragt hier die Rangnamen ein, wie sie im Spiel heißen.
   rankNames: {

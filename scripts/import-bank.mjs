@@ -83,13 +83,28 @@ if (data.guild && typeof data.guild === "object") {
   };
 }
 
+// Gildenbank-Protokoll (ab Addon 1.3)
+const LOG_TYPES = ["deposit", "withdraw", "repair", "withdrawForTab", "buyTab", "depositSummary"];
+const logItem = (e) => Array.isArray(e) && e.length >= 8 && LOG_TYPES.includes(e[1])
+  ? { t: time(e[0]), type: e[1], who: str(e[2], 50), id: int(e[3]), name: str(e[4]), q: int(e[5], 0, 8), n: int(e[6], 1, 1e6), tab: str(e[7], 50) }
+  : null;
+const logMoney = (e) => Array.isArray(e) && e.length >= 4 && LOG_TYPES.includes(e[1])
+  ? { t: time(e[0]), type: e[1], who: str(e[2], 50), amount: int(e[3]) }
+  : null;
+const log = data.guildLog && typeof data.guildLog === "object"
+  ? {
+      items: (data.guildLog.items || []).map(logItem).filter(Boolean),
+      money: (data.guildLog.money || []).map(logMoney).filter(Boolean),
+    }
+  : null;
+
 // ---------- mit vorhandenen Daten zusammenführen ----------
 let bank = { updated: null, chars: {}, guild: null };
 try {
   const old = await readFile(bankFile, "utf8");
   bank = JSON.parse(old.slice(old.indexOf("{"), old.lastIndexOf("}") + 1));
 } catch { /* noch keine Bankdaten */ }
-const before = JSON.stringify([bank.chars, bank.guild]);
+const before = JSON.stringify([bank.chars, bank.guild, bank.log]);
 
 const newer = (a, b) => !b || (a && a >= b);
 const changes = [];
@@ -108,8 +123,27 @@ if (guild && newer(guild.updated, bank.guild?.updated)) {
   bank.guild = guild;
   changes.push(`Gildenbank: ${guild.tabs.reduce((s, t) => s + t.items.length, 0)} Gegenstände in ${guild.tabs.length} Fächern`);
 }
+// Protokoll: Das Addon liefert nur die neuesten Einträge. Ältere, die schon
+// auf der Homepage stehen, bleiben erhalten; ab dem ältesten Eintrag des
+// Exports gilt dessen Stand (der ist vollständig und schon bereinigt).
+// Kurz davor liegende alte Einträge, die auch im Export stehen (Zeit kann
+// je nach PC um bis zu ca. 1 Std. abweichen), werden nicht doppelt übernommen.
+if (log) {
+  const LOG_KEEP = 2000;
+  const sig = (e) => [e.type, e.who, e.id, e.n, e.tab, e.amount].join("|");
+  const merge = (oldList = [], newList) => {
+    if (!newList.length) return oldList;
+    const start = Math.min(...newList.map((e) => Date.parse(e.t)));
+    const dup = (o) => newList.some((n) => sig(n) === sig(o) && Math.abs(Date.parse(n.t) - Date.parse(o.t)) <= 2 * 3600e3);
+    return [...oldList.filter((o) => Date.parse(o.t) < start && !dup(o)), ...newList]
+      .sort((a, b) => Date.parse(a.t) - Date.parse(b.t))
+      .slice(-LOG_KEEP);
+  };
+  bank.log = { items: merge(bank.log?.items, log.items), money: merge(bank.log?.money, log.money) };
+  changes.push(`Protokoll: ${bank.log.items.length} Einträge zu Gegenständen, ${bank.log.money.length} zu Gold`);
+}
 if (!changes.length) fail("Der Export enthält keine Bankdaten.");
-if (JSON.stringify([bank.chars, bank.guild]) === before) {
+if (JSON.stringify([bank.chars, bank.guild, bank.log]) === before) {
   console.log("Nichts Neues – diese Bankdaten sind schon auf der Homepage.");
   process.exit(0);
 }

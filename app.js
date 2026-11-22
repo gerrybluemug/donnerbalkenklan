@@ -243,5 +243,90 @@
 
     ["#b-search", "#b-quality", "#b-sort"].forEach((s) => $(s).addEventListener("input", renderBank));
     renderBank();
+
+    // ---------- Gildenbank-Protokoll ----------
+    const LOG = B.log || { items: [], money: [] };
+    const OUT = new Set(["withdraw", "repair", "withdrawForTab", "buyTab"]);
+    const showOut = C.showBankWithdrawals !== false;
+    const entries = [
+      ...LOG.items.map((e) => ({ ...e, kind: "item" })),
+      ...LOG.money.map((e) => ({ ...e, kind: "money" })),
+    ].filter((e) => showOut || !OUT.has(e.type)).sort((a, b) => Date.parse(b.t) - Date.parse(a.t));
+
+    if (entries.length) {
+      $("#bank-log-wrap").hidden = false;
+
+      // Namen aus dem Protokoll (ggf. "Name-Realm") mit der Mitgliederliste verknüpfen
+      const who = (name) => {
+        if (!name) return "<b>Gildenbonus</b>";
+        const short = name.split("-")[0];
+        const hits = M.filter((m) => m.name.toLowerCase() === short.toLowerCase());
+        if (hits.length !== 1) return `<b>${esc(short)}</b>`;
+        const m = hits[0];
+        return `<a href="${charUrl(m)}" target="_blank" rel="noopener" style="color:${cls(m.cls).color}">${esc(m.name)}</a>`;
+      };
+      const item = (e) => `<b style="color:${qColor(e.q)}">${esc(e.name)}</b>${e.n > 1 ? ` ×${e.n.toLocaleString("de-DE")}` : ""}`;
+      const text = (e) => {
+        const g = e.kind === "money" ? gold(e.amount) : "";
+        switch (e.kind + ":" + e.type) {
+          case "item:deposit": return `${who(e.who)} hat ${item(e)} eingelagert`;
+          case "item:withdraw": return `${who(e.who)} hat ${item(e)} entnommen`;
+          case "money:deposit": return `${who(e.who)} hat ${g} eingezahlt`;
+          case "money:withdraw": return `${who(e.who)} hat ${g} abgehoben`;
+          case "money:repair": return `${who(e.who)} hat ${g} für Reparaturen genutzt`;
+          case "money:withdrawForTab": return `${who(e.who)} hat ${g} für ein Bankfach entnommen`;
+          case "money:buyTab": return e.amount > 0 ? `${who(e.who)} hat ein Bankfach für ${g} gekauft` : `${who(e.who)} hat ein Bankfach freigeschaltet`;
+          case "money:depositSummary": return `Gildenbonus: ${g} eingezahlt`;
+          default: return `${who(e.who)}: ${esc(e.type)}`;
+        }
+      };
+      const ago = (iso) => {
+        const h = Math.max(0, Math.round((Date.now() - Date.parse(iso)) / 3600000)), d = Math.floor(h / 24);
+        if (h < 1) return "vor < 1 Std.";
+        if (d < 1) return `vor ca. ${h} Std.`;
+        if (d < 60) return `vor ${d} ${d === 1 ? "Tag" : "Tagen"}`;
+        return `vor ${Math.floor(d / 30)} Monaten`;
+      };
+      const when = (iso) => "ca. " + new Date(iso).toLocaleString("de-DE", { dateStyle: "medium", timeStyle: "short" });
+
+      // Rangliste: wer hat am meisten Gold eingezahlt bzw. Gegenstände eingelagert
+      const donors = new Map();
+      entries.filter((e) => e.type === "deposit" && e.who).forEach((e) => {
+        const key = e.who.split("-")[0];
+        const d = donors.get(key) || { name: e.who, gold: 0, items: 0, times: 0 };
+        if (e.kind === "money") d.gold += e.amount; else d.items += e.n;
+        d.times++;
+        donors.set(key, d);
+      });
+      const top = [...donors.values()].sort((a, b) => b.gold - a.gold || b.items - a.items || b.times - a.times).slice(0, 10);
+      $("#bank-donors").innerHTML = top.length
+        ? top.map((d) => `<li><span class="who">${who(d.name)}</span><span class="what">${[d.gold ? gold(d.gold) : "", d.items ? `${d.items.toLocaleString("de-DE")} Gegenstände` : ""].filter(Boolean).join(" · ")}</span></li>`).join("")
+        : `<li class="bank-empty">Noch keine Einzahlungen erfasst.</li>`;
+
+      const FILTERS = [
+        ["all", "Alles", () => true],
+        ["in", "Einzahlungen", (e) => !OUT.has(e.type)],
+        ...(showOut ? [["out", "Entnahmen", (e) => OUT.has(e.type)]] : []),
+        ["money", "Gold", (e) => e.kind === "money"],
+        ["item", "Gegenstände", (e) => e.kind === "item"],
+      ];
+      let logFilter = "all", shown = 15;
+      $("#log-filter").innerHTML = FILTERS.map(([id, label]) => `<button role="tab" data-id="${id}">${label}</button>`).join("");
+      $("#log-filter").addEventListener("click", (e) => {
+        const b = e.target.closest("button");
+        if (b) { logFilter = b.dataset.id; shown = 15; renderLog(); }
+      });
+      $("#log-more").addEventListener("click", () => { shown += 50; renderLog(); });
+
+      function renderLog() {
+        document.querySelectorAll("#log-filter button").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.id === logFilter)));
+        const list = entries.filter(FILTERS.find((f) => f[0] === logFilter)[2]);
+        $("#bank-log").innerHTML = list.length
+          ? list.slice(0, shown).map((e) => `<li class="${OUT.has(e.type) ? "out" : "in"}"><span>${text(e)}</span><small title="${esc(when(e.t))}">${esc(ago(e.t))}${e.tab ? ` · ${esc(e.tab)}` : ""}</small></li>`).join("")
+          : `<li class="bank-empty">Keine Einträge.</li>`;
+        $("#log-more").hidden = list.length <= shown;
+      }
+      renderLog();
+    }
   }
 })();

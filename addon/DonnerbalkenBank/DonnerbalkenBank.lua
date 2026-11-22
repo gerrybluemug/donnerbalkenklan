@@ -111,8 +111,19 @@ local function toJSON(v)
   return "null"
 end
 
+local LOG_MAX, LOG_EXPORT = 1000, 200 -- gespeicherte / exportierte Protokolleinträge je Art
+
+local function Tail(t, n)
+  local r = {}
+  for i = math.max(1, #t - n + 1), #t do r[#r + 1] = t[i] end
+  return r
+end
+
 local function BuildExport()
-  DB.lastExport = toJSON({ v = 1, exported = time(), chars = DB.chars, guild = DB.guild or false })
+  local log = false
+  local L = DB.guild and DB.guildLog[DB.guild.name]
+  if L then log = { items = Tail(L.items, LOG_EXPORT), money = Tail(L.money, LOG_EXPORT) } end
+  DB.lastExport = toJSON({ v = 1, exported = time(), chars = DB.chars, guild = DB.guild or false, guildLog = log })
   return DB.lastExport
 end
 
@@ -233,6 +244,106 @@ local function ScanGuild()
 end
 
 ---------------------------------------------------------------------------
+-- Gildenbank-Protokoll: wer hat was eingelagert/entnommen, wer hat wie viel
+-- Gold eingezahlt/abgehoben.
+--
+-- WoW liefert je Fach nur die letzten 25 Einträge (dazu das Geldprotokoll),
+-- jeweils mit relativer Zeit ("vor 3 Std."). Das Addon rechnet daraus eine
+-- ungefähre Uhrzeit aus und sammelt bei jedem Öffnen der Gildenbank neue
+-- Einträge dazu. Schon bekannte Einträge werden wiedererkannt (gleicher
+-- Inhalt und die Zeit passt ungefähr) – so entsteht eine lange Historie.
+--
+-- DB.guildLog[Gilde].items: { zeit, typ, name, itemID, itemName, qualität, anzahl, fach }
+-- DB.guildLog[Gilde].money: { zeit, typ, name, kupfer }
+---------------------------------------------------------------------------
+local HOUR = 3600
+local QUALITY_BY_COLOR = {
+  ff9d9d9d = 0, ffffffff = 1, ff1eff00 = 2, ff0070dd = 3, ffa335ee = 4, ffff8000 = 5, ffe6cc80 = 6, ff00ccff = 7,
+}
+
+local function Quality(id, link)
+  local q
+  if C_Item and C_Item.GetItemQualityByID then q = C_Item.GetItemQualityByID(id) end
+  if not q and GetItemInfo then q = select(3, GetItemInfo(link or id)) end
+  if not q and link then q = QUALITY_BY_COLOR[(link:match("|c(%x%x%x%x%x%x%x%x)") or ""):lower()] end
+  return q or 1
+end
+
+local function Ago(y, m, d, h)
+  return ((((y or 0) * 12 + (m or 0)) * 30 + (d or 0)) * 24 + (h or 0)) * HOUR
+end
+
+-- erlaubte Zeitabweichung beim Wiedererkennen: WoW rundet auf Stunden,
+-- bei alten Einträgen (Monate) ist die Angabe noch ungenauer
+local function Tolerance(age) return 2 * HOUR + age * 0.05 end
+
+local function Sig(e, n)
+  local p = {}
+  for i = 2, n do p[#p + 1] = tostring(e[i]) end
+  return table.concat(p, "\31")
+end
+
+-- fügt neue Einträge aus "fresh" in die (nach Zeit sortierte) Liste ein
+local function MergeLog(list, fresh, n, now)
+  local used, new = {}, {}
+  for _, e in ipairs(fresh) do
+    local s, tol, hit = Sig(e, n), Tolerance(now - e[1]), nil
+    for i = #list, 1, -1 do
+      local o = list[i]
+      if o[1] < e[1] - tol then break end
+      if not used[i] and math.abs(o[1] - e[1]) <= tol and Sig(o, n) == s then hit = i; break end
+    end
+    if hit then used[hit] = true else new[#new + 1] = e end
+  end
+  if #new == 0 then return 0 end
+  for _, e in ipairs(new) do list[#list + 1] = e end
+  table.sort(list, function(a, b) return a[1] < b[1] end)
+  while #list > LOG_MAX do table.remove(list, 1) end
+  return #new
+end
+
+local function ReadGuildLog()
+  local gname = GetGuildInfo("player")
+  if not gname or not GetNumGuildBankTransactions then return end
+  DB.guildLog[gname] = DB.guildLog[gname] or { items = {}, money = {} }
+  local L, now, fresh = DB.guildLog[gname], time(), {}
+
+  for tab = 1, (GetNumGuildBankTabs() or 0) do
+    local tabName = GetGuildBankTabInfo(tab) or ("Fach " .. tab)
+    for i = 1, (GetNumGuildBankTransactions(tab) or 0) do
+      local typ, name, link, count, _, _, y, m, d, h = GetGuildBankTransaction(tab, i)
+      if (typ == "deposit" or typ == "withdraw") and link then
+        local id = tonumber(link:match("item:(%d+)")) or 0
+        fresh[#fresh + 1] = { now - Ago(y, m, d, h), typ, name or "", id, ItemName(id, link), Quality(id, link), count or 1, tabName }
+      end
+    end
+  end
+  local added = MergeLog(L.items, fresh, 8, now)
+
+  fresh = {}
+  if GetNumGuildBankMoneyTransactions then
+    for i = 1, (GetNumGuildBankMoneyTransactions() or 0) do
+      local typ, name, amount, y, m, d, h = GetGuildBankMoneyTransaction(i)
+      if typ then fresh[#fresh + 1] = { now - Ago(y, m, d, h), typ, name or "", amount or 0 } end
+    end
+  end
+  added = added + MergeLog(L.money, fresh, 4, now)
+  if added > 0 then BuildExport() end
+end
+
+local function QueryGuildLogs()
+  if not QueryGuildBankLog then return end
+  local n = GetNumGuildBankTabs() or 0
+  -- nacheinander anfragen, damit der Server nicht drosselt; n+1 = Geldprotokoll
+  local tabs = {}
+  for tab = 1, n do tabs[#tabs + 1] = tab end
+  tabs[#tabs + 1] = (MAX_GUILDBANK_TABS or 8) + 1
+  for i, tab in ipairs(tabs) do
+    C_Timer.After(0.4 * i, function() if guildOpen then QueryGuildBankLog(tab) end end)
+  end
+end
+
+---------------------------------------------------------------------------
 -- Export-Fenster
 ---------------------------------------------------------------------------
 local exportFrame
@@ -304,6 +415,8 @@ SlashCmdList.DONNERBALKENBANK = function(msg)
       local n = 0
       for _, t in ipairs(DB.guild.tabs) do n = n + #t.items end
       say(string.format("Gildenbank: %d Gegenstände in %d Fächern (gelesen: %s)", n, #DB.guild.tabs, fmtTime(DB.guild.updated)))
+      local L = DB.guildLog[DB.guild.name]
+      if L then say(string.format("Gildenbank-Protokoll: %d Einträge zu Gegenständen, %d zu Gold", #L.items, #L.money)) end
     end
     if not any and not DB.guild then say("Noch nichts erfasst. Auf dem Bank-Charakter: /gbank an") end
   else
@@ -319,13 +432,13 @@ local function Reg(ev) pcall(f.RegisterEvent, f, ev) end
 for _, ev in ipairs({
   "ADDON_LOADED", "PLAYER_LOGIN", "PLAYER_LOGOUT", "BAG_UPDATE_DELAYED", "PLAYER_MONEY",
   "BANKFRAME_OPENED", "BANKFRAME_CLOSED", "PLAYERBANKSLOTS_CHANGED",
-  "GUILDBANKFRAME_OPENED", "GUILDBANKFRAME_CLOSED", "GUILDBANKBAGSLOTS_CHANGED", "GUILDBANK_UPDATE_MONEY",
+  "GUILDBANKFRAME_OPENED", "GUILDBANKFRAME_CLOSED", "GUILDBANKBAGSLOTS_CHANGED", "GUILDBANK_UPDATE_MONEY", "GUILDBANKLOG_UPDATE",
   "PLAYER_INTERACTION_MANAGER_FRAME_SHOW", "PLAYER_INTERACTION_MANAGER_FRAME_HIDE",
 }) do Reg(ev) end
 
 local PIT = Enum and Enum.PlayerInteractionType
 local function OpenBank() bankOpen = true; C_Timer.After(0.5, ScanBank) end
-local function OpenGuild() guildOpen = true; QueryGuildTabs(); C_Timer.After(1, ScanGuild) end
+local function OpenGuild() guildOpen = true; QueryGuildTabs(); C_Timer.After(1, ScanGuild); C_Timer.After(1.5, QueryGuildLogs) end
 
 f:SetScript("OnEvent", function(_, event, arg1)
   if event == "ADDON_LOADED" then
@@ -336,6 +449,7 @@ f:SetScript("OnEvent", function(_, event, arg1)
     DB.chars = DB.chars or {}
     DB.seen = DB.seen or {}
     DB.guildTabsSeen = DB.guildTabsSeen or {}
+    DB.guildLog = DB.guildLog or {}
     return
   end
   if not DB then return end
@@ -358,6 +472,8 @@ f:SetScript("OnEvent", function(_, event, arg1)
     guildOpen = false
   elseif event == "GUILDBANKBAGSLOTS_CHANGED" or event == "GUILDBANK_UPDATE_MONEY" then
     ScanGuild()
+  elseif event == "GUILDBANKLOG_UPDATE" then
+    ReadGuildLog()
   elseif event == "PLAYER_INTERACTION_MANAGER_FRAME_SHOW" and PIT then
     if arg1 == PIT.Banker then OpenBank() elseif arg1 == PIT.GuildBanker then OpenGuild() end
   elseif event == "PLAYER_INTERACTION_MANAGER_FRAME_HIDE" and PIT then
