@@ -19,12 +19,12 @@ window.GUILD_CONFIG = {
   // Die Armory liefert nur Rang-Nummern, keine Namen.
   // Tragt hier die Rangnamen ein, wie sie im Spiel heißen.
   rankNames: {
-    0: "Gildenmeister",
+    0: "Gildenleader",
     1: "Offizier",
-    2: "Rang 2",
-    3: "Rang 3",
-    4: "Rang 4",
-    5: "Rang 5",
+    2: "Veteran",
+    3: "Mitglied",
+    4: "Twink",
+    5: "Initiand",
   },
 
   about: [

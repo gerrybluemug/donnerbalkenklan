@@ -22,9 +22,20 @@ const ENDPOINT = "https://worldofwarcraft.blizzard.com/de-de/graphql";
 // aktualisiert und die Kennung muss erneuert werden (siehe README).
 const ROSTER_QUERY_ID = "5f32b85faa248d321a08645d470fb38b82be64b9abd8b5b5fd2816620546794b";
 
+// Der Endpunkt /de-de/graphql gilt für alle WoW-Versionen. Die Armory-Seite
+// schickt ihre eigene Adresse als Herkunft mit; daran erkennt der Server
+// offenbar, dass es um WoW Forever geht. Ohne diese Angabe antwortet er
+// mit "Internal Server Error".
+const GUILD_PAGE = `https://worldofwarcraft.blizzard.com/de-de/forever/${GUILD.region}/armory/guild/${GUILD.nameSlug}`;
+
 const res = await fetch(ENDPOINT, {
   method: "POST",
-  headers: { "content-type": "application/json", "accept-language": "de-de" },
+  headers: {
+    "content-type": "application/json",
+    "accept-language": "de-de",
+    origin: "https://worldofwarcraft.blizzard.com",
+    referer: GUILD_PAGE,
+  },
   body: JSON.stringify({
     operationName: "GetGuildRoster",
     variables: { guild: GUILD, showMessageOfTheDay: false, showRoles: false },
