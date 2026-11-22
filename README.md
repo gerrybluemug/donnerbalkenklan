@@ -126,7 +126,9 @@ Mitglieder melden sich auf der Gildenbank-Seite mit Discord an und klicken bei
 einem Gegenstand auf „Bedarf“. Alle Angemeldeten sehen, wer was braucht;
 Offiziere können Anmeldungen als „erledigt“ abhaken. GitHub Pages kann nichts
 speichern, deshalb läuft dieser Teil als kleines PHP-Skript (Ordner `api/`) auf
-dem Hetzner-Webspace von free-kick.de. Die Daten liegen dort in einer
+dem Hetzner-Webspace (Webhosting S, Server 167.235.121.130) unter der Subdomain
+`donnerbalken-api.free-kick.de`. (free-kick.de selbst läuft auf einem anderen
+Server, deshalb eine eigene Subdomain.) Die Daten liegen dort in einer
 SQLite-Datei im Unterordner `data/` (wird automatisch angelegt und ist von außen
 gesperrt).
 
@@ -135,7 +137,7 @@ Einrichtung (einmalig):
 1. **Discord-App anlegen:** https://discord.com/developers/applications →
    *New Application* (z. B. „Donnerbalkenklan Homepage“) → *OAuth2*.
    *Client ID* notieren, *Client Secret* erzeugen und notieren. Unter
-   *Redirects* eintragen: `https://free-kick.de/donnerbalken-api/?action=callback`
+   *Redirects* eintragen: `https://donnerbalken-api.free-kick.de/?action=callback`
 2. **Dateien vorbereiten:** `api/config.sample.php` als `config.php` speichern
    und Client ID und Client Secret eintragen. Optional Offiziers-Rollen
    (`officer_roles`) und Pflicht-Rollen (`required_role`, eine davon genügt;
@@ -144,11 +146,15 @@ Einrichtung (einmalig):
    Rechtsklick auf die Rolle → „ID kopieren“.
    `config.php` enthält das Geheimnis und gehört **nicht** ins Repository
    (steht in `.gitignore`).
-3. **Hochladen:** In konsoleH (Dateimanager oder FTP) im Webordner von
-   free-kick.de einen Ordner `donnerbalken-api` anlegen und `index.php`,
-   `.htaccess` und `config.php` hineinladen. Der Webspace braucht PHP 8 mit
+3. **Subdomain:** In der Hetzner Console (DNS → free-kick.de) einen A-Eintrag
+   `donnerbalken-api` → `167.235.121.130` und einen AAAA-Eintrag
+   `donnerbalken-api` → `2a01:4f8:1061:21b5::2` anlegen. In konsoleH die
+   Subdomain `donnerbalken-api` anlegen (eigener Ordner) und dafür ein
+   kostenloses Let's-Encrypt-Zertifikat (SSL) einschalten.
+4. **Hochladen:** In den Ordner der Subdomain `index.php`, `.htaccess` und
+   `config.php` laden (Dateimanager oder FTP). Der Webspace braucht PHP 8 mit
    SQLite (bei Hetzner Standard; PHP-Version in konsoleH prüfen).
-4. **Einschalten:** In `config.js` `needsApi: "https://free-kick.de/donnerbalken-api/"`
+5. **Einschalten:** In `config.js` `needsApi: "https://donnerbalken-api.free-kick.de/"`
    eintragen und hochladen.
 
 Ohne Anmeldung zeigt die Seite nur, wie oft ein Gegenstand angemeldet ist.

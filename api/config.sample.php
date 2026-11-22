@@ -11,7 +11,7 @@ return [
     'client_id'     => '',
     'client_secret' => '',
     // Muss genau so bei der Discord-App unter "Redirects" eingetragen sein:
-    'redirect_uri'  => 'https://free-kick.de/donnerbalken-api/?action=callback',
+    'redirect_uri'  => 'https://donnerbalken-api.free-kick.de/?action=callback',
 
     // Nur Mitglieder dieses Discord-Servers dürfen sich anmelden
     'guild_id' => '743537404358426735',
