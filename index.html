@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Donnerbalkenklan</title>
+  <meta name="description" content="Gilden-Homepage des Donnerbalkenklans – Horde-Gilde auf WoW Forever (EU).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="#top"><span class="crest" aria-hidden="true">⚡</span><span data-bind="name"></span></a>
+    <nav>
+      <a href="#ueber">Über uns</a>
+      <a href="#statistik">Statistik</a>
+      <a href="#mitglieder">Mitglieder</a>
+      <a href="#beitreten">Beitreten</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="eyebrow" id="hero-meta"></p>
+        <h1 data-bind="name"></h1>
+        <p class="tagline" data-bind="tagline"></p>
+        <div class="kpis" id="kpis"></div>
+        <div class="cta">
+          <a class="btn primary" href="#mitglieder">Mitglieder ansehen</a>
+          <a class="btn" id="armory-link" target="_blank" rel="noopener">Zur Armory ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="ueber" class="wrap grid-2">
+      <div class="card">
+        <h2>Über uns</h2>
+        <div id="about"></div>
+        <div id="schedule-box">
+          <h3>Feste Termine</h3>
+          <ul class="schedule" id="schedule"></ul>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Neuigkeiten</h2>
+        <ul class="news" id="news"></ul>
+      </div>
+    </section>
+
+    <section id="statistik" class="wrap">
+      <h2 class="section-title">Die Gilde in Zahlen</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Klassen</h3>
+          <div class="bars" id="class-bars"></div>
+        </div>
+        <div class="card">
+          <h3>Völker</h3>
+          <div class="bars" id="race-bars"></div>
+        </div>
+        <div class="card">
+          <h3>Levelverteilung</h3>
+          <div class="histo" id="level-histo"></div>
+        </div>
+      </div>
+      <div class="card top">
+        <h3>Die Stärksten im Klan</h3>
+        <ol class="toplist" id="toplist"></ol>
+      </div>
+    </section>
+
+    <section id="mitglieder" class="wrap">
+      <h2 class="section-title">Mitglieder</h2>
+      <div class="filters">
+        <input type="search" id="f-search" placeholder="Name suchen …" aria-label="Name suchen">
+        <select id="f-class" aria-label="Klasse"><option value="">Alle Klassen</option></select>
+        <select id="f-race" aria-label="Volk"><option value="">Alle Völker</option></select>
+        <select id="f-rank" aria-label="Rang"><option value="">Alle Ränge</option></select>
+        <label class="minlvl">ab Level <input type="number" id="f-minlvl" min="1" max="60" value="1"></label>
+      </div>
+      <p class="count" id="count"></p>
+      <div class="table-wrap">
+        <table id="roster">
+          <thead>
+            <tr>
+              <th data-sort="name">Name</th>
+              <th data-sort="level" class="num">Stufe</th>
+              <th data-sort="ilvl" class="num">Itemlevel</th>
+              <th data-sort="cls">Klasse</th>
+              <th data-sort="race">Volk</th>
+              <th data-sort="rank">Rang</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="beitreten" class="wrap">
+      <div class="card join">
+        <h2>Mitmachen</h2>
+        <p data-bind="joinText"></p>
+        <a class="btn primary" id="discord-link" target="_blank" rel="noopener">Zum Discord</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <p id="stand"></p>
+    <p class="small">World of Warcraft ist eine Marke von Blizzard Entertainment. Dies ist eine private Fan-Seite ohne Verbindung zu Blizzard.</p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="data/roster.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
