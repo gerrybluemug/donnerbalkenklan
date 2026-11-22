@@ -55,7 +55,7 @@ window.GUILD_CONFIG = {
 
   // Adresse der Mitgliederecke (Bedarf an Gildenbank-Gegenständen anmelden),
   // also des Ordners api/ auf dem eigenen Webspace. Leer lassen = ausgeblendet.
-  needsApi: "",
+  needsApi: "https://donnerbalken-api.free-kick.de/",
 
   joinText: "Wir freuen uns über neue Gesichter – egal welche Klasse, egal welches Level. Schreib einfach einen Offizier im Spiel an oder komm auf unseren Discord.",
 };
