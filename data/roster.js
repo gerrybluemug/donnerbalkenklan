@@ -1,6 +1,6 @@
 // Automatisch erzeugt von scripts/update-roster.mjs – nicht von Hand bearbeiten.
 window.ROSTER = {
- "updated": "2026-11-22T17:01:27.926Z",
+ "updated": "2026-11-22T17:32:21.156Z",
  "maxLevel": 60,
  "members": [
   {
@@ -932,7 +932,7 @@ window.ROSTER = {
    "surname": "Tobson",
    "slug": "tobi-tobson",
    "level": 47,
-   "ilvl": 44,
+   "ilvl": 45,
    "race": "ORC",
    "raceName": "Orc",
    "cls": "SHAMAN",
@@ -1124,7 +1124,7 @@ window.ROSTER = {
    "surname": "Moguntius",
    "slug": "mortis-moguntius",
    "level": 22,
-   "ilvl": 9,
+   "ilvl": 11,
    "race": "UNDEAD",
    "raceName": "Untoter",
    "cls": "PRIEST",
@@ -1520,7 +1520,7 @@ window.ROSTER = {
    "surname": "Kroysen",
    "slug": "cardo-kroysen",
    "level": 28,
-   "ilvl": 19,
+   "ilvl": 20,
    "race": "TROLL",
    "raceName": "Troll",
    "cls": "HUNTER",
@@ -2456,7 +2456,7 @@ window.ROSTER = {
    "surname": "Lichtban",
    "slug": "nihilor-lichtban",
    "level": 27,
-   "ilvl": 20,
+   "ilvl": 24,
    "race": "UNDEAD",
    "raceName": "Untoter",
    "cls": "ROGUE",
@@ -2636,12 +2636,12 @@ window.ROSTER = {
    "surname": "Reylord",
    "slug": "braka-reylord",
    "level": 9,
-   "ilvl": null,
+   "ilvl": 2,
    "race": "ORC",
    "raceName": "Orc",
    "cls": "HUNTER",
    "rank": 5,
-   "gender": null
+   "gender": "MALE"
   },
   {
    "name": "Willus",
@@ -2816,12 +2816,12 @@ window.ROSTER = {
    "surname": "Madenfluch",
    "slug": "matriarchin-madenfluch",
    "level": 9,
-   "ilvl": null,
+   "ilvl": 2,
    "race": "UNDEAD",
    "raceName": "Untoter",
    "cls": "WARLOCK",
    "rank": 4,
-   "gender": null
+   "gender": "FEMALE"
   },
   {
    "name": "Gildenbank",
