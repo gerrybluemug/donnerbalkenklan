@@ -157,9 +157,11 @@
       return `<span class="gold">${g.toLocaleString("de-DE")}g</span> <span class="silver">${s}s</span> <span class="copper">${k}c</span>`;
     };
     // Bank-Charakter "Bankallg" → "Bankallg Vontrudi", wenn der Vorname in der Gilde eindeutig ist
+    // Heißt der Charakter selbst "Gildenbank", wird er von der echten Gildenbank unterschieden
     const displayName = (key) => {
       const hits = M.filter((m) => m.name.toLowerCase() === key.toLowerCase());
-      return hits.length === 1 ? fullName(hits[0]) : key;
+      const name = hits.length === 1 ? fullName(hits[0]) : key;
+      return name.toLowerCase() === "gildenbank" ? `${name} (Charakter)` : name;
     };
     const fmt = (iso) => (iso ? new Date(iso).toLocaleString("de-DE", { dateStyle: "medium", timeStyle: "short" }) : "–");
 
