@@ -107,6 +107,13 @@
       <div class="filters">
         <input type="search" id="b-search" placeholder="Gegenstand suchen …" aria-label="Gegenstand suchen">
         <select id="b-quality" aria-label="Qualität"><option value="">Alle Qualitäten</option></select>
+        <select id="b-sort" aria-label="Sortierung">
+          <option value="quality">Nach Qualität</option>
+          <option value="name">Nach Name</option>
+          <option value="oldest">Am längsten gelagert</option>
+          <option value="newest">Zuletzt eingelagert</option>
+          <option value="count">Größte Menge</option>
+        </select>
       </div>
       <p class="count" id="b-count"></p>
       <div class="bank-grid" id="bank-items"></div>

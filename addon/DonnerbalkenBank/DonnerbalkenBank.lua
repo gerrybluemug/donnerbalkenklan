@@ -128,11 +128,48 @@ local function CharEntry()
   return DB.chars[key]
 end
 
-local function ScanBags()
+---------------------------------------------------------------------------
+-- Lagerdauer: pro Bank-Charakter bzw. Gildenbank merkt sich das Addon,
+-- seit wann ein Gegenstand (Item-ID) dort liegt. Umlagern zwischen Taschen
+-- und Bankfach bzw. zwischen Gildenbankfächern setzt die Zeit nicht zurück.
+-- Ist ein Gegenstand ganz weg, beginnt die Zählung beim nächsten Einlagern neu.
+--
+-- DB.seen[ort][itemID] = { t = erstmals gesehen, i = schon beim allerersten
+--   Auslesen vorhanden (dann kann er auch älter sein), w = zuletzt gesehen in }
+--
+-- Jeder Gegenstand im Export bekommt [6] = seit (Unix-Zeit), [7] = 1/0 für "i".
+---------------------------------------------------------------------------
+local function Track(place, lists, firstParts, unknownParts)
+  DB.seen[place] = DB.seen[place] or {}
+  local seen, now, present = DB.seen[place], time(), {}
+  for _, list in ipairs(lists) do
+    for _, it in ipairs(list) do
+      local id, where = it[1], it[5]
+      present[id] = true
+      local s = seen[id]
+      if not s then
+        s = { t = now, i = firstParts[where] or nil }
+        seen[id] = s
+      end
+      s.w = where
+      it[6], it[7] = s.t, s.i and 1 or 0
+    end
+  end
+  -- nicht mehr vorhandene Gegenstände vergessen – außer ihr letzter Lagerort
+  -- konnte gerade nicht gelesen werden (z. B. Gildenbankfach noch nicht geladen)
+  for id, s in pairs(seen) do
+    if not present[id] and not (unknownParts and unknownParts[s.w]) then seen[id] = nil end
+  end
+end
+
+local function ScanBags(firstParts)
   if not IsBankChar() then return end
   local c = CharEntry()
+  firstParts = firstParts or {}
+  if not c.bagsScanned then firstParts["Taschen"] = true; c.bagsScanned = true end
   c.bags = {}
   ScanContainers(BagIDs(), "Taschen", c.bags)
+  Track("c:" .. CharKey(), { c.bags, c.bank or {} }, firstParts)
   c.money = GetMoney()
   c.updated = time()
   BuildExport()
@@ -142,10 +179,12 @@ local bankOpen = false
 local function ScanBank()
   if not (bankOpen and IsBankChar()) then return end
   local c = CharEntry()
+  local first = {}
+  if not c.bankScanned then first["Bank"] = true; c.bankScanned = true end
   c.bank = {}
   ScanContainers(BankIDs(), "Bank", c.bank)
   c.bankUpdated = time()
-  ScanBags()
+  ScanBags(first)
 end
 
 local guildOpen = false
@@ -164,8 +203,12 @@ local function ScanGuild()
     money = GetGuildBankMoney and GetGuildBankMoney() or 0,
     tabs = {},
   }
+  local place = "g:" .. tostring(g.name)
+  DB.guildTabsSeen[place] = DB.guildTabsSeen[place] or {}
+  local tabsSeen, lists, first, unknown = DB.guildTabsSeen[place], {}, {}, {}
   for tab = 1, (GetNumGuildBankTabs() or 0) do
     local name, _, viewable = GetGuildBankTabInfo(tab)
+    name = name or ("Fach " .. tab)
     local items = {}
     if viewable then
       for slot = 1, (MAX_GUILDBANK_SLOTS_PER_TAB or 98) do
@@ -173,12 +216,18 @@ local function ScanGuild()
         if link then
           local _, count, _, _, quality = GetGuildBankItemInfo(tab, slot)
           local id = tonumber(link:match("item:(%d+)"))
-          items[#items + 1] = { id or 0, ItemName(id, link), quality or 1, count or 1 }
+          items[#items + 1] = { id or 0, ItemName(id, link), quality or 1, count or 1, name }
         end
       end
     end
-    g.tabs[#g.tabs + 1] = { name = name or ("Fach " .. tab), viewable = viewable and true or false, items = items }
+    -- leere oder nicht einsehbare Fächer gelten als "nicht gelesen":
+    -- Daten der Gildenbank kommen fachweise verzögert vom Server
+    if #items == 0 then unknown[name] = true
+    elseif not tabsSeen[name] then first[name] = true; tabsSeen[name] = true end
+    lists[#lists + 1] = items
+    g.tabs[#g.tabs + 1] = { name = name, viewable = viewable and true or false, items = items }
   end
+  Track(place, lists, first, unknown)
   DB.guild = g
   BuildExport()
 end
@@ -240,6 +289,7 @@ SlashCmdList.DONNERBALKENBANK = function(msg)
   elseif msg == "aus" then
     DB.enabled[key] = nil
     DB.chars[key] = nil
+    DB.seen["c:" .. key] = nil
     BuildExport()
     say(key .. " wird nicht mehr erfasst; gespeicherte Daten wurden entfernt.")
   elseif msg == "export" then
@@ -284,6 +334,8 @@ f:SetScript("OnEvent", function(_, event, arg1)
     DB = DonnerbalkenBankDB
     DB.enabled = DB.enabled or {}
     DB.chars = DB.chars or {}
+    DB.seen = DB.seen or {}
+    DB.guildTabsSeen = DB.guildTabsSeen or {}
     return
   end
   if not DB then return end

@@ -2,7 +2,7 @@
 ## Title: Donnerbalken Bank
 ## Notes: Liest Bank-Charaktere und Gildenbank aus und exportiert sie für die Gilden-Homepage. /gbank
 ## Author: Donnerbalkenklan
-## Version: 1.0
+## Version: 1.1
 ## SavedVariables: DonnerbalkenBankDB
 
 DonnerbalkenBank.lua

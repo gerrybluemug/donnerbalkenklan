@@ -39,6 +39,14 @@ sie gehört in die erste Zeile von `DonnerbalkenBank.toc`.)
 
 Weitere Befehle: `/gbank status` (was wurde erfasst), `/gbank aus` (Charakter nicht mehr erfassen).
 
+**Lagerdauer:** Das Addon merkt sich, seit wann jeder Gegenstand auf einem
+Bank-Charakter bzw. in der Gildenbank liegt. Umlagern (Taschen ↔ Bankfach,
+Gildenbankfach ↔ Gildenbankfach) setzt die Zeit nicht zurück; wird ein
+Gegenstand komplett entnommen, beginnt die Zählung beim nächsten Einlagern neu.
+Was beim allerersten Auslesen schon da war, wird als „seit ≥ …“ angezeigt,
+weil das Addon nicht wissen kann, wie lange es vorher schon dort lag.
+Gegenstände, die länger als 30 Tage liegen, werden auf der Seite orange markiert.
+
 ### 2. Daten auf die Homepage bringen – Variante A: im Browser
 
 1. Im Spiel `/gbank export` eingeben, der Text ist bereits markiert → **Strg+C**.

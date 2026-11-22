@@ -198,18 +198,48 @@
       const map = new Map();
       sources.filter((s) => current === "all" || s.id === current).forEach((s) => s.items.forEach((i) => {
         const key = i.id + "|" + i.name;
-        const e = map.get(key) || { name: i.name, q: i.q, n: 0, locs: new Set() };
-        e.n += i.n; e.locs.add(i.loc); map.set(key, e);
+        const e = map.get(key) || { name: i.name, q: i.q, n: 0, locs: new Set(), since: null, atLeast: false };
+        e.n += i.n; e.locs.add(i.loc);
+        // bei mehreren Lagerorten zählt der älteste
+        if (i.since && (!e.since || i.since < e.since)) { e.since = i.since; e.atLeast = !!i.atLeast; }
+        map.set(key, e);
       }));
+      const fs = $("#b-sort").value;
+      const t = (i, none) => (i.since ? Date.parse(i.since) : none);
+      const order = {
+        quality: (a, b) => b.q - a.q || a.name.localeCompare(b.name, "de"),
+        name: (a, b) => a.name.localeCompare(b.name, "de"),
+        oldest: (a, b) => t(a, Infinity) - t(b, Infinity) || a.name.localeCompare(b.name, "de"),
+        newest: (a, b) => t(b, -Infinity) - t(a, -Infinity) || a.name.localeCompare(b.name, "de"),
+        count: (a, b) => b.n - a.n || a.name.localeCompare(b.name, "de"),
+      }[fs];
       const items = [...map.values()]
         .filter((i) => (!q || i.name.toLocaleLowerCase("de").includes(q)) && (fq === "" || String(i.q) === fq))
-        .sort((a, b) => b.q - a.q || a.name.localeCompare(b.name, "de"));
+        .sort(order);
       $("#bank-items").innerHTML = items.length
-        ? items.map((i) => `<div class="bank-item"><span class="nm"><b style="color:${qColor(i.q)}">${esc(i.name)}</b><small>${esc([...i.locs].join(", "))}</small></span><span class="qty">×${i.n.toLocaleString("de-DE")}</span></div>`).join("")
+        ? items.map((i) => `<div class="bank-item"><span class="nm"><b style="color:${qColor(i.q)}">${esc(i.name)}</b><small>${esc([...i.locs].join(", "))}</small></span><span class="side"><span class="qty">×${i.n.toLocaleString("de-DE")}</span>${age(i)}</span></div>`).join("")
         : `<p class="bank-empty">Keine passenden Gegenstände.</p>`;
       $("#b-count").textContent = `${items.length} verschiedene Gegenstände`;
     }
-    ["#b-search", "#b-quality"].forEach((s) => $(s).addEventListener("input", renderBank));
+    // Lagerdauer, z. B. "seit 12 Tagen" bzw. "seit ≥ 12 Tagen", wenn der
+    // Gegenstand schon beim ersten Auslesen durch das Addon da war
+    const OLD_DAYS = 30;
+    function age(i) {
+      if (!i.since) return "";
+      const ms = Date.now() - Date.parse(i.since);
+      const h = Math.max(0, Math.floor(ms / 3600000)), d = Math.floor(h / 24);
+      let txt;
+      if (h < 1) txt = "seit < 1 Std.";
+      else if (d < 1) txt = `seit ${h} Std.`;
+      else if (d < 60) txt = `seit ${d} ${d === 1 ? "Tag" : "Tagen"}`;
+      else txt = `seit ${Math.floor(d / 30)} Monaten`;
+      if (i.atLeast) txt = txt.replace("seit ", "seit ≥ ").replace("≥ <", "<");
+      const when = new Date(i.since).toLocaleString("de-DE", { dateStyle: "medium", timeStyle: "short" });
+      const title = i.atLeast ? `Lag schon beim ersten Auslesen (${when}) hier – vermutlich länger` : `Eingelagert am ${when}`;
+      return `<small class="age${d >= OLD_DAYS ? " old" : ""}" title="${esc(title)}">${esc(txt)}</small>`;
+    }
+
+    ["#b-search", "#b-quality", "#b-sort"].forEach((s) => $(s).addEventListener("input", renderBank));
     renderBank();
   }
 })();

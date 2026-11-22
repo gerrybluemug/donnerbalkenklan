@@ -50,10 +50,15 @@ if (!data || data.v !== 1) fail("Unbekanntes Exportformat.");
 // ---------- prüfen & bereinigen ----------
 const str = (s, max = 100) => String(s ?? "").slice(0, max);
 const int = (n, min = 0, max = 1e12) => Math.min(max, Math.max(min, Math.round(Number(n) || 0)));
-const item = (it, where) => Array.isArray(it) && it.length >= 4
-  ? { id: int(it[0]), name: str(it[1]), q: int(it[2], 0, 8), n: int(it[3], 1, 1e6), where: str(where ?? it[4], 30) }
-  : null;
 const time = (t) => (t ? new Date(int(t) * 1000).toISOString() : null);
+// Element 6/7 (ab Addon 1.1): seit wann der Gegenstand da ist / ob er schon
+// beim allerersten Auslesen da war (dann liegt er womöglich schon länger).
+const item = (it, where) => Array.isArray(it) && it.length >= 4
+  ? {
+      id: int(it[0]), name: str(it[1]), q: int(it[2], 0, 8), n: int(it[3], 1, 1e6), where: str(where ?? it[4], 30),
+      since: time(it[5]), atLeast: it[6] === 1,
+    }
+  : null;
 
 const chars = {};
 for (const [name, c] of Object.entries(Array.isArray(data.chars) ? {} : data.chars || {})) {
