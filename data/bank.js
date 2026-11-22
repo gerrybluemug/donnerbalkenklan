@@ -1,10 +1,10 @@
 // Automatisch erzeugt von scripts/import-bank.mjs – nicht von Hand bearbeiten.
 window.BANK = {
- "updated": "2026-11-22T13:16:19.406Z",
+ "updated": "2026-11-22T13:26:57.686Z",
  "chars": {
   "Gildenbank": {
-   "updated": "2026-11-22T13:12:59.000Z",
-   "bankUpdated": "2026-11-22T13:12:59.000Z",
+   "updated": "2026-11-22T13:26:36.000Z",
+   "bankUpdated": "2026-11-22T13:26:36.000Z",
    "money": 0,
    "items": [
     {
@@ -29,7 +29,7 @@ window.BANK = {
   }
  },
  "guild": {
-  "updated": "2026-11-22T13:13:40.000Z",
+  "updated": "2026-11-22T13:26:40.000Z",
   "money": 37534,
   "tabs": []
  }
