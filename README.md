@@ -3,6 +3,8 @@
 Statische Webseite (nur HTML/CSS/JS, kein Server nötig) für die Horde-Gilde
 **Donnerbalkenklan** auf WoW Forever (EU).
 
+Online: **https://donnerbalkenklan.free-kick.de**
+
 ## Dateien
 
 | Datei | Zweck |
@@ -113,6 +115,21 @@ Danach steht die neue Liste in `data/roster.js`.
 1. Neues GitHub-Repository anlegen und alle Dateien hochladen.
 2. Im Repository: *Settings → Pages → Source:* **GitHub Actions** wählen.
 3. Der Workflow holt die Mitgliederliste dann jeden Tag neu und veröffentlicht die Seite.
+
+### Eigene Domain
+
+Die Seite läuft unter `donnerbalkenklan.free-kick.de`. Dafür gibt es bei
+Hetzner (Hetzner Console → DNS → free-kick.de) einen DNS-Eintrag:
+
+| Typ | Name | Wert |
+|---|---|---|
+| CNAME | `donnerbalkenklan` | `gerrybluemug.github.io.` |
+
+und auf GitHub unter *Settings → Pages → Custom domain* die Domain
+`donnerbalkenklan.free-kick.de` mit „Enforce HTTPS“. Die alte Adresse
+`gerrybluemug.github.io/donnerbalkenklan` leitet automatisch dorthin um.
+Wird der DNS-Eintrag gelöscht, ist die Seite nur noch über GitHub erreichbar,
+wenn auch die Custom domain auf GitHub wieder entfernt wird.
 
 ## Wichtig zur Datenquelle
 
