@@ -1,6 +1,6 @@
 // Automatisch erzeugt von scripts/update-roster.mjs – nicht von Hand bearbeiten.
 window.ROSTER = {
- "updated": "2026-11-22T13:27:09.449Z",
+ "updated": "2026-11-22T13:32:48.057Z",
  "maxLevel": 60,
  "members": [
   {
@@ -2780,12 +2780,12 @@ window.ROSTER = {
    "surname": "Thunder",
    "slug": "mallrock-thunder",
    "level": 34,
-   "ilvl": null,
+   "ilvl": 26,
    "race": "UNDEAD",
    "raceName": "Untoter",
    "cls": "PALADIN",
    "rank": 3,
-   "gender": null
+   "gender": "MALE"
   },
   {
    "name": "Bloody",
