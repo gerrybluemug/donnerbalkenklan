@@ -12,9 +12,9 @@ Statische Webseite (nur HTML/CSS/JS, kein Server nötig) für die Horde-Gilde
 | `data/roster.js` | Mitgliederdaten aus der Armory (automatisch erzeugt) |
 | `scripts/update-roster.mjs` | Holt die aktuelle Mitgliederliste aus der Armory |
 | `.github/workflows/update-roster.yml` | Tägliches Auto-Update + Veröffentlichung über GitHub Pages |
-
 | `data/bank.js` | Gildenbank-Daten (aus dem Addon importiert) |
 | `scripts/import-bank.mjs` | Übernimmt den Addon-Export nach `data/bank.js` |
+| `scripts/Gildenbank-hochladen.bat` | Lädt die Addon-Daten per Doppelklick hoch |
 | `addon/DonnerbalkenBank/` | WoW-Addon, das Bank-Charaktere und Gildenbank ausliest |
 
 ## Gildenbank
@@ -46,6 +46,18 @@ Gegenstand komplett entnommen, beginnt die Zählung beim nächsten Einlagern neu
 Was beim allerersten Auslesen schon da war, wird als „seit ≥ …“ angezeigt,
 weil das Addon nicht wissen kann, wie lange es vorher schon dort lag.
 Gegenstände, die länger als 30 Tage liegen, werden auf der Seite orange markiert.
+
+### 2. Daten auf die Homepage bringen – am einfachsten: Doppelklick
+
+`scripts/Gildenbank-hochladen.bat` auf den Desktop kopieren. Nach dem
+Ausloggen aus WoW doppelklicken – fertig. Die Datei sucht die Addon-Daten
+aller WoW-Konten auf dem PC, übernimmt sie und lädt sie zu GitHub hoch.
+Beim ersten Start legt sie dafür eine Kopie der Homepage unter
+`%LOCALAPPDATA%\Donnerbalkenklan\homepage` an.
+
+Voraussetzungen: Git und Node.js installiert, Schreibrechte am Repository.
+Liegt WoW nicht unter `C:\Games\World of Warcraft`, die Zeile `set "WOW=..."`
+in der Datei anpassen.
 
 ### 2. Daten auf die Homepage bringen – Variante A: im Browser
 
