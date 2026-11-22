@@ -6,6 +6,11 @@ on:
   schedule:
     - cron: "17 4 * * *"   # täglich um 04:17 UTC
   workflow_dispatch:        # manuell über den "Run workflow"-Knopf
+    inputs:
+      bank_export:
+        description: "Gildenbank: Export-Text aus dem Addon (/gbank export) hier einfügen. Leer lassen, um nur die Mitgliederliste zu aktualisieren."
+        required: false
+        type: string
   push:
     branches: [main]
 
@@ -31,12 +36,18 @@ jobs:
         continue-on-error: true   # bei Fehlern bleibt die alte Liste online
         run: node scripts/update-roster.mjs
 
+      - name: Gildenbank importieren
+        if: ${{ inputs.bank_export != '' && inputs.bank_export != null }}
+        env:
+          BANK_EXPORT: ${{ inputs.bank_export }}
+        run: node scripts/import-bank.mjs --env
+
       - name: Neue Daten committen
         run: |
           git config user.name "roster-bot"
           git config user.email "roster-bot@users.noreply.github.com"
-          git add data/roster.js
-          git diff --cached --quiet || git commit -m "Mitgliederliste aktualisiert"
+          git add data/roster.js data/bank.js
+          git diff --cached --quiet || git commit -m "Daten aktualisiert (Mitglieder/Gildenbank)"
           git push
 
       - uses: actions/configure-pages@v5

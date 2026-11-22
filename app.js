@@ -139,4 +139,77 @@
   }));
   ["#f-search", "#f-class", "#f-race", "#f-rank", "#f-minlvl"].forEach((s) => $(s).addEventListener("input", render));
   render();
+
+  // ---------- Gildenbank ----------
+  const B = window.BANK;
+  const bankChars = B ? Object.entries(B.chars || {}) : [];
+  if (B && (bankChars.length || B.guild)) {
+    $("#gildenbank").hidden = false;
+    $("#nav-bank").hidden = false;
+
+    const QUALITY = [
+      ["Schlecht", "#9d9d9d"], ["Verbreitet", "#ffffff"], ["Selten", "#1eff00"], ["Rar", "#0070dd"],
+      ["Episch", "#a335ee"], ["Legendär", "#ff8000"], ["Artefakt", "#e6cc80"], ["Erbstück", "#00ccff"], ["WoW-Token", "#00ccff"],
+    ];
+    const qColor = (q) => (QUALITY[q] || QUALITY[1])[1];
+    const gold = (c) => {
+      const g = Math.floor(c / 10000), s = Math.floor((c % 10000) / 100), k = c % 100;
+      return `<span class="gold">${g.toLocaleString("de-DE")}g</span> <span class="silver">${s}s</span> <span class="copper">${k}c</span>`;
+    };
+    // Bank-Charakter "Bankallg" → "Bankallg Vontrudi", wenn der Vorname in der Gilde eindeutig ist
+    const displayName = (key) => {
+      const hits = M.filter((m) => m.name.toLowerCase() === key.toLowerCase());
+      return hits.length === 1 ? fullName(hits[0]) : key;
+    };
+    const fmt = (iso) => (iso ? new Date(iso).toLocaleString("de-DE", { dateStyle: "medium", timeStyle: "short" }) : "–");
+
+    const sources = bankChars.map(([key, c]) => ({
+      id: "c:" + key, label: displayName(key), money: c.money || 0, updated: c.bankUpdated || c.updated,
+      items: c.items.map((i) => ({ ...i, loc: `${displayName(key)} (${i.where})` })),
+    }));
+    if (B.guild) {
+      sources.push({
+        id: "guild", label: "Gildenbank", money: B.guild.money || 0, updated: B.guild.updated,
+        items: B.guild.tabs.flatMap((t) => t.items.map((i) => ({ ...i, loc: `Gildenbank – ${t.name}` }))),
+      });
+    }
+
+    const totalMoney = sources.reduce((s, x) => s + x.money, 0);
+    $("#bank-summary").innerHTML =
+      `<div class="kpi money"><b>${gold(totalMoney)}</b><span>Gold gesamt</span></div>` +
+      sources.map((s) => `<div class="kpi"><b>${s.items.length}</b><span>${esc(s.label)} · Stand ${esc(fmt(s.updated))}</span></div>`).join("");
+
+    let current = "all";
+    const tabs = [{ id: "all", label: "Alles" }, ...sources];
+    $("#bank-sources").innerHTML = tabs.map((t) => `<button role="tab" data-id="${esc(t.id)}">${esc(t.label)}</button>`).join("");
+    $("#bank-sources").addEventListener("click", (e) => {
+      const b = e.target.closest("button");
+      if (b) { current = b.dataset.id; renderBank(); }
+    });
+
+    const usedQ = [...new Set(sources.flatMap((s) => s.items.map((i) => i.q)))].sort((a, b) => b - a);
+    fill("#b-quality", usedQ.map((q) => [q, (QUALITY[q] || QUALITY[1])[0]]));
+
+    function renderBank() {
+      document.querySelectorAll("#bank-sources button").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.id === current)));
+      const q = $("#b-search").value.trim().toLocaleLowerCase("de");
+      const fq = $("#b-quality").value;
+      // gleiche Gegenstände zusammenfassen
+      const map = new Map();
+      sources.filter((s) => current === "all" || s.id === current).forEach((s) => s.items.forEach((i) => {
+        const key = i.id + "|" + i.name;
+        const e = map.get(key) || { name: i.name, q: i.q, n: 0, locs: new Set() };
+        e.n += i.n; e.locs.add(i.loc); map.set(key, e);
+      }));
+      const items = [...map.values()]
+        .filter((i) => (!q || i.name.toLocaleLowerCase("de").includes(q)) && (fq === "" || String(i.q) === fq))
+        .sort((a, b) => b.q - a.q || a.name.localeCompare(b.name, "de"));
+      $("#bank-items").innerHTML = items.length
+        ? items.map((i) => `<div class="bank-item"><span class="nm"><b style="color:${qColor(i.q)}">${esc(i.name)}</b><small>${esc([...i.locs].join(", "))}</small></span><span class="qty">×${i.n.toLocaleString("de-DE")}</span></div>`).join("")
+        : `<p class="bank-empty">Keine passenden Gegenstände.</p>`;
+      $("#b-count").textContent = `${items.length} verschiedene Gegenstände`;
+    }
+    ["#b-search", "#b-quality"].forEach((s) => $(s).addEventListener("input", renderBank));
+    renderBank();
+  }
 })();

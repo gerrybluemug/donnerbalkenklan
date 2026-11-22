@@ -17,6 +17,7 @@
       <a href="#ueber">Über uns</a>
       <a href="#statistik">Statistik</a>
       <a href="#mitglieder">Mitglieder</a>
+      <a href="#gildenbank" id="nav-bank" hidden>Gildenbank</a>
       <a href="#beitreten">Beitreten</a>
     </nav>
   </header>
@@ -99,6 +100,18 @@
       </div>
     </section>
 
+    <section id="gildenbank" class="wrap" hidden>
+      <h2 class="section-title">Gildenbank</h2>
+      <div class="bank-summary" id="bank-summary"></div>
+      <div class="bank-sources" id="bank-sources" role="tablist" aria-label="Lagerort"></div>
+      <div class="filters">
+        <input type="search" id="b-search" placeholder="Gegenstand suchen …" aria-label="Gegenstand suchen">
+        <select id="b-quality" aria-label="Qualität"><option value="">Alle Qualitäten</option></select>
+      </div>
+      <p class="count" id="b-count"></p>
+      <div class="bank-grid" id="bank-items"></div>
+    </section>
+
     <section id="beitreten" class="wrap">
       <div class="card join">
         <h2>Mitmachen</h2>
@@ -115,6 +128,7 @@
 
   <script src="config.js"></script>
   <script src="data/roster.js"></script>
+  <script src="data/bank.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
