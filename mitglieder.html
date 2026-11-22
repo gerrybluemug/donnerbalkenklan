@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mitglieder – Donnerbalkenklan</title>
+  <meta name="description" content="Mitgliederliste des Donnerbalkenklans – Horde-Gilde auf WoW Forever (EU).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="mitglieder" data-title="Mitglieder">
+  <header class="nav">
+    <a class="brand" href="index.html"><span class="crest" aria-hidden="true">⚡</span><span data-bind="name"></span></a>
+    <nav>
+      <a href="index.html" data-page="start">Start</a>
+      <a href="mitglieder.html" data-page="mitglieder">Mitglieder</a>
+      <a href="gildenbank.html" data-page="gildenbank" id="nav-bank" hidden>Gildenbank</a>
+      <a href="index.html#beitreten">Beitreten</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="page-head wrap">
+      <h1>Mitglieder</h1>
+      <p class="tagline">Alle Charaktere des Klans – täglich frisch aus der WoW-Armory.</p>
+    </section>
+
+    <section id="mitglieder" class="wrap">
+      <div class="filters">
+        <input type="search" id="f-search" placeholder="Name suchen …" aria-label="Name suchen">
+        <select id="f-class" aria-label="Klasse"><option value="">Alle Klassen</option></select>
+        <select id="f-race" aria-label="Volk"><option value="">Alle Völker</option></select>
+        <select id="f-rank" aria-label="Rang"><option value="">Alle Ränge</option></select>
+        <label class="minlvl">ab Level <input type="number" id="f-minlvl" min="1" max="60" value="1"></label>
+      </div>
+      <p class="count" id="count"></p>
+      <div class="table-wrap">
+        <table id="roster">
+          <thead>
+            <tr>
+              <th data-sort="name">Name</th>
+              <th data-sort="level" class="num">Stufe</th>
+              <th data-sort="ilvl" class="num">Itemlevel</th>
+              <th data-sort="cls">Klasse</th>
+              <th data-sort="race">Volk</th>
+              <th data-sort="rank">Rang</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="wrap footer">
+    <p id="stand"></p>
+    <p class="small">World of Warcraft ist eine Marke von Blizzard Entertainment. Dies ist eine private Fan-Seite ohne Verbindung zu Blizzard.</p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="data/roster.js"></script>
+  <script src="data/bank.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

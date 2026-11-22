@@ -7,7 +7,10 @@ Statische Webseite (nur HTML/CSS/JS, kein Server nötig) für die Horde-Gilde
 
 | Datei | Zweck |
 |---|---|
-| `index.html` | Die Seite |
+| `index.html` | Startseite (Über uns, News, Statistik, Mitmachen) |
+| `mitglieder.html` | Mitgliederliste |
+| `gildenbank.html` | Gildenbank: Bestand, größte Spender, Einzahlungen |
+| `app.js`, `style.css` | Gemeinsamer Code und Gestaltung aller Seiten |
 | `config.js` | **Hier anpassen:** Texte, News, Termine, Rangnamen, Discord-Link |
 | `data/roster.js` | Mitgliederdaten aus der Armory (automatisch erzeugt) |
 | `scripts/update-roster.mjs` | Holt die aktuelle Mitgliederliste aus der Armory |
@@ -19,8 +22,8 @@ Statische Webseite (nur HTML/CSS/JS, kein Server nötig) für die Horde-Gilde
 
 ## Gildenbank
 
-Der Bereich „Gildenbank“ erscheint auf der Seite automatisch, sobald die
-ersten Bankdaten importiert wurden.
+Der Menüpunkt „Gildenbank“ (Seite `gildenbank.html`) erscheint automatisch,
+sobald die ersten Bankdaten importiert wurden.
 
 ### 1. Addon installieren (auf dem PC, auf dem die Bank-Charaktere gespielt werden)
 
@@ -48,14 +51,15 @@ weil das Addon nicht wissen kann, wie lange es vorher schon dort lag.
 Gegenstände, die länger als 30 Tage liegen, werden auf der Seite orange markiert.
 
 **Protokoll & Spender:** Beim Öffnen der Gildenbank liest das Addon auch das
-Gildenbank-Protokoll aus – wer was eingelagert/entnommen und wer wie viel
-Gold eingezahlt/abgehoben hat. Das klappt mit jedem Charakter, der das Addon
+Gildenbank-Protokoll aus – wer was eingelagert und wer wie viel Gold
+eingezahlt hat. **Entnahmen werden nicht veröffentlicht:** Das Addon merkt
+sie sich zwar im Spiel, exportiert aber nur Einzahlungen/Einlagerungen, und
+der Import verwirft alles andere. Das klappt mit jedem Charakter, der das Addon
 hat (kein `/gbank an` nötig), aber nur für Fächer, deren Protokoll der
 Charakter laut Gildenrang sehen darf. WoW zeigt je Fach nur die letzten 25
 Einträge; das Addon sammelt sie bei jedem Öffnen und baut so eine längere
 Historie auf – also die Gildenbank ruhig regelmäßig öffnen. Zeiten sind nur
-auf die Stunde genau. Wer Entnahmen nicht öffentlich zeigen möchte, setzt in
-`config.js` `showBankWithdrawals: false`.
+auf die Stunde genau.
 
 ### 2. Daten auf die Homepage bringen – am einfachsten: Doppelklick
 

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gildenbank – Donnerbalkenklan</title>
+  <meta name="description" content="Gildenbank des Donnerbalkenklans – Bestand, Spender und Einzahlungen.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="gildenbank" data-title="Gildenbank">
+  <header class="nav">
+    <a class="brand" href="index.html"><span class="crest" aria-hidden="true">⚡</span><span data-bind="name"></span></a>
+    <nav>
+      <a href="index.html" data-page="start">Start</a>
+      <a href="mitglieder.html" data-page="mitglieder">Mitglieder</a>
+      <a href="gildenbank.html" data-page="gildenbank" id="nav-bank" hidden>Gildenbank</a>
+      <a href="index.html#beitreten">Beitreten</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="page-head wrap">
+      <h1>Gildenbank</h1>
+      <p class="tagline">Was im Lager liegt und wer etwas beigesteuert hat.</p>
+    </section>
+
+    <p class="bank-empty wrap" id="bank-none" hidden>Noch keine Bankdaten hochgeladen.</p>
+
+    <section id="gildenbank" class="wrap" hidden>
+      <div class="bank-summary" id="bank-summary"></div>
+      <div class="bank-sources" id="bank-sources" role="tablist" aria-label="Lagerort"></div>
+      <div class="filters">
+        <input type="search" id="b-search" placeholder="Gegenstand suchen …" aria-label="Gegenstand suchen">
+        <select id="b-quality" aria-label="Qualität"><option value="">Alle Qualitäten</option></select>
+        <select id="b-sort" aria-label="Sortierung">
+          <option value="quality">Nach Qualität</option>
+          <option value="name">Nach Name</option>
+          <option value="oldest">Am längsten gelagert</option>
+          <option value="newest">Zuletzt eingelagert</option>
+          <option value="count">Größte Menge</option>
+        </select>
+      </div>
+      <p class="count" id="b-count"></p>
+      <div class="bank-grid" id="bank-items"></div>
+
+      <div class="bank-log-wrap" id="bank-log-wrap" hidden>
+        <div class="card">
+          <h3>Größte Spender</h3>
+          <ol class="donors" id="bank-donors"></ol>
+        </div>
+        <div class="card">
+          <h3>Protokoll</h3>
+          <div class="bank-sources" id="log-filter" role="tablist" aria-label="Protokoll filtern"></div>
+          <ul class="bank-log" id="bank-log"></ul>
+          <p class="log-note">Zeiten sind ungefähr – WoW gibt sie nur auf die Stunde genau an.</p>
+          <button type="button" class="btn" id="log-more" hidden>Mehr anzeigen</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="wrap footer">
+    <p id="stand"></p>
+    <p class="small">World of Warcraft ist eine Marke von Blizzard Entertainment. Dies ist eine private Fan-Seite ohne Verbindung zu Blizzard.</p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="data/roster.js"></script>
+  <script src="data/bank.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

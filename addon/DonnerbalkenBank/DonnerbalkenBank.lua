@@ -113,16 +113,22 @@ end
 
 local LOG_MAX, LOG_EXPORT = 1000, 200 -- gespeicherte / exportierte Protokolleinträge je Art
 
-local function Tail(t, n)
+-- Für die Homepage nur Einzahlungen/Einlagerungen exportieren (die neuesten n);
+-- Entnahmen bleiben im Spiel und werden nicht veröffentlicht.
+local EXPORT_TYPES = { deposit = true, depositSummary = true }
+local function Deposits(t, n)
   local r = {}
-  for i = math.max(1, #t - n + 1), #t do r[#r + 1] = t[i] end
+  for i = #t, 1, -1 do
+    if #r >= n then break end
+    if EXPORT_TYPES[t[i][2]] then table.insert(r, 1, t[i]) end
+  end
   return r
 end
 
 local function BuildExport()
   local log = false
   local L = DB.guild and DB.guildLog[DB.guild.name]
-  if L then log = { items = Tail(L.items, LOG_EXPORT), money = Tail(L.money, LOG_EXPORT) } end
+  if L then log = { items = Deposits(L.items, LOG_EXPORT), money = Deposits(L.money, LOG_EXPORT) } end
   DB.lastExport = toJSON({ v = 1, exported = time(), chars = DB.chars, guild = DB.guild or false, guildLog = log })
   return DB.lastExport
 end

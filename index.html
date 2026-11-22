@@ -10,15 +10,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-page="start">
   <header class="nav">
-    <a class="brand" href="#top"><span class="crest" aria-hidden="true">⚡</span><span data-bind="name"></span></a>
+    <a class="brand" href="index.html"><span class="crest" aria-hidden="true">⚡</span><span data-bind="name"></span></a>
     <nav>
-      <a href="#ueber">Über uns</a>
-      <a href="#statistik">Statistik</a>
-      <a href="#mitglieder">Mitglieder</a>
-      <a href="#gildenbank" id="nav-bank" hidden>Gildenbank</a>
-      <a href="#beitreten">Beitreten</a>
+      <a href="index.html" data-page="start">Start</a>
+      <a href="mitglieder.html" data-page="mitglieder">Mitglieder</a>
+      <a href="gildenbank.html" data-page="gildenbank" id="nav-bank" hidden>Gildenbank</a>
+      <a href="index.html#beitreten">Beitreten</a>
     </nav>
   </header>
 
@@ -30,7 +29,7 @@
         <p class="tagline" data-bind="tagline"></p>
         <div class="kpis" id="kpis"></div>
         <div class="cta">
-          <a class="btn primary" href="#mitglieder">Mitglieder ansehen</a>
+          <a class="btn primary" href="mitglieder.html">Mitglieder ansehen</a>
           <a class="btn" id="armory-link" target="_blank" rel="noopener">Zur Armory ↗</a>
         </div>
       </div>
@@ -70,66 +69,6 @@
       <div class="card top">
         <h3>Die Stärksten im Klan</h3>
         <ol class="toplist" id="toplist"></ol>
-      </div>
-    </section>
-
-    <section id="mitglieder" class="wrap">
-      <h2 class="section-title">Mitglieder</h2>
-      <div class="filters">
-        <input type="search" id="f-search" placeholder="Name suchen …" aria-label="Name suchen">
-        <select id="f-class" aria-label="Klasse"><option value="">Alle Klassen</option></select>
-        <select id="f-race" aria-label="Volk"><option value="">Alle Völker</option></select>
-        <select id="f-rank" aria-label="Rang"><option value="">Alle Ränge</option></select>
-        <label class="minlvl">ab Level <input type="number" id="f-minlvl" min="1" max="60" value="1"></label>
-      </div>
-      <p class="count" id="count"></p>
-      <div class="table-wrap">
-        <table id="roster">
-          <thead>
-            <tr>
-              <th data-sort="name">Name</th>
-              <th data-sort="level" class="num">Stufe</th>
-              <th data-sort="ilvl" class="num">Itemlevel</th>
-              <th data-sort="cls">Klasse</th>
-              <th data-sort="race">Volk</th>
-              <th data-sort="rank">Rang</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="gildenbank" class="wrap" hidden>
-      <h2 class="section-title">Gildenbank</h2>
-      <div class="bank-summary" id="bank-summary"></div>
-      <div class="bank-sources" id="bank-sources" role="tablist" aria-label="Lagerort"></div>
-      <div class="filters">
-        <input type="search" id="b-search" placeholder="Gegenstand suchen …" aria-label="Gegenstand suchen">
-        <select id="b-quality" aria-label="Qualität"><option value="">Alle Qualitäten</option></select>
-        <select id="b-sort" aria-label="Sortierung">
-          <option value="quality">Nach Qualität</option>
-          <option value="name">Nach Name</option>
-          <option value="oldest">Am längsten gelagert</option>
-          <option value="newest">Zuletzt eingelagert</option>
-          <option value="count">Größte Menge</option>
-        </select>
-      </div>
-      <p class="count" id="b-count"></p>
-      <div class="bank-grid" id="bank-items"></div>
-
-      <div class="bank-log-wrap" id="bank-log-wrap" hidden>
-        <div class="card">
-          <h3>Größte Spender</h3>
-          <ol class="donors" id="bank-donors"></ol>
-        </div>
-        <div class="card">
-          <h3>Protokoll</h3>
-          <div class="bank-sources" id="log-filter" role="tablist" aria-label="Protokoll filtern"></div>
-          <ul class="bank-log" id="bank-log"></ul>
-          <p class="log-note">Zeiten sind ungefähr – WoW gibt sie nur auf die Stunde genau an.</p>
-          <button type="button" class="btn" id="log-more" hidden>Mehr anzeigen</button>
-        </div>
       </div>
     </section>
 

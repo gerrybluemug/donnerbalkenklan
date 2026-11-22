@@ -75,7 +75,7 @@ git -C "%REPO%" pull -q --rebase || goto :fehler
 git -C "%REPO%" push -q || goto :fehler
 echo.
 echo  Fertig! In etwa einer Minute ist die Homepage aktuell:
-echo  https://gerrybluemug.github.io/donnerbalkenklan/#gildenbank
+echo  https://gerrybluemug.github.io/donnerbalkenklan/gildenbank.html
 goto :ende
 
 :fehler

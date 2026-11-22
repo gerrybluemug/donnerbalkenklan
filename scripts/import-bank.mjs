@@ -83,8 +83,9 @@ if (data.guild && typeof data.guild === "object") {
   };
 }
 
-// Gildenbank-Protokoll (ab Addon 1.3)
-const LOG_TYPES = ["deposit", "withdraw", "repair", "withdrawForTab", "buyTab", "depositSummary"];
+// Gildenbank-Protokoll (ab Addon 1.3) – nur Einzahlungen/Einlagerungen,
+// Entnahmen werden bewusst nicht veröffentlicht
+const LOG_TYPES = ["deposit", "depositSummary"];
 const logItem = (e) => Array.isArray(e) && e.length >= 8 && LOG_TYPES.includes(e[1])
   ? { t: time(e[0]), type: e[1], who: str(e[2], 50), id: int(e[3]), name: str(e[4]), q: int(e[5], 0, 8), n: int(e[6], 1, 1e6), tab: str(e[7], 50) }
   : null;
@@ -135,7 +136,7 @@ if (log) {
     if (!newList.length) return oldList;
     const start = Math.min(...newList.map((e) => Date.parse(e.t)));
     const dup = (o) => newList.some((n) => sig(n) === sig(o) && Math.abs(Date.parse(n.t) - Date.parse(o.t)) <= 2 * 3600e3);
-    return [...oldList.filter((o) => Date.parse(o.t) < start && !dup(o)), ...newList]
+    return [...oldList.filter((o) => LOG_TYPES.includes(o.type) && Date.parse(o.t) < start && !dup(o)), ...newList]
       .sort((a, b) => Date.parse(a.t) - Date.parse(b.t))
       .slice(-LOG_KEEP);
   };
