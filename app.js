@@ -345,8 +345,29 @@
       else { state.sort = s; state.dir = ["level", "ilvl"].includes(s) ? -1 : 1; }
       render();
     }));
-    ["#f-search", "#f-class", "#f-race", "#f-rank", "#f-minlvl"].forEach((s) => $(s).addEventListener("input", render));
+    const FILTERS = ["#f-search", "#f-class", "#f-race", "#f-rank", "#f-minlvl"];
+    // Suche & Filter einklappbar; zeigt im eingeklappten Zustand, wie viele Filter aktiv sind
+    const box = $("#filter-box");
+    const activeFilters = () => FILTERS.filter((s) => (s === "#f-minlvl" ? +$(s).value > 1 : $(s).value.trim() !== "")).length;
+    const updateActive = () => {
+      const n = activeFilters();
+      $("#filter-active").textContent = n ? `${n} aktiv` : "";
+      $("#f-reset").hidden = !n;
+    };
+    let stored = null;
+    try { stored = localStorage.getItem("mitgliederFilterOffen"); } catch { /* egal */ }
+    box.open = stored !== null ? stored === "1" : window.matchMedia("(min-width: 700px)").matches;
+    // nur echtes Auf-/Zuklappen merken, nicht das Setzen beim Laden
+    box.querySelector("summary").addEventListener("click", () => {
+      try { localStorage.setItem("mitgliederFilterOffen", box.open ? "0" : "1"); } catch { /* egal */ }
+    });
+    $("#f-reset").addEventListener("click", () => {
+      FILTERS.forEach((s) => ($(s).value = s === "#f-minlvl" ? "1" : ""));
+      render(); updateActive();
+    });
+    FILTERS.forEach((s) => $(s).addEventListener("input", () => { render(); updateActive(); }));
     render();
+    updateActive();
   }
 
   // ---------- Chronik ----------

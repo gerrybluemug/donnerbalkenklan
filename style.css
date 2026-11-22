@@ -112,7 +112,16 @@ section.page-head + section.wrap, section.page-head + p + section.wrap { margin-
 .toplist .who small { color: var(--muted); }
 
 /* Roster */
-.filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
+.filter-box { margin-bottom: 10px; }
+.filter-box summary { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; list-style: none; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); font-weight: 600; color: var(--gold-2); user-select: none; }
+.filter-box summary::-webkit-details-marker { display: none; }
+.filter-box summary::before { content: "▸"; color: var(--gold); transition: transform .15s; }
+.filter-box[open] summary::before { transform: rotate(90deg); }
+.filter-box summary:hover { border-color: var(--gold); }
+.filter-box summary small { color: #8fd47c; font-weight: 700; font-size: .8rem; }
+.filter-box[open] summary { margin-bottom: 10px; }
+.filters { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 10px; }
+.filter-box .filters { margin-bottom: 0; }
 .filters input, .filters select { background: var(--card); color: var(--text); border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; font: inherit; }
 .filters input[type=search] { flex: 1 1 220px; }
 .filters .minlvl { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: .9rem; }

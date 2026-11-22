@@ -29,13 +29,17 @@
     </section>
 
     <section id="mitglieder" class="wrap">
+      <details class="filter-box" id="filter-box">
+        <summary><span>Suche &amp; Filter</span><small id="filter-active"></small></summary>
       <div class="filters">
         <input type="search" id="f-search" placeholder="Name suchen …" aria-label="Name suchen">
         <select id="f-class" aria-label="Klasse"><option value="">Alle Klassen</option></select>
         <select id="f-race" aria-label="Volk"><option value="">Alle Völker</option></select>
         <select id="f-rank" aria-label="Rang"><option value="">Alle Ränge</option></select>
         <label class="minlvl">ab Level <input type="number" id="f-minlvl" min="1" max="60" value="1"></label>
+        <button type="button" class="linkish" id="f-reset" hidden>Zurücksetzen</button>
       </div>
+      </details>
       <p class="count" id="count"></p>
       <div class="table-wrap">
         <table id="roster">
