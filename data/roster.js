@@ -1,6 +1,6 @@
 // Automatisch erzeugt von scripts/update-roster.mjs – nicht von Hand bearbeiten.
 window.ROSTER = {
- "updated": "2026-11-22T12:00:00.000Z",
+ "updated": "2026-11-22T10:10:37.261Z",
  "maxLevel": 60,
  "members": [
   {
@@ -284,7 +284,7 @@ window.ROSTER = {
    "surname": "Wolfshauer",
    "slug": "fenrir-wolfshauer",
    "level": 42,
-   "ilvl": 35,
+   "ilvl": 39,
    "race": "TROLL",
    "raceName": "Troll",
    "cls": "SHAMAN",
@@ -404,7 +404,7 @@ window.ROSTER = {
    "surname": "Donnerbalken",
    "slug": "lesnar-donnerbalken",
    "level": 33,
-   "ilvl": 27,
+   "ilvl": 29,
    "race": "ORC",
    "raceName": "Orc",
    "cls": "HUNTER",
@@ -1400,7 +1400,7 @@ window.ROSTER = {
    "surname": "Panki",
    "slug": "bolo-panki",
    "level": 24,
-   "ilvl": 14,
+   "ilvl": 15,
    "race": "ORC",
    "raceName": "Orc",
    "cls": "HUNTER",
