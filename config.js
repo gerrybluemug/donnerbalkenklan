@@ -14,7 +14,7 @@ window.GUILD_CONFIG = {
   characterUrlBase: "https://worldofwarcraft.blizzard.com/de-de/forever/eu/armory/character/",
 
   // Link zu eurem Discord (leer lassen, um den Button auszublenden)
-  discordUrl: "",
+  discordUrl: "https://discord.gg/8vRUnk3XdG",
 
   // Die Armory liefert nur Rang-Nummern, keine Namen.
   // Tragt hier die Rangnamen ein, wie sie im Spiel heißen.
