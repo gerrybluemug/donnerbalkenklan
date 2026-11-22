@@ -15,8 +15,9 @@ return [
 
     // Nur Mitglieder dieses Discord-Servers dürfen sich anmelden
     'guild_id' => '743537404358426735',
-    // Optional: zusätzlich diese Discord-Rolle verlangen (Rollen-ID, sonst leer lassen)
-    'required_role' => '',
+    // Optional: nur wer eine dieser Discord-Rollen hat (z. B. Gildenmitglied), darf rein.
+    // Leer lassen = alle vom Server. Offiziere und Admins dürfen immer.
+    'required_role' => [],
 
     // Wer Anmeldungen als "erledigt" markieren darf:
     // Discord-Rollen-IDs (z. B. Offiziere) und/oder einzelne Discord-Nutzer-IDs

@@ -48,6 +48,16 @@ function clean(string $s, int $max): string
     return mb_substr($s, 0, $max);
 }
 
+// Discord-IDs aus der Einstellung: '123', '123, 456', ['123', 456] … → ['123', '456']
+function id_list($v): array
+{
+    $out = [];
+    foreach ((array)$v as $x) {
+        foreach (preg_split('/[\s,;]+/', (string)$x) as $id) if (preg_match('/^\d+$/', $id)) $out[] = $id;
+    }
+    return $out;
+}
+
 function http(string $method, string $url, array $headers = [], ?string $body = null): array
 {
     if (function_exists('curl_init')) {
@@ -207,11 +217,12 @@ try {
             $member = json_decode($res, true);
             if ($code !== 200 || !is_array($member)) error_page('Die Mitgliederecke ist nur für Mitglieder unseres Discord-Servers.', $back);
             $roles = array_map('strval', $member['roles'] ?? []);
-            if ($cfg['required_role'] !== '' && !in_array((string)$cfg['required_role'], $roles, true)) {
+            $has = fn($list) => count(array_intersect($roles, id_list($list))) > 0;
+            $officer = in_array((string)$me['id'], id_list($cfg['admin_ids']), true) || $has($cfg['officer_roles']);
+            // Pflicht-Rolle(n): eine davon genügt; Offiziere und Admins dürfen immer
+            if (id_list($cfg['required_role']) && !$officer && !$has($cfg['required_role'])) {
                 error_page('Die Mitgliederecke ist nur für Gildenmitglieder (Discord-Rolle fehlt).', $back);
             }
-            $officer = in_array((string)$me['id'], array_map('strval', $cfg['admin_ids']), true)
-                || count(array_intersect($roles, array_map('strval', $cfg['officer_roles']))) > 0;
             $name = clean((string)($member['nick'] ?? $me['global_name'] ?? $me['username'] ?? 'Unbekannt'), 50);
             $avatar = !empty($me['avatar']) ? "https://cdn.discordapp.com/avatars/{$me['id']}/{$me['avatar']}.png?size=64" : null;
 

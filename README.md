@@ -138,7 +138,8 @@ Einrichtung (einmalig):
    *Redirects* eintragen: `https://free-kick.de/donnerbalken-api/?action=callback`
 2. **Dateien vorbereiten:** `api/config.sample.php` als `config.php` speichern
    und Client ID und Client Secret eintragen. Optional Offiziers-Rollen
-   (`officer_roles`) und eine Pflicht-Rolle (`required_role`) eintragen – die
+   (`officer_roles`) und Pflicht-Rollen (`required_role`, eine davon genügt;
+   Offiziere dürfen immer) eintragen – die
    Rollen-ID bekommt man in Discord mit eingeschaltetem Entwicklermodus per
    Rechtsklick auf die Rolle → „ID kopieren“.
    `config.php` enthält das Geheimnis und gehört **nicht** ins Repository
