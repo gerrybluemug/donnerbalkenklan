@@ -89,6 +89,7 @@ try {
   const old = await readFile(bankFile, "utf8");
   bank = JSON.parse(old.slice(old.indexOf("{"), old.lastIndexOf("}") + 1));
 } catch { /* noch keine Bankdaten */ }
+const before = JSON.stringify([bank.chars, bank.guild]);
 
 const newer = (a, b) => !b || (a && a >= b);
 const changes = [];
@@ -108,6 +109,10 @@ if (guild && newer(guild.updated, bank.guild?.updated)) {
   changes.push(`Gildenbank: ${guild.tabs.reduce((s, t) => s + t.items.length, 0)} Gegenstände in ${guild.tabs.length} Fächern`);
 }
 if (!changes.length) fail("Der Export enthält keine Bankdaten.");
+if (JSON.stringify([bank.chars, bank.guild]) === before) {
+  console.log("Nichts Neues – diese Bankdaten sind schon auf der Homepage.");
+  process.exit(0);
+}
 bank.updated = new Date().toISOString();
 
 await writeFile(bankFile, "// Automatisch erzeugt von scripts/import-bank.mjs – nicht von Hand bearbeiten.\nwindow.BANK = " + JSON.stringify(bank, null, 1) + ";\n", "utf8");
@@ -117,6 +122,7 @@ if (push) {
   const git = (...a) => execFileSync("git", a, { cwd: root, stdio: "inherit" });
   git("add", "data/bank.js");
   git("commit", "-m", "Gildenbank aktualisiert");
+  git("pull", "--rebase", "--quiet"); // der tägliche Bot committet ebenfalls
   git("push");
   console.log("Hochgeladen – die Seite ist in etwa einer Minute aktuell.");
 }
