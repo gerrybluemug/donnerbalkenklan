@@ -1,10 +1,10 @@
 // Automatisch erzeugt von scripts/import-bank.mjs – nicht von Hand bearbeiten.
 window.BANK = {
- "updated": "2026-11-22T14:06:59.329Z",
+ "updated": "2026-11-23T14:05:44.285Z",
  "chars": {
   "Gildenbank": {
-   "updated": "2026-11-22T14:01:59.000Z",
-   "bankUpdated": "2026-11-22T14:01:59.000Z",
+   "updated": "2026-11-23T14:05:19.000Z",
+   "bankUpdated": "2026-11-23T14:05:19.000Z",
    "money": 0,
    "items": [
     {
@@ -29,8 +29,8 @@ window.BANK = {
   }
  },
  "guild": {
-  "updated": "2026-11-22T14:02:05.000Z",
-  "money": 37534,
+  "updated": "2026-11-23T14:04:39.000Z",
+  "money": 258367,
   "tabs": []
  },
  "log": {
@@ -45,19 +45,37 @@ window.BANK = {
    {
     "t": "2026-11-10T22:02:06.000Z",
     "type": "deposit",
-    "who": "Kuni Runde",
-    "amount": 5000
+    "who": "Taruuk Eichenhuf",
+    "amount": 1000
    },
    {
     "t": "2026-11-10T22:02:06.000Z",
     "type": "deposit",
-    "who": "Taruuk Eichenhuf",
+    "who": "Kuni Runde",
+    "amount": 5000
+   },
+   {
+    "t": "2026-11-10T22:04:40.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 5000
+   },
+   {
+    "t": "2026-11-10T22:04:40.000Z",
+    "type": "deposit",
+    "who": "",
     "amount": 1000
    },
    {
     "t": "2026-11-11T01:02:06.000Z",
     "type": "deposit",
     "who": "Tharvok Schwarzlicht",
+    "amount": 1000
+   },
+   {
+    "t": "2026-11-11T01:04:40.000Z",
+    "type": "deposit",
+    "who": "",
     "amount": 1000
    },
    {
@@ -69,8 +87,8 @@ window.BANK = {
    {
     "t": "2026-11-13T21:02:06.000Z",
     "type": "deposit",
-    "who": "Tente Deville",
-    "amount": 20000
+    "who": "Darius Lichtban",
+    "amount": 40000
    },
    {
     "t": "2026-11-13T21:02:06.000Z",
@@ -81,8 +99,14 @@ window.BANK = {
    {
     "t": "2026-11-13T21:02:06.000Z",
     "type": "deposit",
-    "who": "Darius Lichtban",
-    "amount": 40000
+    "who": "Tente Deville",
+    "amount": 20000
+   },
+   {
+    "t": "2026-11-13T21:04:40.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 5000
    },
    {
     "t": "2026-11-13T23:02:06.000Z",
@@ -97,6 +121,12 @@ window.BANK = {
     "amount": 2000
    },
    {
+    "t": "2026-11-14T20:04:40.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 2000
+   },
+   {
     "t": "2026-11-14T21:02:06.000Z",
     "type": "deposit",
     "who": "Gernhardt Rainlunzen",
@@ -106,13 +136,25 @@ window.BANK = {
     "t": "2026-11-15T16:02:06.000Z",
     "type": "deposit",
     "who": "Taruuk Eichenhuf",
-    "amount": 10000
+    "amount": 796
    },
    {
     "t": "2026-11-15T16:02:06.000Z",
     "type": "deposit",
     "who": "Taruuk Eichenhuf",
+    "amount": 10000
+   },
+   {
+    "t": "2026-11-15T16:04:40.000Z",
+    "type": "deposit",
+    "who": "",
     "amount": 796
+   },
+   {
+    "t": "2026-11-15T16:04:40.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 10000
    },
    {
     "t": "2026-11-18T22:02:06.000Z",
@@ -131,7 +173,47 @@ window.BANK = {
     "type": "deposit",
     "who": "Kalter Wind",
     "amount": 5000
+   },
+   {
+    "t": "2026-11-22T17:04:40.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 2500
+   },
+   {
+    "t": "2026-11-22T17:04:41.000Z",
+    "type": "deposit",
+    "who": "Zefix Blitz",
+    "amount": 2500
+   },
+   {
+    "t": "2026-11-22T18:04:40.000Z",
+    "type": "deposit",
+    "who": "Tente Deville",
+    "amount": 160000
+   },
+   {
+    "t": "2026-11-22T19:04:40.000Z",
+    "type": "deposit",
+    "who": "Giselle Shieldstorm",
+    "amount": 33333
+   },
+   {
+    "t": "2026-11-22T20:04:40.000Z",
+    "type": "deposit",
+    "who": "Dacka Dacka",
+    "amount": 20000
+   },
+   {
+    "t": "2026-11-23T14:04:40.000Z",
+    "type": "deposit",
+    "who": "Gernhardt Rainlunzen",
+    "amount": 5000
    }
   ]
+ },
+ "calendar": {
+  "updated": "2026-11-23T14:04:06.000Z",
+  "events": []
  }
 };
