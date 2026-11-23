@@ -1,6 +1,6 @@
 // Automatisch erzeugt von scripts/update-roster.mjs – nicht von Hand bearbeiten.
 window.ROSTER = {
- "updated": "2026-11-23T21:46:33.422Z",
+ "updated": "2026-11-23T22:47:31.395Z",
  "maxLevel": 60,
  "members": [
   {
@@ -188,7 +188,7 @@ window.ROSTER = {
    "surname": "Silberhand",
    "slug": "paarn-silberhand",
    "level": 24,
-   "ilvl": 18,
+   "ilvl": 19,
    "race": "UNDEAD",
    "raceName": "Untoter",
    "cls": "PALADIN",
@@ -560,12 +560,12 @@ window.ROSTER = {
    "surname": "Dämmerbruch",
    "slug": "rêl-dämmerbruch",
    "level": 33,
-   "ilvl": 29,
+   "ilvl": null,
    "race": "UNDEAD",
    "raceName": "Untoter",
    "cls": "PRIEST",
    "rank": 5,
-   "gender": "MALE"
+   "gender": null
   },
   {
    "name": "Trolle",
@@ -728,7 +728,7 @@ window.ROSTER = {
    "surname": "Hamso",
    "slug": "hamso-hamso",
    "level": 39,
-   "ilvl": 29,
+   "ilvl": 31,
    "race": "ORC",
    "raceName": "Orc",
    "cls": "SHAMAN",
@@ -752,7 +752,7 @@ window.ROSTER = {
    "surname": "Mulgo",
    "slug": "senior-mulgo",
    "level": 35,
-   "ilvl": 26,
+   "ilvl": 28,
    "race": "TAUREN",
    "raceName": "Tauren",
    "cls": "SHAMAN",
@@ -1148,7 +1148,7 @@ window.ROSTER = {
    "surname": "Vari",
    "slug": "shari-vari",
    "level": 47,
-   "ilvl": 36,
+   "ilvl": 37,
    "race": "ORC",
    "raceName": "Orc",
    "cls": "MAGE",
@@ -1184,12 +1184,12 @@ window.ROSTER = {
    "surname": "Stickwood",
    "slug": "blawan-stickwood",
    "level": 33,
-   "ilvl": 29,
+   "ilvl": 31,
    "race": "UNDEAD",
    "raceName": "Untoter",
    "cls": "PALADIN",
    "rank": 3,
-   "gender": "MALE"
+   "gender": "FEMALE"
   },
   {
    "name": "Nekarion",
@@ -1496,7 +1496,7 @@ window.ROSTER = {
    "surname": "Dartharyn",
    "slug": "alinerys-dartharyn",
    "level": 32,
-   "ilvl": 22,
+   "ilvl": 24,
    "race": "WINDSHAPERSKYBORNE",
    "raceName": "Himmelsgeborener der Windformer",
    "cls": "HUNTER",
@@ -1556,7 +1556,7 @@ window.ROSTER = {
    "surname": "Münze",
    "slug": "onkel-münze",
    "level": 31,
-   "ilvl": 18,
+   "ilvl": 20,
    "race": "TAUREN",
    "raceName": "Tauren",
    "cls": "WARRIOR",
@@ -1592,7 +1592,7 @@ window.ROSTER = {
    "surname": "Lerry",
    "slug": "legendary-lerry",
    "level": 12,
-   "ilvl": 6,
+   "ilvl": 7,
    "race": "TAUREN",
    "raceName": "Tauren",
    "cls": "WARRIOR",
@@ -1664,7 +1664,7 @@ window.ROSTER = {
    "surname": "Gerry",
    "slug": "glamorous-gerry",
    "level": 12,
-   "ilvl": 6,
+   "ilvl": 9,
    "race": "UNDEAD",
    "raceName": "Untoter",
    "cls": "PALADIN",
@@ -1676,7 +1676,7 @@ window.ROSTER = {
    "surname": "Schleichfix",
    "slug": "der-schleichfix",
    "level": 30,
-   "ilvl": 22,
+   "ilvl": 23,
    "race": "UNDEAD",
    "raceName": "Untoter",
    "cls": "ROGUE",
@@ -1748,7 +1748,7 @@ window.ROSTER = {
    "surname": "Donnerfaust",
    "slug": "lana-donnerfaust",
    "level": 20,
-   "ilvl": 9,
+   "ilvl": 12,
    "race": "TROLL",
    "raceName": "Troll",
    "cls": "HUNTER",
@@ -1832,7 +1832,7 @@ window.ROSTER = {
    "surname": "Perry",
    "slug": "perilous-perry",
    "level": 12,
-   "ilvl": 4,
+   "ilvl": 10,
    "race": "TROLL",
    "raceName": "Troll",
    "cls": "MAGE",
@@ -2132,7 +2132,7 @@ window.ROSTER = {
    "surname": "Dragov",
    "slug": "rey-dragov",
    "level": 37,
-   "ilvl": 35,
+   "ilvl": 36,
    "race": "UNDEAD",
    "raceName": "Untoter",
    "cls": "PALADIN",
@@ -2996,12 +2996,12 @@ window.ROSTER = {
    "surname": "Makaria",
    "slug": "morana-makaria",
    "level": 15,
-   "ilvl": null,
+   "ilvl": 3,
    "race": "UNDEAD",
    "raceName": "Untoter",
    "cls": "WARLOCK",
    "rank": 5,
-   "gender": null
+   "gender": "FEMALE"
   },
   {
    "name": "Pinkii",
@@ -3032,12 +3032,12 @@ window.ROSTER = {
    "surname": "Darkmoore",
    "slug": "khairos-darkmoore",
    "level": 25,
-   "ilvl": null,
+   "ilvl": 19,
    "race": "UNDEAD",
    "raceName": "Untoter",
    "cls": "PALADIN",
    "rank": 5,
-   "gender": null
+   "gender": "MALE"
   }
  ]
 };
