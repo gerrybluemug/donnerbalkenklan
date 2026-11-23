@@ -5,6 +5,10 @@ name: Mitgliederliste aktualisieren
 on:
   schedule:
     - cron: "17 4 * * *"   # täglich um 04:17 UTC
+    # kurz nach Mitternacht deutscher Zeit das Mitglied des Tages festlegen
+    # (Winterzeit = 23:00 UTC, Sommerzeit = 22:00 UTC; das Skript prüft selbst, ob schon neuer Tag ist)
+    - cron: "1 22 * * *"
+    - cron: "1 23 * * *"
   workflow_dispatch:        # manuell über den "Run workflow"-Knopf
     inputs:
       bank_export:
@@ -42,11 +46,14 @@ jobs:
           BANK_EXPORT: ${{ inputs.bank_export }}
         run: node scripts/import-bank.mjs --env
 
+      - name: Mitglied des Tages festlegen
+        run: node scripts/motd.mjs
+
       - name: Neue Daten committen
         run: |
           git config user.name "roster-bot"
           git config user.email "roster-bot@users.noreply.github.com"
-          git add data/roster.js data/bank.js data/history.js
+          git add data/roster.js data/bank.js data/history.js data/motd.js
           git diff --cached --quiet || git commit -m "Daten aktualisiert (Mitglieder/Gildenbank)"
           git push
 

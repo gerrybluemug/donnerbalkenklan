@@ -111,13 +111,36 @@ const calendar = data.calendar && typeof data.calendar === "object" && Array.isA
     }
   : null;
 
+// Gildenliste (ab Addon 1.5): Das Addon liefert, wann wer zuletzt online war.
+// Veröffentlicht wird davon nur, wer länger als motdMaxOfflineDays (config.js)
+// offline ist – keine Login-Zeiten. Gebraucht fürs "Mitglied des Tages".
+async function maxOfflineDays() {
+  try {
+    const w = {};
+    new Function("window", await readFile(join(root, "config.js"), "utf8"))(w);
+    const d = Number(w.GUILD_CONFIG?.motdMaxOfflineDays);
+    return d > 0 ? d : 10;
+  } catch { return 10; }
+}
+let inactive = null;
+if (data.roster && typeof data.roster === "object" && data.roster.seen && typeof data.roster.seen === "object" && !Array.isArray(data.roster.seen)) {
+  const days = await maxOfflineDays();
+  const at = int(data.roster.updated);
+  const names = Object.entries(data.roster.seen)
+    .filter(([, t]) => at - int(t) > days * 86400)
+    .map(([n]) => str(n, 50))
+    .filter(Boolean)
+    .sort((a, b) => a.localeCompare(b, "de"));
+  if (at) inactive = { updated: time(at), days, names };
+}
+
 // ---------- mit vorhandenen Daten zusammenführen ----------
 let bank = { updated: null, chars: {}, guild: null };
 try {
   const old = await readFile(bankFile, "utf8");
   bank = JSON.parse(old.slice(old.indexOf("{"), old.lastIndexOf("}") + 1));
 } catch { /* noch keine Bankdaten */ }
-const snapshot = () => JSON.stringify([bank.chars, bank.guild, bank.log, bank.calendar]);
+const snapshot = () => JSON.stringify([bank.chars, bank.guild, bank.log, bank.calendar, bank.inactive]);
 const before = snapshot();
 
 const newer = (a, b) => !b || (a && a >= b);
@@ -160,7 +183,11 @@ if (calendar && newer(calendar.updated, bank.calendar?.updated)) {
   bank.calendar = calendar;
   changes.push(`Gildentermine: ${calendar.events.length}`);
 }
-if (!changes.length) fail("Der Export enthält weder Bankdaten noch Gildentermine.");
+if (inactive && newer(inactive.updated, bank.inactive?.updated)) {
+  bank.inactive = inactive;
+  changes.push(`Gildenliste: ${inactive.names.length} Mitglieder länger als ${inactive.days} Tage offline`);
+}
+if (!changes.length) fail("Der Export enthält weder Bankdaten noch Gildentermine oder Gildenliste.");
 if (snapshot() === before) {
   console.log("Nichts Neues – diese Bankdaten sind schon auf der Homepage.");
   process.exit(0);

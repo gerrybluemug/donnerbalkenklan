@@ -165,15 +165,13 @@
   // ---------- "Heute im Klan" (Startseite) ----------
   if ($("#heute")) {
     // Mitglied des Tages: wechselt um 00:00 Uhr (deutsche Zeit), für alle Besucher derselbe.
-    // Jedes Mitglied bekommt pro Tag eine feste Losnummer, die kleinste gewinnt. So bleibt die
-    // Wahl den ganzen Tag gleich, auch wenn der Bot tagsüber die Mitgliederliste aktualisiert;
-    // wer erst heute beigetreten ist, kommt frühestens morgen dran.
-    const joinedToday = (x) => !!(H && H.chars[x.slug] && H.chars[x.slug].j === today);
-    const pool = M.filter((x) => !joinedToday(x));
-    const list = pool.length ? pool : M;
-    const lot = (x) => hashStr(today + "|motd|" + x.slug);
-    if (list.length) {
-      const m = list.reduce((best, x) => (lot(x) < lot(best) ? x : best));
+    // Der Bot legt es kurz nach Mitternacht in data/motd.js fest (keine Twinks, niemand, der
+    // länger offline ist). Bis dahin rechnet die Seite mit denselben Regeln selbst (motd-pick.js).
+    const fixed = window.MOTD && window.MOTD.date === today && bySlug.get(window.MOTD.slug);
+    const m = fixed || (window.pickMemberOfDay && M.length ? window.pickMemberOfDay(M, {
+      today, history: H, inactive: B && B.inactive, skipRanks: C.motdSkipRanks || [],
+    }) : null);
+    if (m) {
       // Seite steht über Mitternacht offen? Dann um 00:00 Uhr neu laden.
       const [hh, mm, ss] = berlin().slice(11, 19).split(":").map(Number);
       setTimeout(() => location.reload(), (86400 - (hh * 3600 + mm * 60 + ss)) * 1000 + 5000);

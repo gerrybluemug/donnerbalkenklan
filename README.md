@@ -117,6 +117,12 @@ zusammengeführt; pro Charakter zählt jeweils der neueste Stand.
 - **Startseite:** Mitglied des Tages (Sprüche in `config.js` unter `motdLines`),
   Aufsteiger der Woche, Ladenhüter des Monats (was am längsten in der Bank liegt)
   und wie viele gerade im Discord online sind.
+  Das Mitglied des Tages legt der Bot kurz nach 00:00 Uhr in `data/motd.js` fest
+  (`scripts/motd.mjs`, Regeln in `motd-pick.js`): keine Ränge aus `motdSkipRanks`
+  (Twinks) und niemand, der länger als `motdMaxOfflineDays` offline ist. Wer wie
+  lange offline ist, liest das Gildenbank-Addon ab Version 1.5 aus der
+  Gildenliste im Spiel; veröffentlicht wird davon nur die Namensliste der länger
+  Abwesenden (in `data/bank.js` unter `inactive`), keine Login-Zeiten.
 - **Mitgliederliste:** 💰 für die 10 größten Spender der Gildenbank, „neu“ für
   alle, die in den letzten 7 Tagen beigetreten sind.
 

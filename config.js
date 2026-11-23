@@ -52,6 +52,11 @@ window.GUILD_CONFIG = {
     "Ehre, Ruhm und ein Freibier in Orgrimmar.",
     "Dein Name wird heute in jeder Taverne gerufen.",
   ],
+  // Wer nicht Mitglied des Tages wird: diese Ränge (Nummern wie bei rankNames, 4 = Twink) …
+  motdSkipRanks: [4],
+  // … und wer laut Gildenliste länger als so viele Tage offline ist.
+  // Die Gildenliste liest das Gildenbank-Addon (ab Version 1.5) im Spiel aus.
+  motdMaxOfflineDays: 10,
 
   // Adresse der Mitgliederecke (Bedarf an Gildenbank-Gegenständen anmelden),
   // also des Ordners api/ auf dem eigenen Webspace. Leer lassen = ausgeblendet.

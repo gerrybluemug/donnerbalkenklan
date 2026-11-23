@@ -137,7 +137,10 @@ local function BuildExport()
   if not cal then
     for _, c in pairs(DB.calendar) do if not cal or c.updated > cal.updated then cal = c end end
   end
-  DB.lastExport = toJSON({ v = 1, exported = time(), chars = DB.chars, guild = DB.guild or false, guildLog = log, calendar = cal or false })
+  -- Gildenliste (wer wann zuletzt online war): die der eigenen Gilde
+  local gname = GetGuildInfo and GetGuildInfo("player")
+  local roster = (DB.guild and DB.roster[DB.guild.name]) or (gname and DB.roster[gname])
+  DB.lastExport = toJSON({ v = 1, exported = time(), chars = DB.chars, guild = DB.guild or false, guildLog = log, calendar = cal or false, roster = roster or false })
   return DB.lastExport
 end
 
@@ -455,6 +458,42 @@ local function AskCalendar()
   C_Calendar.OpenCalendar() -- lädt nur die Termine (CALENDAR_UPDATE_EVENT_LIST), öffnet nichts
 end
 
+---------------------------------------------------------------------------
+-- Gildenliste: wann war wer zuletzt online? (für "Mitglied des Tages")
+-- Auf der Homepage landet davon nur, wer länger offline ist – keine Login-Zeiten.
+---------------------------------------------------------------------------
+local rosterReadAt = 0
+
+local function ReadRoster()
+  if not (IsInGuild() and GetNumGuildMembers and GetGuildRosterInfo) then return end
+  if GetTime() - rosterReadAt < 10 then return end
+  local gname = GetGuildInfo("player")
+  local n = GetNumGuildMembers()
+  if not gname or not n or n == 0 then return end
+  rosterReadAt = GetTime()
+  local now, seen = time(), {}
+  for i = 1, n do
+    local name, _, _, _, _, _, _, _, online = GetGuildRosterInfo(i)
+    if type(name) == "string" then
+      name = name:match("^[^-]+")
+      local t
+      if online then
+        t = now
+      elseif GetGuildRosterLastOnline then
+        local y, m, d, h = GetGuildRosterLastOnline(i)
+        if type(y) == "number" then t = now - ((((y * 365) + (m or 0) * 30 + (d or 0)) * 24 + (h or 0)) * 3600) end
+      end
+      if t and (not seen[name] or t > seen[name]) then seen[name] = t end
+    end
+  end
+  DB.roster[gname] = { guild = gname, updated = now, seen = seen }
+end
+
+local function AskRoster()
+  if not IsInGuild() then return end
+  if C_GuildInfo and C_GuildInfo.GuildRoster then C_GuildInfo.GuildRoster() elseif GuildRoster then GuildRoster() end
+end
+
 local function fmtTime(t) return t and date("%d.%m. %H:%M", t) or "nie" end
 
 SLASH_DONNERBALKENBANK1 = "/gbank"
@@ -489,6 +528,12 @@ SlashCmdList.DONNERBALKENBANK = function(msg)
     local gname = GetGuildInfo("player")
     local cal = gname and DB.calendar[gname]
     if cal then say(string.format("Gildentermine: %d (gelesen: %s)", #cal.events, fmtTime(cal.updated))) end
+    local ros = gname and DB.roster[gname]
+    if ros then
+      local c = 0
+      for _ in pairs(ros.seen) do c = c + 1 end
+      say(string.format("Gildenliste: %d Mitglieder (gelesen: %s)", c, fmtTime(ros.updated)))
+    end
     if not any and not DB.guild then say("Noch keine Bank erfasst. Auf dem Bank-Charakter: /gbank an") end
   else
     say("/gbank an | aus | export | status")
@@ -505,7 +550,7 @@ for _, ev in ipairs({
   "BANKFRAME_OPENED", "BANKFRAME_CLOSED", "PLAYERBANKSLOTS_CHANGED",
   "GUILDBANKFRAME_OPENED", "GUILDBANKFRAME_CLOSED", "GUILDBANKBAGSLOTS_CHANGED", "GUILDBANK_UPDATE_MONEY", "GUILDBANKLOG_UPDATE",
   "PLAYER_INTERACTION_MANAGER_FRAME_SHOW", "PLAYER_INTERACTION_MANAGER_FRAME_HIDE",
-  "CALENDAR_UPDATE_EVENT_LIST", "CALENDAR_UPDATE_GUILD_EVENTS",
+  "CALENDAR_UPDATE_EVENT_LIST", "CALENDAR_UPDATE_GUILD_EVENTS", "GUILD_ROSTER_UPDATE",
 }) do Reg(ev) end
 
 local PIT = Enum and Enum.PlayerInteractionType
@@ -523,15 +568,18 @@ f:SetScript("OnEvent", function(_, event, arg1)
     DB.guildTabsSeen = DB.guildTabsSeen or {}
     DB.guildLog = DB.guildLog or {}
     DB.calendar = DB.calendar or {}
+    DB.roster = DB.roster or {}
     return
   end
   if not DB then return end
 
   if event == "PLAYER_LOGIN" or event == "PLAYER_MONEY" then
     ScanBags()
-    if event == "PLAYER_LOGIN" then C_Timer.After(8, AskCalendar) end
+    if event == "PLAYER_LOGIN" then C_Timer.After(8, AskCalendar); C_Timer.After(12, AskRoster) end
   elseif event == "CALENDAR_UPDATE_EVENT_LIST" or event == "CALENDAR_UPDATE_GUILD_EVENTS" then
     ReadCalendar()
+  elseif event == "GUILD_ROSTER_UPDATE" then
+    ReadRoster()
   elseif event == "BAG_UPDATE_DELAYED" then
     if bankOpen then ScanBank() else ScanBags() end
   elseif event == "PLAYER_LOGOUT" then
