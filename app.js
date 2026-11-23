@@ -55,7 +55,8 @@
   // Charakter aus dem Verlauf – verlinkt, solange er in der Gilde ist
   const histName = (slug, c) => (bySlug.has(slug) ? memberLink(bySlug.get(slug)) : `<b style="color:${cls(c.c).color}">${esc(c.n)}</b>`);
   // einfacher, über den Tag gleichbleibender Zufall
-  const dayHash = (salt) => { let h = 2166136261; for (const ch of today + salt) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
+  const hashStr = (s) => { let h = 2166136261; for (const ch of s) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
+  const dayHash = (salt) => hashStr(today + salt);
   const pick = (list, salt) => list[dayHash(salt) % list.length];
 
   // Aufsteiger: Stufen seit dem Stichtag vor 7 Tagen (bzw. seit Aufzeichnungsbeginn)
@@ -163,10 +164,19 @@
 
   // ---------- "Heute im Klan" (Startseite) ----------
   if ($("#heute")) {
-    // Mitglied des Tages: jeden Tag ein anderer, für alle Besucher derselbe
-    const list = [...M].sort((a, b) => a.slug.localeCompare(b.slug));
+    // Mitglied des Tages: wechselt um 00:00 Uhr (deutsche Zeit), für alle Besucher derselbe.
+    // Jedes Mitglied bekommt pro Tag eine feste Losnummer, die kleinste gewinnt. So bleibt die
+    // Wahl den ganzen Tag gleich, auch wenn der Bot tagsüber die Mitgliederliste aktualisiert;
+    // wer erst heute beigetreten ist, kommt frühestens morgen dran.
+    const joinedToday = (x) => !!(H && H.chars[x.slug] && H.chars[x.slug].j === today);
+    const pool = M.filter((x) => !joinedToday(x));
+    const list = pool.length ? pool : M;
+    const lot = (x) => hashStr(today + "|motd|" + x.slug);
     if (list.length) {
-      const m = list[dayHash("motd") % list.length];
+      const m = list.reduce((best, x) => (lot(x) < lot(best) ? x : best));
+      // Seite steht über Mitternacht offen? Dann um 00:00 Uhr neu laden.
+      const [hh, mm, ss] = berlin().slice(11, 19).split(":").map(Number);
+      setTimeout(() => location.reload(), (86400 - (hh * 3600 + mm * 60 + ss)) * 1000 + 5000);
       const k = cls(m.cls);
       const h = H && H.chars[m.slug];
       const since = !h ? "" : h.j ? `Im Klan seit ${fmtDay(h.j)}` : `Schon vor dem ${fmtDay(H.start)} im Klan`;
