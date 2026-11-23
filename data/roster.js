@@ -1,6 +1,6 @@
 // Automatisch erzeugt von scripts/update-roster.mjs – nicht von Hand bearbeiten.
 window.ROSTER = {
- "updated": "2026-11-23T21:40:42.510Z",
+ "updated": "2026-11-23T21:46:33.422Z",
  "maxLevel": 60,
  "members": [
   {
@@ -1796,7 +1796,7 @@ window.ROSTER = {
    "surname": "Berry",
    "slug": "beautiful-berry",
    "level": 12,
-   "ilvl": 4,
+   "ilvl": 8,
    "race": "TAUREN",
    "raceName": "Tauren",
    "cls": "SHAMAN",
