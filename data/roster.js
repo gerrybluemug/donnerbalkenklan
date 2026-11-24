@@ -1,6 +1,6 @@
 // Automatisch erzeugt von scripts/update-roster.mjs – nicht von Hand bearbeiten.
 window.ROSTER = {
- "updated": "2026-11-24T05:47:30.838Z",
+ "updated": "2026-11-24T06:46:57.014Z",
  "maxLevel": 60,
  "members": [
   {
@@ -2888,7 +2888,7 @@ window.ROSTER = {
    "surname": "Lichtban",
    "slug": "krogar-lichtban",
    "level": 20,
-   "ilvl": 12,
+   "ilvl": 16,
    "race": "TAUREN",
    "raceName": "Tauren",
    "cls": "WARRIOR",
