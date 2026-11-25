@@ -1,10 +1,10 @@
 // Automatisch erzeugt von scripts/import-bank.mjs – nicht von Hand bearbeiten.
 window.BANK = {
- "updated": "2026-11-23T22:47:17.633Z",
+ "updated": "2026-11-25T19:47:53.369Z",
  "chars": {
   "Gildenbank": {
-   "updated": "2026-11-23T22:46:41.000Z",
-   "bankUpdated": "2026-11-23T22:46:41.000Z",
+   "updated": "2026-11-25T19:41:46.000Z",
+   "bankUpdated": "2026-11-25T19:28:31.000Z",
    "money": 0,
    "items": [
     {
@@ -42,13 +42,22 @@ window.BANK = {
      "where": "Taschen",
      "since": "2026-11-23T22:44:39.000Z",
      "atLeast": false
+    },
+    {
+     "id": 6373,
+     "name": "Elixier der Feuermacht",
+     "q": 1,
+     "n": 15,
+     "where": "Taschen",
+     "since": "2026-11-25T19:28:18.000Z",
+     "atLeast": false
     }
    ]
   }
  },
  "guild": {
-  "updated": "2026-11-23T22:44:44.000Z",
-  "money": 668368,
+  "updated": "2026-11-25T19:42:01.000Z",
+  "money": 800000,
   "tabs": []
  },
  "log": {
@@ -63,14 +72,14 @@ window.BANK = {
    {
     "t": "2026-11-10T22:02:06.000Z",
     "type": "deposit",
-    "who": "Kuni Runde",
-    "amount": 5000
+    "who": "Taruuk Eichenhuf",
+    "amount": 1000
    },
    {
     "t": "2026-11-10T22:02:06.000Z",
     "type": "deposit",
-    "who": "Taruuk Eichenhuf",
-    "amount": 1000
+    "who": "Kuni Runde",
+    "amount": 5000
    },
    {
     "t": "2026-11-10T22:04:40.000Z",
@@ -105,12 +114,6 @@ window.BANK = {
    {
     "t": "2026-11-13T21:02:06.000Z",
     "type": "deposit",
-    "who": "Tente Deville",
-    "amount": 20000
-   },
-   {
-    "t": "2026-11-13T21:02:06.000Z",
-    "type": "deposit",
     "who": "Darius Lichtban",
     "amount": 40000
    },
@@ -121,10 +124,22 @@ window.BANK = {
     "amount": 5000
    },
    {
+    "t": "2026-11-13T21:02:06.000Z",
+    "type": "deposit",
+    "who": "Tente Deville",
+    "amount": 20000
+   },
+   {
     "t": "2026-11-13T21:04:40.000Z",
     "type": "deposit",
     "who": "",
     "amount": 5000
+   },
+   {
+    "t": "2026-11-13T23:01:01.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 10000
    },
    {
     "t": "2026-11-13T23:02:06.000Z",
@@ -143,6 +158,18 @@ window.BANK = {
     "type": "deposit",
     "who": "",
     "amount": 2000
+   },
+   {
+    "t": "2026-11-14T20:28:37.000Z",
+    "type": "deposit",
+    "who": "Rhainer Wein",
+    "amount": 5000
+   },
+   {
+    "t": "2026-11-14T21:01:01.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 5000
    },
    {
     "t": "2026-11-14T21:02:06.000Z",
@@ -173,6 +200,12 @@ window.BANK = {
     "type": "deposit",
     "who": "",
     "amount": 796
+   },
+   {
+    "t": "2026-11-18T22:01:01.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 50
    },
    {
     "t": "2026-11-18T22:02:06.000Z",
@@ -217,6 +250,12 @@ window.BANK = {
     "amount": 2500
    },
    {
+    "t": "2026-11-22T18:01:01.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 160000
+   },
+   {
     "t": "2026-11-22T18:04:40.000Z",
     "type": "deposit",
     "who": "Tente Deville",
@@ -235,15 +274,33 @@ window.BANK = {
     "amount": 33333
    },
    {
+    "t": "2026-11-22T20:01:01.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 20000
+   },
+   {
     "t": "2026-11-22T20:04:40.000Z",
     "type": "deposit",
     "who": "Dacka Dacka",
     "amount": 20000
    },
    {
+    "t": "2026-11-23T14:01:01.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 5000
+   },
+   {
     "t": "2026-11-23T14:04:40.000Z",
     "type": "deposit",
     "who": "Gernhardt Rainlunzen",
+    "amount": 5000
+   },
+   {
+    "t": "2026-11-23T14:28:37.000Z",
+    "type": "deposit",
+    "who": "Rhainer Wein",
     "amount": 5000
    },
    {
@@ -253,10 +310,16 @@ window.BANK = {
     "amount": 300000
    },
    {
-    "t": "2026-11-23T19:44:45.000Z",
+    "t": "2026-11-23T15:01:01.000Z",
     "type": "deposit",
-    "who": "Beautiful Berry",
-    "amount": 1
+    "who": "",
+    "amount": 300000
+   },
+   {
+    "t": "2026-11-23T19:01:01.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 10000
    },
    {
     "t": "2026-11-23T19:44:45.000Z",
@@ -265,22 +328,131 @@ window.BANK = {
     "amount": 10000
    },
    {
+    "t": "2026-11-23T19:44:45.000Z",
+    "type": "deposit",
+    "who": "Beautiful Berry",
+    "amount": 1
+   },
+   {
+    "t": "2026-11-23T20:01:01.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 1
+   },
+   {
     "t": "2026-11-23T20:44:45.000Z",
     "type": "deposit",
     "who": "Darius Lichtban",
     "amount": 100000
+   },
+   {
+    "t": "2026-11-23T21:01:01.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 100000
+   },
+   {
+    "t": "2026-11-24T09:01:01.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 400
+   },
+   {
+    "t": "2026-11-24T09:01:01.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 1232
+   },
+   {
+    "t": "2026-11-24T09:01:01.000Z",
+    "type": "deposit",
+    "who": "Jankon Donnerpfeil",
+    "amount": 1232
+   },
+   {
+    "t": "2026-11-24T09:01:01.000Z",
+    "type": "deposit",
+    "who": "Jankon Donnerpfeil",
+    "amount": 400
+   },
+   {
+    "t": "2026-11-24T09:01:01.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 20000
+   },
+   {
+    "t": "2026-11-24T09:01:01.000Z",
+    "type": "deposit",
+    "who": "Jankon Donnerpfeil",
+    "amount": 20000
+   },
+   {
+    "t": "2026-11-24T10:01:01.000Z",
+    "type": "deposit",
+    "who": "Boojongo Xll",
+    "amount": 70000
+   },
+   {
+    "t": "2026-11-24T10:01:01.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 70000
+   },
+   {
+    "t": "2026-11-24T22:09:49.000Z",
+    "type": "deposit",
+    "who": "Hunt Arbeít",
+    "amount": 20000
+   },
+   {
+    "t": "2026-11-24T22:09:49.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 20000
+   },
+   {
+    "t": "2026-11-25T11:28:35.000Z",
+    "type": "deposit",
+    "who": "Kalter Wind",
+    "amount": 5000
+   },
+   {
+    "t": "2026-11-25T11:28:35.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 5000
+   },
+   {
+    "t": "2026-11-25T19:28:35.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 15000
+   },
+   {
+    "t": "2026-11-25T19:28:35.000Z",
+    "type": "deposit",
+    "who": "Jankon Donnerpfeil",
+    "amount": 15000
    }
   ]
  },
  "calendar": {
-  "updated": "2026-11-23T22:43:49.000Z",
+  "updated": "2026-11-25T19:41:46.000Z",
   "events": []
  },
  "inactive": {
-  "updated": "2026-11-23T22:46:48.000Z",
+  "updated": "2026-11-25T19:42:57.000Z",
   "days": 10,
   "names": [
-   "Praytes Mcfinnigan"
+   "Gandal Thegrey",
+   "Huffle Puf",
+   "Milky Hots",
+   "Nekarion Darkfire",
+   "Tala Valkov",
+   "Tristan Trollig",
+   "Wander Magierin",
+   "Wigges Ironfist"
   ]
  }
 };
