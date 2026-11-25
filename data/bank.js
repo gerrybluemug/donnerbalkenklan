@@ -1,11 +1,11 @@
 // Automatisch erzeugt von scripts/import-bank.mjs – nicht von Hand bearbeiten.
 window.BANK = {
- "updated": "2026-11-25T19:47:53.369Z",
+ "updated": "2026-11-25T22:20:37.259Z",
  "chars": {
   "Gildenbank": {
-   "updated": "2026-11-25T19:41:46.000Z",
-   "bankUpdated": "2026-11-25T19:28:31.000Z",
-   "money": 0,
+   "updated": "2026-11-25T22:19:16.000Z",
+   "bankUpdated": "2026-11-25T20:51:38.000Z",
+   "money": 18,
    "items": [
     {
      "id": 6948,
@@ -15,53 +15,158 @@ window.BANK = {
      "where": "Taschen",
      "since": "2026-11-22T13:12:50.000Z",
      "atLeast": true
-    },
-    {
-     "id": 117,
-     "name": "Zähes Stockfleisch",
-     "q": 1,
-     "n": 4,
-     "where": "Taschen",
-     "since": "2026-11-22T13:12:50.000Z",
-     "atLeast": true
-    },
-    {
-     "id": 248703,
-     "name": "Abgefangene Kiste: Barren des Lehrlings",
-     "q": 2,
-     "n": 2,
-     "where": "Taschen",
-     "since": "2026-11-23T22:44:39.000Z",
-     "atLeast": false
-    },
-    {
-     "id": 248683,
-     "name": "Abgefangene Kiste: Erz des Lehrlings",
-     "q": 1,
-     "n": 1,
-     "where": "Taschen",
-     "since": "2026-11-23T22:44:39.000Z",
-     "atLeast": false
-    },
-    {
-     "id": 6373,
-     "name": "Elixier der Feuermacht",
-     "q": 1,
-     "n": 15,
-     "where": "Taschen",
-     "since": "2026-11-25T19:28:18.000Z",
-     "atLeast": false
     }
    ]
   }
  },
  "guild": {
-  "updated": "2026-11-25T19:42:01.000Z",
-  "money": 800000,
-  "tabs": []
+  "updated": "2026-11-25T22:19:35.000Z",
+  "money": 405000,
+  "tabs": [
+   {
+    "name": "Fach 1",
+    "viewable": true,
+    "items": [
+     {
+      "id": 10051,
+      "name": "Rote Magiestofftasche",
+      "q": 1,
+      "n": 1,
+      "where": "Fach 1",
+      "since": "2026-11-25T22:18:47.000Z",
+      "atLeast": true
+     },
+     {
+      "id": 10051,
+      "name": "Rote Magiestofftasche",
+      "q": 1,
+      "n": 1,
+      "where": "Fach 1",
+      "since": "2026-11-25T22:18:47.000Z",
+      "atLeast": true
+     },
+     {
+      "id": 5763,
+      "name": "Rote Wolltasche",
+      "q": 1,
+      "n": 1,
+      "where": "Fach 1",
+      "since": "2026-11-25T22:18:47.000Z",
+      "atLeast": true
+     },
+     {
+      "id": 4245,
+      "name": "Kleines Seidenpack",
+      "q": 1,
+      "n": 1,
+      "where": "Fach 1",
+      "since": "2026-11-25T22:18:47.000Z",
+      "atLeast": true
+     },
+     {
+      "id": 248683,
+      "name": "Abgefangene Kiste: Erz des Lehrlings",
+      "q": 1,
+      "n": 1,
+      "where": "Fach 1",
+      "since": "2026-11-25T22:19:11.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 248703,
+      "name": "Abgefangene Kiste: Barren des Lehrlings",
+      "q": 2,
+      "n": 2,
+      "where": "Fach 1",
+      "since": "2026-11-25T22:19:09.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 6373,
+      "name": "Elixier der Feuermacht",
+      "q": 1,
+      "n": 14,
+      "where": "Fach 1",
+      "since": "2026-11-25T22:19:16.000Z",
+      "atLeast": false
+     }
+    ]
+   }
+  ]
  },
  "log": {
-  "items": [],
+  "items": [
+   {
+    "t": "2026-11-25T22:18:49.000Z",
+    "type": "deposit",
+    "who": "Shari Vari",
+    "id": 10051,
+    "name": "Rote Magiestofftasche",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-25T22:18:49.000Z",
+    "type": "deposit",
+    "who": "Shari Vari",
+    "id": 10051,
+    "name": "Rote Magiestofftasche",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-25T22:18:49.000Z",
+    "type": "deposit",
+    "who": "Shari Vari",
+    "id": 4245,
+    "name": "Kleines Seidenpack",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-25T22:18:49.000Z",
+    "type": "deposit",
+    "who": "Shari Vari",
+    "id": 5763,
+    "name": "Rote Wolltasche",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-25T22:19:24.000Z",
+    "type": "deposit",
+    "who": "Gildenbank Donnerbalken",
+    "id": 248683,
+    "name": "Abgefangene Kiste: Erz des Lehrlings",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-25T22:19:24.000Z",
+    "type": "deposit",
+    "who": "Gildenbank Donnerbalken",
+    "id": 248703,
+    "name": "Abgefangene Kiste: Barren des Lehrlings",
+    "q": 2,
+    "n": 2,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-25T22:19:24.000Z",
+    "type": "deposit",
+    "who": "Gildenbank Donnerbalken",
+    "id": 6373,
+    "name": "Elixier der Feuermacht",
+    "q": 1,
+    "n": 14,
+    "tab": "Fach 1"
+   }
+  ],
   "money": [
    {
     "t": "2026-11-08T01:02:06.000Z",
@@ -120,14 +225,14 @@ window.BANK = {
    {
     "t": "2026-11-13T21:02:06.000Z",
     "type": "deposit",
-    "who": "Aus Noxar",
-    "amount": 5000
+    "who": "Tente Deville",
+    "amount": 20000
    },
    {
     "t": "2026-11-13T21:02:06.000Z",
     "type": "deposit",
-    "who": "Tente Deville",
-    "amount": 20000
+    "who": "Aus Noxar",
+    "amount": 5000
    },
    {
     "t": "2026-11-13T21:04:40.000Z",
@@ -193,13 +298,13 @@ window.BANK = {
     "t": "2026-11-15T16:04:40.000Z",
     "type": "deposit",
     "who": "",
-    "amount": 10000
+    "amount": 796
    },
    {
     "t": "2026-11-15T16:04:40.000Z",
     "type": "deposit",
     "who": "",
-    "amount": 796
+    "amount": 10000
    },
    {
     "t": "2026-11-18T22:01:01.000Z",
@@ -354,20 +459,8 @@ window.BANK = {
    {
     "t": "2026-11-24T09:01:01.000Z",
     "type": "deposit",
-    "who": "",
-    "amount": 400
-   },
-   {
-    "t": "2026-11-24T09:01:01.000Z",
-    "type": "deposit",
-    "who": "",
-    "amount": 1232
-   },
-   {
-    "t": "2026-11-24T09:01:01.000Z",
-    "type": "deposit",
     "who": "Jankon Donnerpfeil",
-    "amount": 1232
+    "amount": 20000
    },
    {
     "t": "2026-11-24T09:01:01.000Z",
@@ -385,7 +478,25 @@ window.BANK = {
     "t": "2026-11-24T09:01:01.000Z",
     "type": "deposit",
     "who": "Jankon Donnerpfeil",
-    "amount": 20000
+    "amount": 1232
+   },
+   {
+    "t": "2026-11-24T09:01:01.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 1232
+   },
+   {
+    "t": "2026-11-24T09:01:01.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 400
+   },
+   {
+    "t": "2026-11-24T10:01:01.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 70000
    },
    {
     "t": "2026-11-24T10:01:01.000Z",
@@ -394,10 +505,10 @@ window.BANK = {
     "amount": 70000
    },
    {
-    "t": "2026-11-24T10:01:01.000Z",
+    "t": "2026-11-24T22:09:49.000Z",
     "type": "deposit",
     "who": "",
-    "amount": 70000
+    "amount": 20000
    },
    {
     "t": "2026-11-24T22:09:49.000Z",
@@ -406,10 +517,10 @@ window.BANK = {
     "amount": 20000
    },
    {
-    "t": "2026-11-24T22:09:49.000Z",
+    "t": "2026-11-25T11:28:35.000Z",
     "type": "deposit",
     "who": "",
-    "amount": 20000
+    "amount": 5000
    },
    {
     "t": "2026-11-25T11:28:35.000Z",
@@ -418,35 +529,60 @@ window.BANK = {
     "amount": 5000
    },
    {
-    "t": "2026-11-25T11:28:35.000Z",
-    "type": "deposit",
-    "who": "",
-    "amount": 5000
-   },
-   {
-    "t": "2026-11-25T19:28:35.000Z",
-    "type": "deposit",
-    "who": "",
-    "amount": 15000
-   },
-   {
     "t": "2026-11-25T19:28:35.000Z",
     "type": "deposit",
     "who": "Jankon Donnerpfeil",
     "amount": 15000
+   },
+   {
+    "t": "2026-11-25T19:28:35.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 15000
+   },
+   {
+    "t": "2026-11-25T20:49:52.000Z",
+    "type": "deposit",
+    "who": "Schnoppers Axtschädel",
+    "amount": 200000
+   },
+   {
+    "t": "2026-11-25T20:49:52.000Z",
+    "type": "deposit",
+    "who": "Darius Lichtban",
+    "amount": 140000
+   },
+   {
+    "t": "2026-11-25T22:18:49.000Z",
+    "type": "deposit",
+    "who": "Shari Vari",
+    "amount": 60000
+   },
+   {
+    "t": "2026-11-25T22:18:49.000Z",
+    "type": "deposit",
+    "who": "Ragnor Silbersehne",
+    "amount": 5000
+   },
+   {
+    "t": "2026-11-25T22:19:08.000Z",
+    "type": "deposit",
+    "who": "Gildenbank Donnerbalken",
+    "amount": 200000
    }
   ]
  },
  "calendar": {
-  "updated": "2026-11-25T19:41:46.000Z",
+  "updated": "2026-11-25T22:18:32.000Z",
   "events": []
  },
  "inactive": {
-  "updated": "2026-11-25T19:42:57.000Z",
+  "updated": "2026-11-25T22:19:45.000Z",
   "days": 10,
   "names": [
    "Gandal Thegrey",
    "Huffle Puf",
+   "Iseira Ari",
    "Milky Hots",
    "Nekarion Darkfire",
    "Tala Valkov",
