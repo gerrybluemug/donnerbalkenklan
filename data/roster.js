@@ -1,6 +1,6 @@
 // Automatisch erzeugt von scripts/update-roster.mjs – nicht von Hand bearbeiten.
 window.ROSTER = {
- "updated": "2026-11-26T04:00:41.851Z",
+ "updated": "2026-11-26T04:43:06.830Z",
  "maxLevel": 60,
  "members": [
   {
@@ -2725,7 +2725,7 @@ window.ROSTER = {
    "raceName": "Untoter",
    "cls": "PALADIN",
    "rank": 5,
-   "gender": null
+   "gender": "FEMALE"
   },
   {
    "name": "Zdan",
