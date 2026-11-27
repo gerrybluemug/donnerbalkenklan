@@ -1,6 +1,6 @@
 // Automatisch erzeugt von scripts/update-roster.mjs – nicht von Hand bearbeiten.
 window.ROSTER = {
- "updated": "2026-11-27T04:48:31.624Z",
+ "updated": "2026-11-27T13:10:22.906Z",
  "maxLevel": 60,
  "members": [
   {
@@ -24,7 +24,7 @@ window.ROSTER = {
    "race": "ORC",
    "raceName": "Orc",
    "cls": "HUNTER",
-   "rank": 5,
+   "rank": 3,
    "gender": "FEMALE"
   },
   {
@@ -43,7 +43,7 @@ window.ROSTER = {
    "name": "Egwen",
    "surname": "Alvere",
    "slug": "egwen-alvere",
-   "level": 33,
+   "level": 34,
    "ilvl": null,
    "race": "TROLL",
    "raceName": "Troll",
@@ -56,7 +56,7 @@ window.ROSTER = {
    "surname": "Alvere",
    "slug": "signus-alvere",
    "level": 17,
-   "ilvl": 10,
+   "ilvl": null,
    "race": "ORC",
    "raceName": "Orc",
    "cls": "SHAMAN",
@@ -559,7 +559,7 @@ window.ROSTER = {
    "name": "Tommy",
    "surname": "Thegun",
    "slug": "tommy-thegun",
-   "level": 43,
+   "level": 45,
    "ilvl": null,
    "race": "ORC",
    "raceName": "Orc",
@@ -715,7 +715,7 @@ window.ROSTER = {
    "name": "Giselle",
    "surname": "Shieldstorm",
    "slug": "giselle-shieldstorm",
-   "level": 46,
+   "level": 47,
    "ilvl": null,
    "race": "UNDEAD",
    "raceName": "Untoter",
@@ -739,7 +739,7 @@ window.ROSTER = {
    "name": "Hamso",
    "surname": "Hamso",
    "slug": "hamso-hamso",
-   "level": 42,
+   "level": 43,
    "ilvl": null,
    "race": "ORC",
    "raceName": "Orc",
@@ -780,7 +780,7 @@ window.ROSTER = {
    "race": "ORC",
    "raceName": "Orc",
    "cls": "SHAMAN",
-   "rank": 5,
+   "rank": 4,
    "gender": null
   },
   {
@@ -908,7 +908,7 @@ window.ROSTER = {
    "surname": "Mcsvenson",
    "slug": "carlos-mcsvenson",
    "level": 26,
-   "ilvl": 19,
+   "ilvl": null,
    "race": "TROLL",
    "raceName": "Troll",
    "cls": "WARLOCK",
@@ -979,7 +979,7 @@ window.ROSTER = {
    "name": "Dooktor",
    "surname": "Greenthumb",
    "slug": "dooktor-greenthumb",
-   "level": 38,
+   "level": 39,
    "ilvl": null,
    "race": "TAUREN",
    "raceName": "Tauren",
@@ -1075,7 +1075,7 @@ window.ROSTER = {
    "name": "Diond",
    "surname": "Abendstern",
    "slug": "diond-abendstern",
-   "level": 45,
+   "level": 46,
    "ilvl": null,
    "race": "ORC",
    "raceName": "Orc",
@@ -1687,7 +1687,7 @@ window.ROSTER = {
    "name": "Sandi",
    "surname": "Maus",
    "slug": "sandi-maus",
-   "level": 30,
+   "level": 31,
    "ilvl": null,
    "race": "ORC",
    "raceName": "Orc",
@@ -2191,12 +2191,12 @@ window.ROSTER = {
    "name": "Remmex",
    "surname": "Sturmlanze",
    "slug": "remmex-sturmlanze",
-   "level": 28,
+   "level": 29,
    "ilvl": null,
    "race": "TAUREN",
    "raceName": "Tauren",
    "cls": "SHAMAN",
-   "rank": 5,
+   "rank": 3,
    "gender": "MALE"
   },
   {
@@ -2863,7 +2863,7 @@ window.ROSTER = {
    "name": "Heiisenberg",
    "surname": "Whitee",
    "slug": "heiisenberg-whitee",
-   "level": 26,
+   "level": 27,
    "ilvl": null,
    "race": "ORC",
    "raceName": "Orc",
@@ -2880,7 +2880,7 @@ window.ROSTER = {
    "race": "ORC",
    "raceName": "Orc",
    "cls": "WARRIOR",
-   "rank": 5,
+   "rank": 1,
    "gender": null
   },
   {
@@ -3002,6 +3002,30 @@ window.ROSTER = {
    "cls": "MAGE",
    "rank": 5,
    "gender": "MALE"
+  },
+  {
+   "name": "Bulletten",
+   "surname": "Bulle",
+   "slug": "bulletten-bulle",
+   "level": 25,
+   "ilvl": null,
+   "race": "TAUREN",
+   "raceName": "Tauren",
+   "cls": "HUNTER",
+   "rank": 5,
+   "gender": "MALE"
+  },
+  {
+   "name": "Razer",
+   "surname": "Deathadder",
+   "slug": "razer-deathadder",
+   "level": 33,
+   "ilvl": null,
+   "race": "UNDEAD",
+   "raceName": "Untoter",
+   "cls": "PALADIN",
+   "rank": 5,
+   "gender": "FEMALE"
   }
  ]
 };
