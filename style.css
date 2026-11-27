@@ -263,6 +263,7 @@ td a:hover { text-decoration: underline; }
 .events li { display: flex; gap: 12px; padding: 8px 0; border-top: 1px solid var(--line); }
 .events li b { min-width: 92px; color: var(--gold); }
 .events li .t { color: var(--muted); min-width: 52px; }
+.events li.empty { color: var(--muted); }
 .tag { display: inline-block; font-size: .72rem; padding: 1px 7px; border-radius: 99px; border: 1px solid var(--line); color: var(--muted); font-style: normal; vertical-align: 1px; }
 
 /* Abzeichen in der Mitgliederliste */

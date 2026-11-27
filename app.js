@@ -204,16 +204,16 @@
         const dt = new Date(Date.UTC(y, mo - 1, d, hh, mi));
         return { day: dt.toLocaleDateString("de-DE", { weekday: "short", day: "2-digit", month: "2-digit", timeZone: "UTC" }), time: t.slice(11, 16) };
       };
-      if (upcoming.length) {
-        $("#events").innerHTML = upcoming.map((e) => {
+      $("#events").innerHTML = upcoming.length
+        ? upcoming.map((e) => {
           const w = when(e.start);
           const tag = e.kind === "announcement" ? "Ankündigung" : TYPES[e.type] || "";
           return `<li><b>${esc(w.day)}</b><span class="t">${esc(w.time)}</span><span>${esc(e.title)}${tag ? ` <small class="tag">${esc(tag)}</small>` : ""}</span></li>`;
-        }).join("");
-        const st = CAL.updated ? new Date(CAL.updated).toLocaleString("de-DE", { dateStyle: "medium", timeStyle: "short" }) : "";
-        $("#events-note").textContent = `Aus dem Ingame-Kalender (Serverzeit)${st ? ` · Stand ${st}` : ""}`;
-        $("#events-box").hidden = false;
-      }
+        }).join("")
+        : `<li class="empty">Im Ingame-Kalender steht gerade kein Gildentermin.</li>`;
+      const st = CAL.updated ? new Date(CAL.updated).toLocaleString("de-DE", { dateStyle: "medium", timeStyle: "short" }) : "";
+      $("#events-note").textContent = `Aus dem Ingame-Kalender (Serverzeit)${st ? ` · Stand ${st}` : ""}`;
+      $("#events-box").hidden = false;
     }
 
     // Discord: wie viele gerade online sind (öffentliche Einladungs-Info von Discord)

@@ -38,10 +38,9 @@ window.GUILD_CONFIG = {
   ],
 
   // Feste Termine (leer lassen, um den Abschnitt auszublenden)
-  schedule: [
-    { day: "Mittwoch", time: "20:00", what: "Gilden-Dungeonabend" },
-    { day: "Sonntag", time: "19:00", what: "Gemeinsames Leveln & Twink-Runde" },
-  ],
+  // Beispiel: { day: "Mittwoch", time: "20:00", what: "Gilden-Dungeonabend" },
+  // Die Termine aus dem Ingame-Kalender erscheinen unabhängig davon automatisch.
+  schedule: [],
 
   // Sprüche für das "Mitglied des Tages" (jeden Tag ein anderer)
   motdLines: [
