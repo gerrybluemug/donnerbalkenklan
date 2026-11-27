@@ -1,6 +1,6 @@
 // Automatisch erzeugt von scripts/update-roster.mjs – nicht von Hand bearbeiten.
 window.ROSTER = {
- "updated": "2026-11-27T13:57:32.875Z",
+ "updated": "2026-11-27T16:33:16.002Z",
  "maxLevel": 60,
  "members": [
   {
@@ -19,7 +19,7 @@ window.ROSTER = {
    "name": "Devana",
    "surname": "Emberfang",
    "slug": "devana-emberfang",
-   "level": 33,
+   "level": 34,
    "ilvl": null,
    "race": "ORC",
    "raceName": "Orc",
@@ -148,18 +148,6 @@ window.ROSTER = {
    "gender": "MALE"
   },
   {
-   "name": "Huffle",
-   "surname": "Puf",
-   "slug": "huffle-puf",
-   "level": 28,
-   "ilvl": 21,
-   "race": "ORC",
-   "raceName": "Orc",
-   "cls": "MAGE",
-   "rank": 3,
-   "gender": "MALE"
-  },
-  {
    "name": "Azura",
    "surname": "Catsiopeia",
    "slug": "azura-catsiopeia",
@@ -180,7 +168,7 @@ window.ROSTER = {
    "race": "UNDEAD",
    "raceName": "Untoter",
    "cls": "ROGUE",
-   "rank": 5,
+   "rank": 3,
    "gender": "MALE"
   },
   {
@@ -367,7 +355,7 @@ window.ROSTER = {
    "name": "Tente",
    "surname": "Deville",
    "slug": "tente-deville",
-   "level": 56,
+   "level": 57,
    "ilvl": null,
    "race": "TAUREN",
    "raceName": "Tauren",
@@ -379,7 +367,7 @@ window.ROSTER = {
    "name": "Lesnar",
    "surname": "Donnerbalken",
    "slug": "lesnar-donnerbalken",
-   "level": 35,
+   "level": 36,
    "ilvl": null,
    "race": "ORC",
    "raceName": "Orc",
@@ -512,7 +500,7 @@ window.ROSTER = {
    "surname": "Grimm",
    "slug": "lyra-grimm",
    "level": 41,
-   "ilvl": 35,
+   "ilvl": null,
    "race": "TROLL",
    "raceName": "Troll",
    "cls": "HUNTER",
@@ -564,7 +552,7 @@ window.ROSTER = {
    "race": "ORC",
    "raceName": "Orc",
    "cls": "HUNTER",
-   "rank": 5,
+   "rank": 3,
    "gender": "MALE"
   },
   {
@@ -715,7 +703,7 @@ window.ROSTER = {
    "name": "Giselle",
    "surname": "Shieldstorm",
    "slug": "giselle-shieldstorm",
-   "level": 47,
+   "level": 48,
    "ilvl": null,
    "race": "UNDEAD",
    "raceName": "Untoter",
@@ -799,7 +787,7 @@ window.ROSTER = {
    "name": "Sla",
    "surname": "Sla",
    "slug": "sla-sla",
-   "level": 41,
+   "level": 42,
    "ilvl": null,
    "race": "TAUREN",
    "raceName": "Tauren",
@@ -1240,18 +1228,6 @@ window.ROSTER = {
    "gender": "FEMALE"
   },
   {
-   "name": "Nekarion",
-   "surname": "Darkfire",
-   "slug": "nekarion-darkfire",
-   "level": 12,
-   "ilvl": 4,
-   "race": "ORC",
-   "raceName": "Orc",
-   "cls": "SHAMAN",
-   "rank": 5,
-   "gender": "MALE"
-  },
-  {
    "name": "Muhcow",
    "surname": "Solvan",
    "slug": "muhcow-solvan",
@@ -1640,7 +1616,7 @@ window.ROSTER = {
    "surname": "Todesser",
    "slug": "dudurus-todesser",
    "level": 26,
-   "ilvl": 19,
+   "ilvl": null,
    "race": "TAUREN",
    "raceName": "Tauren",
    "cls": "DRUID",
@@ -1900,18 +1876,6 @@ window.ROSTER = {
    "gender": "MALE"
   },
   {
-   "name": "Wander",
-   "surname": "Magierin",
-   "slug": "wander-magierin",
-   "level": 10,
-   "ilvl": 6,
-   "race": "TROLL",
-   "raceName": "Troll",
-   "cls": "MAGE",
-   "rank": 5,
-   "gender": "FEMALE"
-  },
-  {
    "name": "Harry",
    "surname": "Heimtücke",
    "slug": "harry-heimtücke",
@@ -2035,7 +1999,7 @@ window.ROSTER = {
    "name": "Boandlgrama",
    "surname": "Kerschgeist",
    "slug": "boandlgrama-kerschgeist",
-   "level": 39,
+   "level": 40,
    "ilvl": null,
    "race": "UNDEAD",
    "raceName": "Untoter",
@@ -2336,7 +2300,7 @@ window.ROSTER = {
    "surname": "Nebenwirkung",
    "slug": "mister-nebenwirkung",
    "level": 18,
-   "ilvl": 11,
+   "ilvl": null,
    "race": "TROLL",
    "raceName": "Troll",
    "cls": "PRIEST",
@@ -2348,7 +2312,7 @@ window.ROSTER = {
    "surname": "Risiko",
    "slug": "mister-risiko",
    "level": 18,
-   "ilvl": 12,
+   "ilvl": null,
    "race": "TROLL",
    "raceName": "Troll",
    "cls": "WARRIOR",
@@ -2556,7 +2520,7 @@ window.ROSTER = {
    "race": "TROLL",
    "raceName": "Troll",
    "cls": "SHAMAN",
-   "rank": 5,
+   "rank": 4,
    "gender": null
   },
   {
@@ -2887,7 +2851,7 @@ window.ROSTER = {
    "name": "Krogar",
    "surname": "Lichtban",
    "slug": "krogar-lichtban",
-   "level": 26,
+   "level": 27,
    "ilvl": null,
    "race": "TAUREN",
    "raceName": "Tauren",
@@ -2983,7 +2947,7 @@ window.ROSTER = {
    "name": "Aslan",
    "surname": "Höllschrei",
    "slug": "aslan-höllschrei",
-   "level": 10,
+   "level": 12,
    "ilvl": null,
    "race": "TAUREN",
    "raceName": "Tauren",
@@ -3007,7 +2971,7 @@ window.ROSTER = {
    "name": "Bulletten",
    "surname": "Bulle",
    "slug": "bulletten-bulle",
-   "level": 25,
+   "level": 26,
    "ilvl": null,
    "race": "TAUREN",
    "raceName": "Tauren",
