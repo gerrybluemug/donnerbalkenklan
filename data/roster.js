@@ -1,6 +1,6 @@
 // Automatisch erzeugt von scripts/update-roster.mjs – nicht von Hand bearbeiten.
 window.ROSTER = {
- "updated": "2026-11-27T13:10:22.906Z",
+ "updated": "2026-11-27T13:50:15.257Z",
  "maxLevel": 60,
  "members": [
   {
