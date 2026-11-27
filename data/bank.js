@@ -1,10 +1,10 @@
 // Automatisch erzeugt von scripts/import-bank.mjs – nicht von Hand bearbeiten.
 window.BANK = {
- "updated": "2026-11-25T22:20:37.259Z",
+ "updated": "2026-11-27T13:50:03.881Z",
  "chars": {
   "Gildenbank": {
-   "updated": "2026-11-25T22:19:16.000Z",
-   "bankUpdated": "2026-11-25T20:51:38.000Z",
+   "updated": "2026-11-26T20:06:43.000Z",
+   "bankUpdated": "2026-11-26T20:06:43.000Z",
    "money": 18,
    "items": [
     {
@@ -20,7 +20,7 @@ window.BANK = {
   }
  },
  "guild": {
-  "updated": "2026-11-25T22:19:35.000Z",
+  "updated": "2026-11-26T20:07:00.000Z",
   "money": 405000,
   "tabs": [
    {
@@ -64,6 +64,42 @@ window.BANK = {
       "atLeast": true
      },
      {
+      "id": 255725,
+      "name": "Handbuch: Überragender Heiltrank",
+      "q": 2,
+      "n": 1,
+      "where": "Fach 1",
+      "since": "2026-11-26T20:06:44.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 248689,
+      "name": "Abgefangene Kiste: Kuriositäten des Gesellen",
+      "q": 1,
+      "n": 1,
+      "where": "Fach 1",
+      "since": "2026-11-26T20:06:44.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 248706,
+      "name": "Abgefangene Kiste: Barren des Gesellen",
+      "q": 2,
+      "n": 1,
+      "where": "Fach 1",
+      "since": "2026-11-26T20:06:44.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 248694,
+      "name": "Abgefangene Kiste: Kuriositäten des Experten",
+      "q": 1,
+      "n": 1,
+      "where": "Fach 1",
+      "since": "2026-11-26T20:06:44.000Z",
+      "atLeast": false
+     },
+     {
       "id": 248683,
       "name": "Abgefangene Kiste: Erz des Lehrlings",
       "q": 1,
@@ -97,9 +133,9 @@ window.BANK = {
  "log": {
   "items": [
    {
-    "t": "2026-11-25T22:18:49.000Z",
+    "t": "2026-11-25T22:06:46.000Z",
     "type": "deposit",
-    "who": "Shari Vari",
+    "who": "",
     "id": 10051,
     "name": "Rote Magiestofftasche",
     "q": 1,
@@ -107,9 +143,29 @@ window.BANK = {
     "tab": "Fach 1"
    },
    {
-    "t": "2026-11-25T22:18:49.000Z",
+    "t": "2026-11-25T22:06:46.000Z",
     "type": "deposit",
-    "who": "Shari Vari",
+    "who": "",
+    "id": 5763,
+    "name": "Rote Wolltasche",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-25T22:06:46.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 4245,
+    "name": "Kleines Seidenpack",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-25T22:06:46.000Z",
+    "type": "deposit",
+    "who": "",
     "id": 10051,
     "name": "Rote Magiestofftasche",
     "q": 1,
@@ -130,8 +186,28 @@ window.BANK = {
     "t": "2026-11-25T22:18:49.000Z",
     "type": "deposit",
     "who": "Shari Vari",
+    "id": 10051,
+    "name": "Rote Magiestofftasche",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-25T22:18:49.000Z",
+    "type": "deposit",
+    "who": "Shari Vari",
     "id": 5763,
     "name": "Rote Wolltasche",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-25T22:18:49.000Z",
+    "type": "deposit",
+    "who": "Shari Vari",
+    "id": 10051,
+    "name": "Rote Magiestofftasche",
     "q": 1,
     "n": 1,
     "tab": "Fach 1"
@@ -164,6 +240,76 @@ window.BANK = {
     "name": "Elixier der Feuermacht",
     "q": 1,
     "n": 14,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-25T23:06:46.000Z",
+    "type": "deposit",
+    "who": "Buddy Grabfried",
+    "id": 255725,
+    "name": "Handbuch: Überragender Heiltrank",
+    "q": 2,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-26T15:06:46.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 248706,
+    "name": "Abgefangene Kiste: Barren des Gesellen",
+    "q": 2,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-26T15:06:46.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 248689,
+    "name": "Abgefangene Kiste: Kuriositäten des Gesellen",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-26T15:06:46.000Z",
+    "type": "deposit",
+    "who": "Dacka Dacka",
+    "id": 248706,
+    "name": "Abgefangene Kiste: Barren des Gesellen",
+    "q": 2,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-26T15:06:46.000Z",
+    "type": "deposit",
+    "who": "Dacka Dacka",
+    "id": 248689,
+    "name": "Abgefangene Kiste: Kuriositäten des Gesellen",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-26T17:06:46.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 248694,
+    "name": "Abgefangene Kiste: Kuriositäten des Experten",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-26T17:06:46.000Z",
+    "type": "deposit",
+    "who": "Sla Sla",
+    "id": 248694,
+    "name": "Abgefangene Kiste: Kuriositäten des Experten",
+    "q": 1,
+    "n": 1,
     "tab": "Fach 1"
    }
   ],
@@ -219,14 +365,14 @@ window.BANK = {
    {
     "t": "2026-11-13T21:02:06.000Z",
     "type": "deposit",
-    "who": "Darius Lichtban",
-    "amount": 40000
+    "who": "Tente Deville",
+    "amount": 20000
    },
    {
     "t": "2026-11-13T21:02:06.000Z",
     "type": "deposit",
-    "who": "Tente Deville",
-    "amount": 20000
+    "who": "Darius Lichtban",
+    "amount": 40000
    },
    {
     "t": "2026-11-13T21:02:06.000Z",
@@ -286,13 +432,13 @@ window.BANK = {
     "t": "2026-11-15T16:02:06.000Z",
     "type": "deposit",
     "who": "Taruuk Eichenhuf",
-    "amount": 796
+    "amount": 10000
    },
    {
     "t": "2026-11-15T16:02:06.000Z",
     "type": "deposit",
     "who": "Taruuk Eichenhuf",
-    "amount": 10000
+    "amount": 796
    },
    {
     "t": "2026-11-15T16:04:40.000Z",
@@ -429,14 +575,14 @@ window.BANK = {
    {
     "t": "2026-11-23T19:44:45.000Z",
     "type": "deposit",
-    "who": "Amity Miller",
-    "amount": 10000
+    "who": "Beautiful Berry",
+    "amount": 1
    },
    {
     "t": "2026-11-23T19:44:45.000Z",
     "type": "deposit",
-    "who": "Beautiful Berry",
-    "amount": 1
+    "who": "Amity Miller",
+    "amount": 10000
    },
    {
     "t": "2026-11-23T20:01:01.000Z",
@@ -459,20 +605,14 @@ window.BANK = {
    {
     "t": "2026-11-24T09:01:01.000Z",
     "type": "deposit",
-    "who": "Jankon Donnerpfeil",
-    "amount": 20000
-   },
-   {
-    "t": "2026-11-24T09:01:01.000Z",
-    "type": "deposit",
-    "who": "Jankon Donnerpfeil",
-    "amount": 400
+    "who": "",
+    "amount": 1232
    },
    {
     "t": "2026-11-24T09:01:01.000Z",
     "type": "deposit",
     "who": "",
-    "amount": 20000
+    "amount": 400
    },
    {
     "t": "2026-11-24T09:01:01.000Z",
@@ -484,19 +624,19 @@ window.BANK = {
     "t": "2026-11-24T09:01:01.000Z",
     "type": "deposit",
     "who": "",
-    "amount": 1232
+    "amount": 20000
    },
    {
     "t": "2026-11-24T09:01:01.000Z",
     "type": "deposit",
-    "who": "",
+    "who": "Jankon Donnerpfeil",
     "amount": 400
    },
    {
-    "t": "2026-11-24T10:01:01.000Z",
+    "t": "2026-11-24T09:01:01.000Z",
     "type": "deposit",
-    "who": "",
-    "amount": 70000
+    "who": "Jankon Donnerpfeil",
+    "amount": 20000
    },
    {
     "t": "2026-11-24T10:01:01.000Z",
@@ -505,15 +645,21 @@ window.BANK = {
     "amount": 70000
    },
    {
-    "t": "2026-11-24T22:09:49.000Z",
+    "t": "2026-11-24T10:01:01.000Z",
     "type": "deposit",
     "who": "",
-    "amount": 20000
+    "amount": 70000
    },
    {
     "t": "2026-11-24T22:09:49.000Z",
     "type": "deposit",
     "who": "Hunt Arbeít",
+    "amount": 20000
+   },
+   {
+    "t": "2026-11-24T22:09:49.000Z",
+    "type": "deposit",
+    "who": "",
     "amount": 20000
    },
    {
@@ -531,13 +677,13 @@ window.BANK = {
    {
     "t": "2026-11-25T19:28:35.000Z",
     "type": "deposit",
-    "who": "Jankon Donnerpfeil",
+    "who": "",
     "amount": 15000
    },
    {
     "t": "2026-11-25T19:28:35.000Z",
     "type": "deposit",
-    "who": "",
+    "who": "Jankon Donnerpfeil",
     "amount": 15000
    },
    {
@@ -553,16 +699,22 @@ window.BANK = {
     "amount": 140000
    },
    {
-    "t": "2026-11-25T22:18:49.000Z",
+    "t": "2026-11-25T21:06:46.000Z",
     "type": "deposit",
-    "who": "Shari Vari",
-    "amount": 60000
+    "who": "",
+    "amount": 140000
    },
    {
     "t": "2026-11-25T22:18:49.000Z",
     "type": "deposit",
     "who": "Ragnor Silbersehne",
     "amount": 5000
+   },
+   {
+    "t": "2026-11-25T22:18:49.000Z",
+    "type": "deposit",
+    "who": "Shari Vari",
+    "amount": 60000
    },
    {
     "t": "2026-11-25T22:19:08.000Z",
@@ -573,21 +725,35 @@ window.BANK = {
   ]
  },
  "calendar": {
-  "updated": "2026-11-25T22:18:32.000Z",
-  "events": []
+  "updated": "2026-11-26T20:07:21.000Z",
+  "events": [
+   {
+    "start": "2026-11-28T19:00",
+    "end": "2000-01-01T00:00",
+    "title": "Blackrock Deeps Run",
+    "kind": "event",
+    "type": 4
+   }
+  ]
  },
  "inactive": {
-  "updated": "2026-11-25T22:19:45.000Z",
+  "updated": "2026-11-27T13:47:33.000Z",
   "days": 10,
   "names": [
+   "Atronik Bogensehne",
+   "Dictator Kimjongbonk",
+   "Flathoo Lenßen",
    "Gandal Thegrey",
-   "Huffle Puf",
+   "Goreck Lokthar",
+   "Gripper Deriltis",
    "Iseira Ari",
+   "Kargoth Kriegsfang",
+   "Lyra Grimm",
    "Milky Hots",
-   "Nekarion Darkfire",
+   "Robert Bobby",
+   "Suncho Muncho",
    "Tala Valkov",
    "Tristan Trollig",
-   "Wander Magierin",
    "Wigges Ironfist"
   ]
  }
