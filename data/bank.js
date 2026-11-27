@@ -1,9 +1,9 @@
 // Automatisch erzeugt von scripts/import-bank.mjs – nicht von Hand bearbeiten.
 window.BANK = {
- "updated": "2026-11-27T13:50:03.881Z",
+ "updated": "2026-11-27T16:32:59.573Z",
  "chars": {
   "Gildenbank": {
-   "updated": "2026-11-26T20:06:43.000Z",
+   "updated": "2026-11-27T16:30:18.000Z",
    "bankUpdated": "2026-11-26T20:06:43.000Z",
    "money": 18,
    "items": [
@@ -20,7 +20,7 @@ window.BANK = {
   }
  },
  "guild": {
-  "updated": "2026-11-26T20:07:00.000Z",
+  "updated": "2026-11-27T16:32:22.000Z",
   "money": 405000,
   "tabs": [
    {
@@ -73,12 +73,93 @@ window.BANK = {
       "atLeast": false
      },
      {
+      "id": 2318,
+      "name": "Leichtes Leder",
+      "q": 1,
+      "n": 9,
+      "where": "Fach 1",
+      "since": "2026-11-27T16:32:21.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 2319,
+      "name": "Mittleres Leder",
+      "q": 1,
+      "n": 5,
+      "where": "Fach 1",
+      "since": "2026-11-27T16:32:21.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 249428,
+      "name": "Makelloser Balg",
+      "q": 2,
+      "n": 3,
+      "where": "Fach 1",
+      "since": "2026-11-27T16:32:21.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 4232,
+      "name": "Mittlerer Balg",
+      "q": 1,
+      "n": 1,
+      "where": "Fach 1",
+      "since": "2026-11-27T16:32:21.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 4241,
+      "name": "Grüne Wolltasche",
+      "q": 1,
+      "n": 1,
+      "where": "Fach 1",
+      "since": "2026-11-27T16:32:21.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 8387,
+      "name": "Muster: Große Voodoomaske",
+      "q": 2,
+      "n": 1,
+      "where": "Fach 1",
+      "since": "2026-11-27T16:32:21.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 10606,
+      "name": "Bauplan: Fallschirm-Umhang",
+      "q": 2,
+      "n": 1,
+      "where": "Fach 1",
+      "since": "2026-11-27T16:32:21.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 248683,
+      "name": "Abgefangene Kiste: Erz des Lehrlings",
+      "q": 1,
+      "n": 1,
+      "where": "Fach 1",
+      "since": "2026-11-25T22:19:11.000Z",
+      "atLeast": false
+     },
+     {
       "id": 248689,
       "name": "Abgefangene Kiste: Kuriositäten des Gesellen",
       "q": 1,
       "n": 1,
       "where": "Fach 1",
       "since": "2026-11-26T20:06:44.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 248703,
+      "name": "Abgefangene Kiste: Barren des Lehrlings",
+      "q": 2,
+      "n": 2,
+      "where": "Fach 1",
+      "since": "2026-11-25T22:19:09.000Z",
       "atLeast": false
      },
      {
@@ -97,24 +178,6 @@ window.BANK = {
       "n": 1,
       "where": "Fach 1",
       "since": "2026-11-26T20:06:44.000Z",
-      "atLeast": false
-     },
-     {
-      "id": 248683,
-      "name": "Abgefangene Kiste: Erz des Lehrlings",
-      "q": 1,
-      "n": 1,
-      "where": "Fach 1",
-      "since": "2026-11-25T22:19:11.000Z",
-      "atLeast": false
-     },
-     {
-      "id": 248703,
-      "name": "Abgefangene Kiste: Barren des Lehrlings",
-      "q": 2,
-      "n": 2,
-      "where": "Fach 1",
-      "since": "2026-11-25T22:19:09.000Z",
       "atLeast": false
      },
      {
@@ -176,26 +239,6 @@ window.BANK = {
     "t": "2026-11-25T22:18:49.000Z",
     "type": "deposit",
     "who": "Shari Vari",
-    "id": 4245,
-    "name": "Kleines Seidenpack",
-    "q": 1,
-    "n": 1,
-    "tab": "Fach 1"
-   },
-   {
-    "t": "2026-11-25T22:18:49.000Z",
-    "type": "deposit",
-    "who": "Shari Vari",
-    "id": 10051,
-    "name": "Rote Magiestofftasche",
-    "q": 1,
-    "n": 1,
-    "tab": "Fach 1"
-   },
-   {
-    "t": "2026-11-25T22:18:49.000Z",
-    "type": "deposit",
-    "who": "Shari Vari",
     "id": 5763,
     "name": "Rote Wolltasche",
     "q": 1,
@@ -208,6 +251,26 @@ window.BANK = {
     "who": "Shari Vari",
     "id": 10051,
     "name": "Rote Magiestofftasche",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-25T22:18:49.000Z",
+    "type": "deposit",
+    "who": "Shari Vari",
+    "id": 10051,
+    "name": "Rote Magiestofftasche",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-25T22:18:49.000Z",
+    "type": "deposit",
+    "who": "Shari Vari",
+    "id": 4245,
+    "name": "Kleines Seidenpack",
     "q": 1,
     "n": 1,
     "tab": "Fach 1"
@@ -243,6 +306,16 @@ window.BANK = {
     "tab": "Fach 1"
    },
    {
+    "t": "2026-11-25T22:32:23.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 255725,
+    "name": "Handbuch: Überragender Heiltrank",
+    "q": 2,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
     "t": "2026-11-25T23:06:46.000Z",
     "type": "deposit",
     "who": "Buddy Grabfried",
@@ -255,6 +328,16 @@ window.BANK = {
    {
     "t": "2026-11-26T15:06:46.000Z",
     "type": "deposit",
+    "who": "Dacka Dacka",
+    "id": 248689,
+    "name": "Abgefangene Kiste: Kuriositäten des Gesellen",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-26T15:06:46.000Z",
+    "type": "deposit",
     "who": "",
     "id": 248706,
     "name": "Abgefangene Kiste: Barren des Gesellen",
@@ -279,16 +362,6 @@ window.BANK = {
     "id": 248706,
     "name": "Abgefangene Kiste: Barren des Gesellen",
     "q": 2,
-    "n": 1,
-    "tab": "Fach 1"
-   },
-   {
-    "t": "2026-11-26T15:06:46.000Z",
-    "type": "deposit",
-    "who": "Dacka Dacka",
-    "id": 248689,
-    "name": "Abgefangene Kiste: Kuriositäten des Gesellen",
-    "q": 1,
     "n": 1,
     "tab": "Fach 1"
    },
@@ -308,6 +381,146 @@ window.BANK = {
     "who": "Sla Sla",
     "id": 248694,
     "name": "Abgefangene Kiste: Kuriositäten des Experten",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T13:32:23.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 10606,
+    "name": "Bauplan: Fallschirm-Umhang",
+    "q": 2,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T13:32:23.000Z",
+    "type": "deposit",
+    "who": "Diond Abendstern",
+    "id": 10606,
+    "name": "Bauplan: Fallschirm-Umhang",
+    "q": 2,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T13:32:23.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 8387,
+    "name": "Muster: Große Voodoomaske",
+    "q": 2,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T13:32:23.000Z",
+    "type": "deposit",
+    "who": "Diond Abendstern",
+    "id": 8387,
+    "name": "Muster: Große Voodoomaske",
+    "q": 2,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T14:32:23.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 2318,
+    "name": "Leichtes Leder",
+    "q": 1,
+    "n": 9,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T14:32:23.000Z",
+    "type": "deposit",
+    "who": "Kalter Wind",
+    "id": 2319,
+    "name": "Mittleres Leder",
+    "q": 1,
+    "n": 5,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T14:32:23.000Z",
+    "type": "deposit",
+    "who": "Kalter Wind",
+    "id": 4232,
+    "name": "Mittlerer Balg",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T14:32:23.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 4232,
+    "name": "Mittlerer Balg",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T14:32:23.000Z",
+    "type": "deposit",
+    "who": "Kalter Wind",
+    "id": 2318,
+    "name": "Leichtes Leder",
+    "q": 1,
+    "n": 9,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T14:32:23.000Z",
+    "type": "deposit",
+    "who": "Kalter Wind",
+    "id": 249428,
+    "name": "Makelloser Balg",
+    "q": 2,
+    "n": 3,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T14:32:23.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 249428,
+    "name": "Makelloser Balg",
+    "q": 2,
+    "n": 3,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T14:32:23.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 2319,
+    "name": "Mittleres Leder",
+    "q": 1,
+    "n": 5,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T16:32:23.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 4241,
+    "name": "Grüne Wolltasche",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T16:32:23.000Z",
+    "type": "deposit",
+    "who": "Lana Donnerfaust",
+    "id": 4241,
+    "name": "Grüne Wolltasche",
     "q": 1,
     "n": 1,
     "tab": "Fach 1"
@@ -365,14 +578,14 @@ window.BANK = {
    {
     "t": "2026-11-13T21:02:06.000Z",
     "type": "deposit",
-    "who": "Tente Deville",
-    "amount": 20000
+    "who": "Darius Lichtban",
+    "amount": 40000
    },
    {
     "t": "2026-11-13T21:02:06.000Z",
     "type": "deposit",
-    "who": "Darius Lichtban",
-    "amount": 40000
+    "who": "Tente Deville",
+    "amount": 20000
    },
    {
     "t": "2026-11-13T21:02:06.000Z",
@@ -575,14 +788,14 @@ window.BANK = {
    {
     "t": "2026-11-23T19:44:45.000Z",
     "type": "deposit",
-    "who": "Beautiful Berry",
-    "amount": 1
+    "who": "Amity Miller",
+    "amount": 10000
    },
    {
     "t": "2026-11-23T19:44:45.000Z",
     "type": "deposit",
-    "who": "Amity Miller",
-    "amount": 10000
+    "who": "Beautiful Berry",
+    "amount": 1
    },
    {
     "t": "2026-11-23T20:01:01.000Z",
@@ -605,14 +818,14 @@ window.BANK = {
    {
     "t": "2026-11-24T09:01:01.000Z",
     "type": "deposit",
-    "who": "",
-    "amount": 1232
+    "who": "Jankon Donnerpfeil",
+    "amount": 400
    },
    {
     "t": "2026-11-24T09:01:01.000Z",
     "type": "deposit",
-    "who": "",
-    "amount": 400
+    "who": "Jankon Donnerpfeil",
+    "amount": 20000
    },
    {
     "t": "2026-11-24T09:01:01.000Z",
@@ -629,14 +842,20 @@ window.BANK = {
    {
     "t": "2026-11-24T09:01:01.000Z",
     "type": "deposit",
-    "who": "Jankon Donnerpfeil",
+    "who": "",
     "amount": 400
    },
    {
     "t": "2026-11-24T09:01:01.000Z",
     "type": "deposit",
-    "who": "Jankon Donnerpfeil",
-    "amount": 20000
+    "who": "",
+    "amount": 1232
+   },
+   {
+    "t": "2026-11-24T10:01:01.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 70000
    },
    {
     "t": "2026-11-24T10:01:01.000Z",
@@ -645,21 +864,15 @@ window.BANK = {
     "amount": 70000
    },
    {
-    "t": "2026-11-24T10:01:01.000Z",
-    "type": "deposit",
-    "who": "",
-    "amount": 70000
-   },
-   {
     "t": "2026-11-24T22:09:49.000Z",
     "type": "deposit",
-    "who": "Hunt Arbeít",
+    "who": "",
     "amount": 20000
    },
    {
     "t": "2026-11-24T22:09:49.000Z",
     "type": "deposit",
-    "who": "",
+    "who": "Hunt Arbeít",
     "amount": 20000
    },
    {
@@ -721,12 +934,25 @@ window.BANK = {
     "type": "deposit",
     "who": "Gildenbank Donnerbalken",
     "amount": 200000
+   },
+   {
+    "t": "2026-11-25T22:32:23.000Z",
+    "type": "deposit",
+    "who": "",
+    "amount": 5000
    }
   ]
  },
  "calendar": {
-  "updated": "2026-11-26T20:07:21.000Z",
+  "updated": "2026-11-27T16:32:23.000Z",
   "events": [
+   {
+    "start": "2026-11-27T20:15",
+    "end": "2000-01-01T00:00",
+    "title": "Kral von Razorfen",
+    "kind": "event",
+    "type": 4
+   },
    {
     "start": "2026-11-28T19:00",
     "end": "2000-01-01T00:00",
@@ -737,7 +963,7 @@ window.BANK = {
   ]
  },
  "inactive": {
-  "updated": "2026-11-27T13:47:33.000Z",
+  "updated": "2026-11-27T16:32:31.000Z",
   "days": 10,
   "names": [
    "Atronik Bogensehne",
@@ -748,7 +974,6 @@ window.BANK = {
    "Gripper Deriltis",
    "Iseira Ari",
    "Kargoth Kriegsfang",
-   "Lyra Grimm",
    "Milky Hots",
    "Robert Bobby",
    "Suncho Muncho",
