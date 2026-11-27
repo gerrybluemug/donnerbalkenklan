@@ -1,6 +1,6 @@
 // Automatisch erzeugt von scripts/update-roster.mjs – nicht von Hand bearbeiten.
 window.ROSTER = {
- "updated": "2026-11-27T13:50:15.257Z",
+ "updated": "2026-11-27T13:57:32.875Z",
  "maxLevel": 60,
  "members": [
   {
@@ -236,7 +236,7 @@ window.ROSTER = {
    "surname": "Federhuf",
    "slug": "tahanak-federhuf",
    "level": 20,
-   "ilvl": 14,
+   "ilvl": null,
    "race": "TAUREN",
    "raceName": "Tauren",
    "cls": "DRUID",
