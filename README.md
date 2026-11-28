@@ -67,6 +67,11 @@ Einträge; das Addon sammelt sie bei jedem Öffnen und baut so eine längere
 Historie auf – also die Gildenbank ruhig regelmäßig öffnen. Zeiten sind nur
 auf die Stunde genau.
 
+Die Spender-Rangliste „Gegenstände“ zählt in **Stapeln**: 20 Leder (ein voller
+Stapel) zählen so viel wie eine Waffe. Wie viel auf einen Stapel passt, liest
+das Addon ab Version 1.6 im Spiel aus. Bis dahin schätzt die Seite: Was schon
+mal mehrfach auf einem Platz lag, gilt als 20er-Stapel, alles andere als 1.
+
 **Gildentermine:** Das Addon liest (mit jedem Charakter in der Gilde, auch ohne
 `/gbank an`) kurz nach dem Einloggen die Gildentermine und Gildenankündigungen
 der nächsten drei Monate aus dem Ingame-Kalender. Sie landen beim nächsten
