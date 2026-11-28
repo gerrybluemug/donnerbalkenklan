@@ -1,6 +1,6 @@
 // Automatisch erzeugt von scripts/update-roster.mjs – nicht von Hand bearbeiten.
 window.ROSTER = {
- "updated": "2026-11-28T12:25:53.508Z",
+ "updated": "2026-11-28T13:10:03.147Z",
  "maxLevel": 60,
  "members": [
   {
@@ -1153,7 +1153,7 @@ window.ROSTER = {
    "raceName": "Orc",
    "cls": "HUNTER",
    "rank": 5,
-   "gender": "MALE"
+   "gender": null
   },
   {
    "name": "Shari",
