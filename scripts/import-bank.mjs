@@ -106,7 +106,7 @@ const calendar = data.calendar && typeof data.calendar === "object" && Array.isA
       updated: time(data.calendar.updated),
       events: data.calendar.events
         .filter((e) => Array.isArray(e) && calTime(e[0]))
-        .map((e) => ({ start: calTime(e[0]), end: calTime(e[1]), title: str(e[2], 120), kind: e[3] === "GUILD_ANNOUNCEMENT" ? "announcement" : "event", type: Number.isInteger(e[4]) ? e[4] : null }))
+        .map((e) => ({ start: calTime(e[0]), end: calTime(e[1]) && calTime(e[1]) >= calTime(e[0]) ? calTime(e[1]) : null, title: str(e[2], 120), kind: e[3] === "GUILD_ANNOUNCEMENT" ? "announcement" : "event", type: Number.isInteger(e[4]) ? e[4] : null }))
         .slice(0, 100),
     }
   : null;

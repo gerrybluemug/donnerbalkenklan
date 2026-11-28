@@ -136,8 +136,10 @@ local function StackSize(id)
   if not id or id == 0 then return nil end
   local n = DB.stacks[id]
   if n then return n end
-  if C_Item and C_Item.GetItemMaxStackByID then n = C_Item.GetItemMaxStackByID(id) end
-  if (type(n) ~= "number" or n < 1) and GetItemInfo then n = select(8, GetItemInfo(id)) end
+  local function ok(v) return type(v) == "number" and v >= 1 end
+  if C_Item and C_Item.GetItemMaxStackSizeByID then n = C_Item.GetItemMaxStackSizeByID(id) end
+  if not ok(n) and C_Item and C_Item.GetItemInfo then n = select(8, C_Item.GetItemInfo(id)) end
+  if not ok(n) and GetItemInfo then n = select(8, GetItemInfo(id)) end
   if type(n) == "number" and n >= 1 then DB.stacks[id] = n; return n end
   if C_Item and C_Item.RequestLoadItemDataByID then pcall(C_Item.RequestLoadItemDataByID, id) end
 end
@@ -467,7 +469,10 @@ local function ReadCalendar()
           local key = start .. "|" .. (e.title or "")
           if not seen[key] then
             seen[key] = true
-            table.insert(events, { start, CalTime(e.endTime), e.title or "", e.calendarType, e.eventType or false })
+            -- ohne eingetragenes Ende liefert WoW 2000-01-01 → dann kein Ende
+            local ende = CalTime(e.endTime)
+            if ende and ende < start then ende = false end
+            table.insert(events, { start, ende, e.title or "", e.calendarType, e.eventType or false })
           end
         end
       end
