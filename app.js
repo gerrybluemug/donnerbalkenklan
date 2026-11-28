@@ -138,8 +138,24 @@
   }
   // Spender-Statistik aus dem Protokoll (nur Einzahlungen/Einlagerungen).
   // Bank-Charaktere selbst zählen nicht – die räumen nur um.
+  // Gegenstände zählen in Stapeln: 20 Leder (1 Stapel) = 1 Waffe.
+  // Die Stapelgröße liefert das Addon (ab 1.6). Fehlt sie noch: Lag ein
+  // Gegenstand irgendwo schon mal mehrfach auf einem Platz, ist er stapelbar –
+  // dann gilt die übliche 20 (Leder, Stoff, Kräuter, Erz …) oder mehr, falls
+  // schon mehr gesehen; sonst 1.
+  function stackSizes() {
+    const seen = new Map(), note = (id, n) => { if (id && n > (seen.get(id) || 0)) seen.set(id, n); };
+    if (hasBank) {
+      Object.values(B.chars || {}).forEach((c) => (c.items || []).forEach((i) => note(i.id, i.n)));
+      ((B.guild && B.guild.tabs) || []).forEach((t) => t.items.forEach((i) => note(i.id, i.n)));
+      ((B.log && B.log.items) || []).forEach((e) => note(e.id, e.n));
+    }
+    const known = (hasBank && B.stacks) || {};
+    return (id) => known[id] || ((seen.get(id) || 1) > 1 ? Math.max(seen.get(id), 20) : 1);
+  }
   function donorStats() {
     const LOG = (hasBank && B.log) || { items: [], money: [] };
+    const stackOf = stackSizes();
     const bankChars = new Set(Object.keys((hasBank && B.chars) || {}).map((k) => k.toLowerCase()));
     const donors = new Map();
     [...LOG.items.map((e) => ({ ...e, kind: "item" })), ...LOG.money.map((e) => ({ ...e, kind: "money" }))]
@@ -148,19 +164,20 @@
         if (bankChars.has(short.split(" ")[0].toLowerCase())) return;
         const m = findMember(e.who);
         const key = m ? m.slug : short.toLowerCase();
-        const d = donors.get(key) || { name: m ? fullName(m) : short, member: m, gold: 0, goldTimes: 0, items: 0, itemTimes: 0, byItem: new Map() };
+        const d = donors.get(key) || { name: m ? fullName(m) : short, member: m, gold: 0, goldTimes: 0, items: 0, stacks: 0, itemTimes: 0, byItem: new Map() };
         if (e.kind === "money") { d.gold += e.amount; d.goldTimes++; }
         else {
-          d.items += e.n; d.itemTimes++;
-          const k = e.id || e.name, it = d.byItem.get(k) || { name: e.name, q: e.q, n: 0 };
-          it.n += e.n; d.byItem.set(k, it);
+          const st = e.n / stackOf(e.id);
+          d.items += e.n; d.stacks += st; d.itemTimes++;
+          const k = e.id || e.name, it = d.byItem.get(k) || { name: e.name, q: e.q, n: 0, stacks: 0 };
+          it.n += e.n; it.stacks += st; d.byItem.set(k, it);
         }
         donors.set(key, d);
       });
     const all = [...donors.values()];
     return {
       gold: all.filter((d) => d.gold > 0).sort((a, b) => b.gold - a.gold || b.goldTimes - a.goldTimes),
-      items: all.filter((d) => d.items > 0).sort((a, b) => b.items - a.items || b.itemTimes - a.itemTimes),
+      items: all.filter((d) => d.items > 0).sort((a, b) => b.stacks - a.stacks || b.itemTimes - a.itemTimes),
     };
   }
   const goldText = (c) => {
@@ -630,10 +647,11 @@
       const DONOR_TABS = [
         ["gold", "Gold", stats.gold, (d) => `${gold(d.gold)} · ${num(d.goldTimes)} ${d.goldTimes === 1 ? "Spende" : "Spenden"}`, "Noch keine Goldspenden erfasst."],
         ["items", "Gegenstände", stats.items, (d) => {
-          const top = [...d.byItem.values()].sort((a, b) => b.n - a.n);
+          const top = [...d.byItem.values()].sort((a, b) => b.stacks - a.stacks || b.n - a.n);
           const list = top.slice(0, 3).map((i) => `<b style="color:${qColor(i.q)}">${esc(i.name)}</b>${i.n > 1 ? ` ×${num(i.n)}` : ""}`).join(", ");
           const rest = top.length > 3 ? ` <span title="${esc(top.slice(3).map((i) => `${i.name}${i.n > 1 ? ` ×${i.n}` : ""}`).join(", "))}">+${top.length - 3} weitere</span>` : "";
-          return `${num(d.items)} ${d.items === 1 ? "Gegenstand" : "Gegenstände"} · ${times(d.itemTimes)}<br><small>${list}${rest}</small>`;
+          const st = Math.round(d.stacks * 10) / 10;
+          return `<span title="Gezählt wird in vollen Stapeln: 20 Leder (1 Stapel) zählen so viel wie 1 Waffe">${st.toLocaleString("de-DE")} Stapel</span> · ${num(d.items)} ${d.items === 1 ? "Gegenstand" : "Gegenstände"} · ${times(d.itemTimes)}<br><small>${list}${rest}</small>`;
         }, "Noch keine Einlagerungen erfasst."],
       ];
       let donorTab = stats.gold.length || !stats.items.length ? "gold" : "items";

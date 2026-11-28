@@ -134,13 +134,22 @@ if (data.roster && typeof data.roster === "object" && data.roster.seen && typeof
   if (at) inactive = { updated: time(at), days, names };
 }
 
+// Stapelgrößen (ab Addon 1.6): wie viele Stück eines Gegenstands auf einen
+// Stapel passen – für die Spender-Rangliste "Gegenstände"
+const stacks = {};
+if (data.stacks && typeof data.stacks === "object" && !Array.isArray(data.stacks)) {
+  for (const [id, n] of Object.entries(data.stacks)) {
+    if (/^\d{1,7}$/.test(id) && Number(n) >= 1) stacks[id] = int(n, 1, 10000);
+  }
+}
+
 // ---------- mit vorhandenen Daten zusammenführen ----------
 let bank = { updated: null, chars: {}, guild: null };
 try {
   const old = await readFile(bankFile, "utf8");
   bank = JSON.parse(old.slice(old.indexOf("{"), old.lastIndexOf("}") + 1));
 } catch { /* noch keine Bankdaten */ }
-const snapshot = () => JSON.stringify([bank.chars, bank.guild, bank.log, bank.calendar, bank.inactive]);
+const snapshot = () => JSON.stringify([bank.chars, bank.guild, bank.log, bank.calendar, bank.inactive, bank.stacks]);
 const before = snapshot();
 
 const newer = (a, b) => !b || (a && a >= b);
@@ -187,7 +196,12 @@ if (inactive && newer(inactive.updated, bank.inactive?.updated)) {
   bank.inactive = inactive;
   changes.push(`Gildenliste: ${inactive.names.length} Mitglieder länger als ${inactive.days} Tage offline`);
 }
-if (!changes.length) fail("Der Export enthält weder Bankdaten noch Gildentermine oder Gildenliste.");
+const newStacks = Object.keys(stacks).filter((id) => bank.stacks?.[id] !== stacks[id]).length;
+if (newStacks) {
+  bank.stacks = { ...(bank.stacks || {}), ...stacks };
+  changes.push(`Stapelgrößen: ${newStacks} neu`);
+}
+if (!changes.length && !Object.keys(stacks).length) fail("Der Export enthält weder Bankdaten noch Gildentermine oder Gildenliste.");
 if (snapshot() === before) {
   console.log("Nichts Neues – diese Bankdaten sind schon auf der Homepage.");
   process.exit(0);

@@ -128,6 +128,32 @@ local function Deposits(t, n)
   return r
 end
 
+-- Wie viele Stück passen auf einen Stapel? (für die Spender-Rangliste:
+-- 1 Stapel Leder = 20 Stück soll so viel zählen wie 1 Waffe)
+-- Einmal bekannte Werte merkt sich das Addon; noch nicht geladene Gegenstände
+-- werden beim nächsten Export erneut versucht.
+local function StackSize(id)
+  if not id or id == 0 then return nil end
+  local n = DB.stacks[id]
+  if n then return n end
+  if C_Item and C_Item.GetItemMaxStackByID then n = C_Item.GetItemMaxStackByID(id) end
+  if (type(n) ~= "number" or n < 1) and GetItemInfo then n = select(8, GetItemInfo(id)) end
+  if type(n) == "number" and n >= 1 then DB.stacks[id] = n; return n end
+  if C_Item and C_Item.RequestLoadItemDataByID then pcall(C_Item.RequestLoadItemDataByID, id) end
+end
+
+local function CollectStacks(log)
+  local out = {}
+  local function add(id) local n = StackSize(id); if n then out[tostring(id)] = n end end
+  for _, c in pairs(DB.chars) do
+    for _, it in ipairs(c.bags or {}) do add(it[1]) end
+    for _, it in ipairs(c.bank or {}) do add(it[1]) end
+  end
+  if DB.guild then for _, t in ipairs(DB.guild.tabs) do for _, it in ipairs(t.items) do add(it[1]) end end end
+  if log then for _, e in ipairs(log.items) do add(e[4]) end end
+  return out
+end
+
 local function BuildExport()
   local log = false
   local L = DB.guild and DB.guildLog[DB.guild.name]
@@ -140,7 +166,7 @@ local function BuildExport()
   -- Gildenliste (wer wann zuletzt online war): die der eigenen Gilde
   local gname = GetGuildInfo and GetGuildInfo("player")
   local roster = (DB.guild and DB.roster[DB.guild.name]) or (gname and DB.roster[gname])
-  DB.lastExport = toJSON({ v = 1, exported = time(), chars = DB.chars, guild = DB.guild or false, guildLog = log, calendar = cal or false, roster = roster or false })
+  DB.lastExport = toJSON({ v = 1, exported = time(), chars = DB.chars, guild = DB.guild or false, guildLog = log, calendar = cal or false, roster = roster or false, stacks = CollectStacks(log) })
   return DB.lastExport
 end
 
@@ -569,6 +595,7 @@ f:SetScript("OnEvent", function(_, event, arg1)
     DB.guildLog = DB.guildLog or {}
     DB.calendar = DB.calendar or {}
     DB.roster = DB.roster or {}
+    DB.stacks = DB.stacks or {}
     return
   end
   if not DB then return end
