@@ -237,8 +237,13 @@
     const CAL = hasBank && B.calendar;
     if (CAL && $("#events-box")) {
       const from = berlin(new Date(Date.now() - 3 * 3600e3)).slice(0, 16);
-      // Termine ohne eingetragenes Ende liefert WoW mit Ende "2000-01-01" – dann zählt der Beginn
-      const upcoming = CAL.events.filter((e) => (e.end && e.end >= e.start ? e.end : e.start) >= from).slice(0, 6);
+      // Termine ohne eingetragenes Ende (WoW liefert dann "2000-01-01") enden mit
+      // dem nächsten Tageswechsel nach Beginn und verschwinden dann sofort.
+      // Termine mit Ende bleiben noch 3 Std. danach stehen.
+      const nowStr = berlin().slice(0, 16);
+      const upcoming = CAL.events.filter((e) => e.end && e.end >= e.start
+        ? e.end >= from
+        : addDays(e.start.slice(0, 10), 1) + "T00:00" > nowStr).slice(0, 6);
       const TYPES = ["Schlachtzug", "Dungeon", "PvP", "Treffen", "Sonstiges"];
       const when = (t) => {
         const [y, mo, d, hh, mi] = t.split(/[-T:]/).map(Number);
