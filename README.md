@@ -123,7 +123,7 @@ zusammengeführt; pro Charakter zählt jeweils der neueste Stand.
   lange offline ist, liest das Gildenbank-Addon ab Version 1.5 aus der
   Gildenliste im Spiel; veröffentlicht wird davon nur die Namensliste der länger
   Abwesenden (in `data/bank.js` unter `inactive`), keine Login-Zeiten.
-- **Mitgliederliste:** 💰 für die 10 größten Spender der Gildenbank, „neu“ für
+- **Mitgliederliste:** 💰 für die 10 größten Goldspender und 📦 für die 10 fleißigsten Einlagerer der Gildenbank, „neu“ für
   alle, die in den letzten 7 Tagen beigetreten sind.
 
 ## Mitgliederecke (Bedarf an Gildenbank-Gegenständen anmelden)

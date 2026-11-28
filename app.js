@@ -126,19 +126,42 @@
       <p class="shelf-meta">liegt ${esc(ageText(i).txt)} unberührt · ${esc(i.loc)}</p><p class="quip">${esc(quip)}</p>`;
     $("#shelf-card").hidden = false;
   }
-  // Spender-Rangliste aus dem Protokoll (nur Einzahlungen/Einlagerungen)
-  function donorRanking() {
+  // Namen aus dem Gildenbank-Protokoll ("Vorname Nachname", evtl. mit "-Realm")
+  // einem Mitglied zuordnen: erst voller Name, sonst eindeutiger Vorname
+  function findMember(who) {
+    const s = (who || "").split("-")[0].trim().toLowerCase();
+    if (!s) return null;
+    const full = M.filter((m) => fullName(m).toLowerCase() === s);
+    if (full.length === 1) return full[0];
+    const first = M.filter((m) => m.name.toLowerCase() === s.split(" ")[0]);
+    return first.length === 1 ? first[0] : null;
+  }
+  // Spender-Statistik aus dem Protokoll (nur Einzahlungen/Einlagerungen).
+  // Bank-Charaktere selbst zählen nicht – die räumen nur um.
+  function donorStats() {
     const LOG = (hasBank && B.log) || { items: [], money: [] };
+    const bankChars = new Set(Object.keys((hasBank && B.chars) || {}).map((k) => k.toLowerCase()));
     const donors = new Map();
     [...LOG.items.map((e) => ({ ...e, kind: "item" })), ...LOG.money.map((e) => ({ ...e, kind: "money" }))]
       .filter((e) => e.type === "deposit" && e.who).forEach((e) => {
-        const key = e.who.split("-")[0].toLowerCase();
-        const d = donors.get(key) || { name: e.who, gold: 0, items: 0, times: 0 };
-        if (e.kind === "money") d.gold += e.amount; else d.items += e.n;
-        d.times++;
+        const short = e.who.split("-")[0].trim();
+        if (bankChars.has(short.split(" ")[0].toLowerCase())) return;
+        const m = findMember(e.who);
+        const key = m ? m.slug : short.toLowerCase();
+        const d = donors.get(key) || { name: m ? fullName(m) : short, member: m, gold: 0, goldTimes: 0, items: 0, itemTimes: 0, byItem: new Map() };
+        if (e.kind === "money") { d.gold += e.amount; d.goldTimes++; }
+        else {
+          d.items += e.n; d.itemTimes++;
+          const k = e.id || e.name, it = d.byItem.get(k) || { name: e.name, q: e.q, n: 0 };
+          it.n += e.n; d.byItem.set(k, it);
+        }
         donors.set(key, d);
       });
-    return [...donors.values()].sort((a, b) => b.gold - a.gold || b.items - a.items || b.times - a.times).slice(0, 10);
+    const all = [...donors.values()];
+    return {
+      gold: all.filter((d) => d.gold > 0).sort((a, b) => b.gold - a.gold || b.goldTimes - a.goldTimes),
+      items: all.filter((d) => d.items > 0).sort((a, b) => b.items - a.items || b.itemTimes - a.itemTimes),
+    };
   }
   const goldText = (c) => {
     const g = Math.floor(c / 10000), sv = Math.floor((c % 10000) / 100), k = c % 100;
@@ -284,17 +307,15 @@
 
   // ---------- Mitgliederliste (Seite "Mitglieder") ----------
   if ($("#roster")) {
-    // Abzeichen: Top-Spender der Gildenbank, neu im Klan (letzte 7 Tage)
-    const donorRank = new Map();
-    donorRanking().forEach((d, i) => {
-      const hits = M.filter((m) => m.name.toLowerCase() === d.name.split("-")[0].toLowerCase());
-      if (hits.length === 1) donorRank.set(hits[0].slug, i + 1);
-    });
+    // Abzeichen: Top-Spender (Gold) und Top-Einlagerer (Gegenstände) der Gildenbank, neu im Klan (letzte 7 Tage)
+    const stats = donorStats(), rankOf = (list) => new Map(list.slice(0, 10).filter((d) => d.member).map((d, i) => [d.member.slug, i + 1]));
+    const goldRank = rankOf(stats.gold), itemRank = rankOf(stats.items);
     const newSince = addDays(today, -7);
     const badges = (m) => {
       let b = "";
-      const r = donorRank.get(m.slug);
-      if (r) b += `<span class="badge donor" title="Top-Spender der Gildenbank (Platz ${r})">💰</span>`;
+      const r = goldRank.get(m.slug), ri = itemRank.get(m.slug);
+      if (r) b += `<span class="badge donor" title="Top-Spender der Gildenbank: Gold (Platz ${r})">💰</span>`;
+      if (ri) b += `<span class="badge donor" title="Top-Spender der Gildenbank: Gegenstände (Platz ${ri})">📦</span>`;
       const h = H && H.chars[m.slug];
       if (h && h.j && h.j >= newSince) b += `<span class="badge new" title="Seit ${esc(fmtDay(h.j))} im Klan">neu</span>`;
       return b;
@@ -579,11 +600,9 @@
       // Namen aus dem Protokoll (ggf. "Name-Realm") mit der Mitgliederliste verknüpfen
       const who = (name) => {
         if (!name) return "<b>Gildenbonus</b>";
-        const short = name.split("-")[0];
-        const hits = M.filter((m) => m.name.toLowerCase() === short.toLowerCase());
-        if (hits.length !== 1) return `<b>${esc(short)}</b>`;
-        const m = hits[0];
-        return `<a href="${charUrl(m)}" target="_blank" rel="noopener" style="color:${cls(m.cls).color}">${esc(m.name)}</a>`;
+        const m = findMember(name);
+        if (!m) return `<b>${esc(name.split("-")[0])}</b>`;
+        return `<a href="${charUrl(m)}" target="_blank" rel="noopener" style="color:${cls(m.cls).color}">${esc(fullName(m))}</a>`;
       };
       const item = (e) => `<b style="color:${qColor(e.q)}">${esc(e.name)}</b>${e.n > 1 ? ` ×${e.n.toLocaleString("de-DE")}` : ""}`;
       const text = (e) => {
@@ -604,11 +623,33 @@
       };
       const when = (iso) => "ca. " + new Date(iso).toLocaleString("de-DE", { dateStyle: "medium", timeStyle: "short" });
 
-      // Rangliste: wer hat am meisten Gold eingezahlt bzw. Gegenstände eingelagert
-      const top = donorRanking();
-      $("#bank-donors").innerHTML = top.length
-        ? top.map((d) => `<li><span class="who">${who(d.name)}</span><span class="what">${[d.gold ? gold(d.gold) : "", d.items ? `${d.items.toLocaleString("de-DE")} Gegenstände` : ""].filter(Boolean).join(" · ")}</span></li>`).join("")
-        : `<li class="bank-empty">Noch keine Einzahlungen erfasst.</li>`;
+      // Ranglisten: wer hat am meisten Gold eingezahlt, wer die meisten Gegenstände eingelagert
+      const stats = donorStats();
+      const num = (n) => n.toLocaleString("de-DE");
+      const times = (n) => `${num(n)}× eingelagert`;
+      const DONOR_TABS = [
+        ["gold", "Gold", stats.gold, (d) => `${gold(d.gold)} · ${num(d.goldTimes)} ${d.goldTimes === 1 ? "Spende" : "Spenden"}`, "Noch keine Goldspenden erfasst."],
+        ["items", "Gegenstände", stats.items, (d) => {
+          const top = [...d.byItem.values()].sort((a, b) => b.n - a.n);
+          const list = top.slice(0, 3).map((i) => `<b style="color:${qColor(i.q)}">${esc(i.name)}</b>${i.n > 1 ? ` ×${num(i.n)}` : ""}`).join(", ");
+          const rest = top.length > 3 ? ` <span title="${esc(top.slice(3).map((i) => `${i.name}${i.n > 1 ? ` ×${i.n}` : ""}`).join(", "))}">+${top.length - 3} weitere</span>` : "";
+          return `${num(d.items)} ${d.items === 1 ? "Gegenstand" : "Gegenstände"} · ${times(d.itemTimes)}<br><small>${list}${rest}</small>`;
+        }, "Noch keine Einlagerungen erfasst."],
+      ];
+      let donorTab = stats.gold.length || !stats.items.length ? "gold" : "items";
+      $("#donor-tabs").innerHTML = DONOR_TABS.map(([id, label]) => `<button role="tab" data-id="${id}">${label}</button>`).join("");
+      $("#donor-tabs").addEventListener("click", (e) => {
+        const b = e.target.closest("button");
+        if (b) { donorTab = b.dataset.id; renderDonors(); }
+      });
+      function renderDonors() {
+        document.querySelectorAll("#donor-tabs button").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.id === donorTab)));
+        const [, , list, what, empty] = DONOR_TABS.find((t) => t[0] === donorTab);
+        $("#bank-donors").innerHTML = list.length
+          ? list.slice(0, 10).map((d) => `<li><span class="who">${who(d.name)}</span><span class="what">${what(d)}</span></li>`).join("")
+          : `<li class="bank-empty">${empty}</li>`;
+      }
+      renderDonors();
 
       const FILTERS = [
         ["all", "Alles", () => true],
