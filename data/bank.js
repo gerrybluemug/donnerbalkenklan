@@ -1,27 +1,17 @@
 // Automatisch erzeugt von scripts/import-bank.mjs – nicht von Hand bearbeiten.
 window.BANK = {
- "updated": "2026-11-27T16:32:59.573Z",
+ "updated": "2026-11-28T12:22:55.047Z",
  "chars": {
   "Gildenbank": {
-   "updated": "2026-11-27T16:30:18.000Z",
-   "bankUpdated": "2026-11-26T20:06:43.000Z",
+   "updated": "2026-11-28T12:21:15.000Z",
+   "bankUpdated": "2026-11-28T12:20:48.000Z",
    "money": 18,
-   "items": [
-    {
-     "id": 6948,
-     "name": "Ruhestein",
-     "q": 1,
-     "n": 1,
-     "where": "Taschen",
-     "since": "2026-11-22T13:12:50.000Z",
-     "atLeast": true
-    }
-   ]
+   "items": []
   }
  },
  "guild": {
-  "updated": "2026-11-27T16:32:22.000Z",
-  "money": 405000,
+  "updated": "2026-11-28T12:20:53.000Z",
+  "money": 425000,
   "tabs": [
    {
     "name": "Fach 1",
@@ -109,12 +99,84 @@ window.BANK = {
       "atLeast": false
      },
      {
+      "id": 929,
+      "name": "Heiltrank",
+      "q": 1,
+      "n": 5,
+      "where": "Fach 1",
+      "since": "2026-11-28T10:28:11.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 929,
+      "name": "Heiltrank",
+      "q": 1,
+      "n": 5,
+      "where": "Fach 1",
+      "since": "2026-11-28T10:28:11.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 929,
+      "name": "Heiltrank",
+      "q": 1,
+      "n": 5,
+      "where": "Fach 1",
+      "since": "2026-11-28T10:28:11.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 929,
+      "name": "Heiltrank",
+      "q": 1,
+      "n": 5,
+      "where": "Fach 1",
+      "since": "2026-11-28T10:28:11.000Z",
+      "atLeast": false
+     },
+     {
       "id": 4241,
       "name": "Grüne Wolltasche",
       "q": 1,
       "n": 1,
       "where": "Fach 1",
       "since": "2026-11-27T16:32:21.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 3388,
+      "name": "Geringes Trollblutelixier",
+      "q": 1,
+      "n": 1,
+      "where": "Fach 1",
+      "since": "2026-11-28T10:28:11.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 3874,
+      "name": "Pläne: Polierte Stahlstiefel",
+      "q": 2,
+      "n": 1,
+      "where": "Fach 1",
+      "since": "2026-11-28T10:28:11.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 4412,
+      "name": "Bauplan: Mondsichtgewehr",
+      "q": 2,
+      "n": 1,
+      "where": "Fach 1",
+      "since": "2026-11-28T10:28:11.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 3745,
+      "name": "Rune des Öffnens",
+      "q": 1,
+      "n": 5,
+      "where": "Fach 1",
+      "since": "2026-11-28T10:28:11.000Z",
       "atLeast": false
      },
      {
@@ -133,6 +195,24 @@ window.BANK = {
       "n": 1,
       "where": "Fach 1",
       "since": "2026-11-27T16:32:21.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 5774,
+      "name": "Muster: Grünes Seidenpack",
+      "q": 2,
+      "n": 1,
+      "where": "Fach 1",
+      "since": "2026-11-28T12:20:52.000Z",
+      "atLeast": false
+     },
+     {
+      "id": 3385,
+      "name": "Geringer Manatrank",
+      "q": 1,
+      "n": 3,
+      "where": "Fach 1",
+      "since": "2026-11-28T12:20:52.000Z",
       "atLeast": false
      },
      {
@@ -209,8 +289,8 @@ window.BANK = {
     "t": "2026-11-25T22:06:46.000Z",
     "type": "deposit",
     "who": "",
-    "id": 5763,
-    "name": "Rote Wolltasche",
+    "id": 10051,
+    "name": "Rote Magiestofftasche",
     "q": 1,
     "n": 1,
     "tab": "Fach 1"
@@ -229,16 +309,6 @@ window.BANK = {
     "t": "2026-11-25T22:06:46.000Z",
     "type": "deposit",
     "who": "",
-    "id": 10051,
-    "name": "Rote Magiestofftasche",
-    "q": 1,
-    "n": 1,
-    "tab": "Fach 1"
-   },
-   {
-    "t": "2026-11-25T22:18:49.000Z",
-    "type": "deposit",
-    "who": "Shari Vari",
     "id": 5763,
     "name": "Rote Wolltasche",
     "q": 1,
@@ -261,6 +331,16 @@ window.BANK = {
     "who": "Shari Vari",
     "id": 10051,
     "name": "Rote Magiestofftasche",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-25T22:18:49.000Z",
+    "type": "deposit",
+    "who": "Shari Vari",
+    "id": 5763,
+    "name": "Rote Wolltasche",
     "q": 1,
     "n": 1,
     "tab": "Fach 1"
@@ -328,7 +408,7 @@ window.BANK = {
    {
     "t": "2026-11-26T15:06:46.000Z",
     "type": "deposit",
-    "who": "Dacka Dacka",
+    "who": "",
     "id": 248689,
     "name": "Abgefangene Kiste: Kuriositäten des Gesellen",
     "q": 1,
@@ -338,7 +418,7 @@ window.BANK = {
    {
     "t": "2026-11-26T15:06:46.000Z",
     "type": "deposit",
-    "who": "",
+    "who": "Dacka Dacka",
     "id": 248706,
     "name": "Abgefangene Kiste: Barren des Gesellen",
     "q": 2,
@@ -348,7 +428,7 @@ window.BANK = {
    {
     "t": "2026-11-26T15:06:46.000Z",
     "type": "deposit",
-    "who": "",
+    "who": "Dacka Dacka",
     "id": 248689,
     "name": "Abgefangene Kiste: Kuriositäten des Gesellen",
     "q": 1,
@@ -358,7 +438,7 @@ window.BANK = {
    {
     "t": "2026-11-26T15:06:46.000Z",
     "type": "deposit",
-    "who": "Dacka Dacka",
+    "who": "",
     "id": 248706,
     "name": "Abgefangene Kiste: Barren des Gesellen",
     "q": 2,
@@ -388,9 +468,9 @@ window.BANK = {
    {
     "t": "2026-11-27T13:32:23.000Z",
     "type": "deposit",
-    "who": "",
-    "id": 10606,
-    "name": "Bauplan: Fallschirm-Umhang",
+    "who": "Diond Abendstern",
+    "id": 8387,
+    "name": "Muster: Große Voodoomaske",
     "q": 2,
     "n": 1,
     "tab": "Fach 1"
@@ -418,61 +498,11 @@ window.BANK = {
    {
     "t": "2026-11-27T13:32:23.000Z",
     "type": "deposit",
-    "who": "Diond Abendstern",
-    "id": 8387,
-    "name": "Muster: Große Voodoomaske",
+    "who": "",
+    "id": 10606,
+    "name": "Bauplan: Fallschirm-Umhang",
     "q": 2,
     "n": 1,
-    "tab": "Fach 1"
-   },
-   {
-    "t": "2026-11-27T14:32:23.000Z",
-    "type": "deposit",
-    "who": "",
-    "id": 2318,
-    "name": "Leichtes Leder",
-    "q": 1,
-    "n": 9,
-    "tab": "Fach 1"
-   },
-   {
-    "t": "2026-11-27T14:32:23.000Z",
-    "type": "deposit",
-    "who": "Kalter Wind",
-    "id": 2319,
-    "name": "Mittleres Leder",
-    "q": 1,
-    "n": 5,
-    "tab": "Fach 1"
-   },
-   {
-    "t": "2026-11-27T14:32:23.000Z",
-    "type": "deposit",
-    "who": "Kalter Wind",
-    "id": 4232,
-    "name": "Mittlerer Balg",
-    "q": 1,
-    "n": 1,
-    "tab": "Fach 1"
-   },
-   {
-    "t": "2026-11-27T14:32:23.000Z",
-    "type": "deposit",
-    "who": "",
-    "id": 4232,
-    "name": "Mittlerer Balg",
-    "q": 1,
-    "n": 1,
-    "tab": "Fach 1"
-   },
-   {
-    "t": "2026-11-27T14:32:23.000Z",
-    "type": "deposit",
-    "who": "Kalter Wind",
-    "id": 2318,
-    "name": "Leichtes Leder",
-    "q": 1,
-    "n": 9,
     "tab": "Fach 1"
    },
    {
@@ -498,6 +528,16 @@ window.BANK = {
    {
     "t": "2026-11-27T14:32:23.000Z",
     "type": "deposit",
+    "who": "Kalter Wind",
+    "id": 2318,
+    "name": "Leichtes Leder",
+    "q": 1,
+    "n": 9,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T14:32:23.000Z",
+    "type": "deposit",
     "who": "",
     "id": 2319,
     "name": "Mittleres Leder",
@@ -506,11 +546,41 @@ window.BANK = {
     "tab": "Fach 1"
    },
    {
-    "t": "2026-11-27T16:32:23.000Z",
+    "t": "2026-11-27T14:32:23.000Z",
     "type": "deposit",
     "who": "",
-    "id": 4241,
-    "name": "Grüne Wolltasche",
+    "id": 2318,
+    "name": "Leichtes Leder",
+    "q": 1,
+    "n": 9,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T14:32:23.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 4232,
+    "name": "Mittlerer Balg",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T14:32:23.000Z",
+    "type": "deposit",
+    "who": "Kalter Wind",
+    "id": 2319,
+    "name": "Mittleres Leder",
+    "q": 1,
+    "n": 5,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T14:32:23.000Z",
+    "type": "deposit",
+    "who": "Kalter Wind",
+    "id": 4232,
+    "name": "Mittlerer Balg",
     "q": 1,
     "n": 1,
     "tab": "Fach 1"
@@ -522,6 +592,216 @@ window.BANK = {
     "id": 4241,
     "name": "Grüne Wolltasche",
     "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T16:32:23.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 4241,
+    "name": "Grüne Wolltasche",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T21:28:13.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 929,
+    "name": "Heiltrank",
+    "q": 1,
+    "n": 5,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T21:28:13.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 929,
+    "name": "Heiltrank",
+    "q": 1,
+    "n": 5,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T21:28:13.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 929,
+    "name": "Heiltrank",
+    "q": 1,
+    "n": 5,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T21:28:13.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 929,
+    "name": "Heiltrank",
+    "q": 1,
+    "n": 5,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T21:28:14.000Z",
+    "type": "deposit",
+    "who": "Rhainer Wein",
+    "id": 929,
+    "name": "Heiltrank",
+    "q": 1,
+    "n": 5,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T21:28:14.000Z",
+    "type": "deposit",
+    "who": "Rhainer Wein",
+    "id": 929,
+    "name": "Heiltrank",
+    "q": 1,
+    "n": 5,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T21:28:14.000Z",
+    "type": "deposit",
+    "who": "Rhainer Wein",
+    "id": 929,
+    "name": "Heiltrank",
+    "q": 1,
+    "n": 5,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T21:28:14.000Z",
+    "type": "deposit",
+    "who": "Rhainer Wein",
+    "id": 929,
+    "name": "Heiltrank",
+    "q": 1,
+    "n": 5,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T23:28:13.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 3745,
+    "name": "Rune des Öffnens",
+    "q": 1,
+    "n": 5,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-27T23:28:14.000Z",
+    "type": "deposit",
+    "who": "Fatboy Gamer",
+    "id": 3745,
+    "name": "Rune des Öffnens",
+    "q": 1,
+    "n": 5,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-28T00:28:13.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 3388,
+    "name": "Geringes Trollblutelixier",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-28T00:28:14.000Z",
+    "type": "deposit",
+    "who": "Razer Deathadder",
+    "id": 3388,
+    "name": "Geringes Trollblutelixier",
+    "q": 1,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-28T01:28:13.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 3874,
+    "name": "Pläne: Polierte Stahlstiefel",
+    "q": 2,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-28T01:28:14.000Z",
+    "type": "deposit",
+    "who": "Sebri Zebri",
+    "id": 3874,
+    "name": "Pläne: Polierte Stahlstiefel",
+    "q": 2,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-28T10:28:13.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 4412,
+    "name": "Bauplan: Mondsichtgewehr",
+    "q": 2,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-28T10:28:14.000Z",
+    "type": "deposit",
+    "who": "Dacka Dacka",
+    "id": 4412,
+    "name": "Bauplan: Mondsichtgewehr",
+    "q": 2,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-28T11:20:54.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 3385,
+    "name": "Geringer Manatrank",
+    "q": 1,
+    "n": 3,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-28T11:20:54.000Z",
+    "type": "deposit",
+    "who": "Najah Babajaga",
+    "id": 3385,
+    "name": "Geringer Manatrank",
+    "q": 1,
+    "n": 3,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-28T12:20:54.000Z",
+    "type": "deposit",
+    "who": "",
+    "id": 5774,
+    "name": "Muster: Grünes Seidenpack",
+    "q": 2,
+    "n": 1,
+    "tab": "Fach 1"
+   },
+   {
+    "t": "2026-11-28T12:20:54.000Z",
+    "type": "deposit",
+    "who": "Jankon Donnerpfeil",
+    "id": 5774,
+    "name": "Muster: Grünes Seidenpack",
+    "q": 2,
     "n": 1,
     "tab": "Fach 1"
    }
@@ -536,14 +816,14 @@ window.BANK = {
    {
     "t": "2026-11-10T22:02:06.000Z",
     "type": "deposit",
-    "who": "Taruuk Eichenhuf",
-    "amount": 1000
+    "who": "Kuni Runde",
+    "amount": 5000
    },
    {
     "t": "2026-11-10T22:02:06.000Z",
     "type": "deposit",
-    "who": "Kuni Runde",
-    "amount": 5000
+    "who": "Taruuk Eichenhuf",
+    "amount": 1000
    },
    {
     "t": "2026-11-10T22:04:40.000Z",
@@ -578,6 +858,12 @@ window.BANK = {
    {
     "t": "2026-11-13T21:02:06.000Z",
     "type": "deposit",
+    "who": "Aus Noxar",
+    "amount": 5000
+   },
+   {
+    "t": "2026-11-13T21:02:06.000Z",
+    "type": "deposit",
     "who": "Darius Lichtban",
     "amount": 40000
    },
@@ -586,12 +872,6 @@ window.BANK = {
     "type": "deposit",
     "who": "Tente Deville",
     "amount": 20000
-   },
-   {
-    "t": "2026-11-13T21:02:06.000Z",
-    "type": "deposit",
-    "who": "Aus Noxar",
-    "amount": 5000
    },
    {
     "t": "2026-11-13T21:04:40.000Z",
@@ -645,13 +925,13 @@ window.BANK = {
     "t": "2026-11-15T16:02:06.000Z",
     "type": "deposit",
     "who": "Taruuk Eichenhuf",
-    "amount": 10000
+    "amount": 796
    },
    {
     "t": "2026-11-15T16:02:06.000Z",
     "type": "deposit",
     "who": "Taruuk Eichenhuf",
-    "amount": 796
+    "amount": 10000
    },
    {
     "t": "2026-11-15T16:04:40.000Z",
@@ -788,14 +1068,14 @@ window.BANK = {
    {
     "t": "2026-11-23T19:44:45.000Z",
     "type": "deposit",
-    "who": "Amity Miller",
-    "amount": 10000
+    "who": "Beautiful Berry",
+    "amount": 1
    },
    {
     "t": "2026-11-23T19:44:45.000Z",
     "type": "deposit",
-    "who": "Beautiful Berry",
-    "amount": 1
+    "who": "Amity Miller",
+    "amount": 10000
    },
    {
     "t": "2026-11-23T20:01:01.000Z",
@@ -818,7 +1098,7 @@ window.BANK = {
    {
     "t": "2026-11-24T09:01:01.000Z",
     "type": "deposit",
-    "who": "Jankon Donnerpfeil",
+    "who": "",
     "amount": 400
    },
    {
@@ -836,6 +1116,12 @@ window.BANK = {
    {
     "t": "2026-11-24T09:01:01.000Z",
     "type": "deposit",
+    "who": "Jankon Donnerpfeil",
+    "amount": 400
+   },
+   {
+    "t": "2026-11-24T09:01:01.000Z",
+    "type": "deposit",
     "who": "",
     "amount": 20000
    },
@@ -843,19 +1129,7 @@ window.BANK = {
     "t": "2026-11-24T09:01:01.000Z",
     "type": "deposit",
     "who": "",
-    "amount": 400
-   },
-   {
-    "t": "2026-11-24T09:01:01.000Z",
-    "type": "deposit",
-    "who": "",
     "amount": 1232
-   },
-   {
-    "t": "2026-11-24T10:01:01.000Z",
-    "type": "deposit",
-    "who": "",
-    "amount": 70000
    },
    {
     "t": "2026-11-24T10:01:01.000Z",
@@ -864,15 +1138,21 @@ window.BANK = {
     "amount": 70000
    },
    {
-    "t": "2026-11-24T22:09:49.000Z",
+    "t": "2026-11-24T10:01:01.000Z",
     "type": "deposit",
     "who": "",
-    "amount": 20000
+    "amount": 70000
    },
    {
     "t": "2026-11-24T22:09:49.000Z",
     "type": "deposit",
     "who": "Hunt Arbeít",
+    "amount": 20000
+   },
+   {
+    "t": "2026-11-24T22:09:49.000Z",
+    "type": "deposit",
+    "who": "",
     "amount": 20000
    },
    {
@@ -902,14 +1182,14 @@ window.BANK = {
    {
     "t": "2026-11-25T20:49:52.000Z",
     "type": "deposit",
-    "who": "Schnoppers Axtschädel",
-    "amount": 200000
+    "who": "Darius Lichtban",
+    "amount": 140000
    },
    {
     "t": "2026-11-25T20:49:52.000Z",
     "type": "deposit",
-    "who": "Darius Lichtban",
-    "amount": 140000
+    "who": "Schnoppers Axtschädel",
+    "amount": 200000
    },
    {
     "t": "2026-11-25T21:06:46.000Z",
@@ -918,16 +1198,22 @@ window.BANK = {
     "amount": 140000
    },
    {
-    "t": "2026-11-25T22:18:49.000Z",
+    "t": "2026-11-25T21:20:55.000Z",
     "type": "deposit",
-    "who": "Ragnor Silbersehne",
-    "amount": 5000
+    "who": "",
+    "amount": 200000
    },
    {
     "t": "2026-11-25T22:18:49.000Z",
     "type": "deposit",
     "who": "Shari Vari",
     "amount": 60000
+   },
+   {
+    "t": "2026-11-25T22:18:49.000Z",
+    "type": "deposit",
+    "who": "Ragnor Silbersehne",
+    "amount": 5000
    },
    {
     "t": "2026-11-25T22:19:08.000Z",
@@ -940,19 +1226,18 @@ window.BANK = {
     "type": "deposit",
     "who": "",
     "amount": 5000
+   },
+   {
+    "t": "2026-11-27T21:28:14.000Z",
+    "type": "deposit",
+    "who": "Rhainer Wein",
+    "amount": 20000
    }
   ]
  },
  "calendar": {
-  "updated": "2026-11-27T16:32:23.000Z",
+  "updated": "2026-11-28T12:21:23.000Z",
   "events": [
-   {
-    "start": "2026-11-27T20:15",
-    "end": "2000-01-01T00:00",
-    "title": "Kral von Razorfen",
-    "kind": "event",
-    "type": 4
-   },
    {
     "start": "2026-11-28T19:00",
     "end": "2000-01-01T00:00",
@@ -963,15 +1248,19 @@ window.BANK = {
   ]
  },
  "inactive": {
-  "updated": "2026-11-27T16:32:31.000Z",
+  "updated": "2026-11-28T12:22:21.000Z",
   "days": 10,
   "names": [
    "Atronik Bogensehne",
    "Dictator Kimjongbonk",
+   "Dunkelskar Xii",
    "Flathoo Lenßen",
    "Gandal Thegrey",
    "Goreck Lokthar",
    "Gripper Deriltis",
+   "Herr Bertl",
+   "Hibiki Sakurama",
+   "Hunds Sohn",
    "Iseira Ari",
    "Kargoth Kriegsfang",
    "Milky Hots",
@@ -979,6 +1268,7 @@ window.BANK = {
    "Suncho Muncho",
    "Tala Valkov",
    "Tristan Trollig",
+   "Turok Stormcall",
    "Wigges Ironfist"
   ]
  }
